@@ -1,0 +1,4531 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+%                                                                         %
+% The Project Gutenberg EBook of Note sur une Méthode pour la Réduction   %
+% d'Intégrales Définies, by D. (David) Bierens de Haan                    %
+%                                                                         %
+% This eBook is for the use of anyone anywhere at no cost and with        %
+% almost no restrictions whatsoever.  You may copy it, give it away or    %
+% re-use it under the terms of the Project Gutenberg License included     %
+% with this eBook or online at www.gutenberg.net                          %
+%                                                                         %
+%                                                                         %
+% Title: Note sur une Méthode pour la Réduction d'Intégrales Définies     %
+%        et sur son Application à Quelques Formules Spécials              %
+%                                                                         %
+% Author: D. (David) Bierens de Haan                                      %
+%                                                                         %
+% Release Date: June 6, 2011 [EBook #36334]                               %
+%                                                                         %
+% Language: French                                                        %
+%                                                                         %
+% Character set encoding: ISO-8859-1                                      %
+%                                                                         %
+% *** START OF THIS PROJECT GUTENBERG EBOOK REDUCTION D'INTEGRALES DEFINIES ***
+%                                                                         %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+
+\def\ebook{36334}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Packages and substitutions:                                      %%
+%%                                                                  %%
+%% book:     Required.                                              %%
+%% inputenc: Standard DP encoding. Required.                        %%
+%% fontenc:  Output encoding. Required.                             %%
+%% babel:    French language features. Required.                    %%
+%%                                                                  %%
+%% calc:     Infix arithmetic. Required.                            %%
+%%                                                                  %%
+%% amsmath:  AMS mathematics enhancements. Required.                %%
+%% amssymb:  Additional mathematical symbols. Required.             %%
+%%                                                                  %%
+%% alltt:    Fixed-width font environment. Required.                %%
+%%                                                                  %%
+%% fancyhdr: Enhanced running headers and footers. Required.        %%
+%%                                                                  %%
+%% geometry: Enhanced page layout package. Required.                %%
+%% hyperref: Hypertext embellishments for pdf output. Required.     %%
+%%                                                                  %%
+%%                                                                  %%
+%% Producer's Comments:                                             %%
+%%                                                                  %%
+%%   Wide displayed equations have been reformatted freely.         %%
+%%   Minor typographical corrections are marked with \DPtypo.       %%
+%%   Changes made for typographical consistency are marked \DPchg.  %%
+%%   Other changes are [** TN: noted] in the file.                  %%
+%%                                                                  %%
+%%                                                                  %%
+%% PDF pages: 65                                                    %%
+%% PDF page size: A4                                                %%
+%% PDF document info: filled in                                     %%
+%%                                                                  %%
+%% Summary of log file:                                             %%
+%%                                                                  %%
+%% * 16 overfull hboxes (wide displayed equations)                  %%
+%% * 3 underfull vboxes                                             %%
+%%                                                                  %%
+%% Compile History:                                                 %%
+%%                                                                  %%
+%% June, 2011: adhere (Andrew D. Hwang)                             %%
+%%             texlive2007, GNU/Linux                               %%
+%%                                                                  %%
+%% Command block:                                                   %%
+%%                                                                  %%
+%%     pdflatex x2                                                  %%
+%%                                                                  %%
+%%                                                                  %%
+%% June 2011: pglatex.                                              %%
+%%   Compile this project with:                                     %%
+%%   pdflatex 36334-t.tex ..... TWO times                           %%
+%%                                                                  %%
+%%   pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6)                 %%
+%%                                                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listfiles
+\documentclass[12pt]{book}[2005/09/16]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[latin1]{inputenc}[2006/05/05] %% DP standard encoding
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}    % the language
+
+\usepackage{calc}[2005/08/06]
+
+\usepackage{ifthen}[2001/05/26]  %% Logical conditionals
+
+\usepackage{amsmath}[2000/07/18] %% Displayed equations
+\usepackage{amssymb}[2002/01/22] %% and additional symbols
+
+\usepackage{alltt}[1997/06/16]   %% boilerplate, credits, license
+
+% for running heads; no package date available
+\usepackage{fancyhdr}
+
+\usepackage[a4paper]{geometry}[2002/07/08]
+
+\usepackage[pdftex,
+  hyperref,
+  hyperfootnotes=false,
+  pdfkeywords={Andrew D. Hwang, Joshua Hutchison,
+               Project Gutenberg Online Distributed Proofreading Team,
+               Cornell University Historical Mathematical Monographs Collection},
+  pdfstartview=Fit,    % default value
+  pdfstartpage=1,      % default value
+  pdfpagemode=UseNone, % default value
+  bookmarks=true,      % default value
+  linktocpage=false,   % default value
+  pdfpagelayout=TwoPageRight,
+  pdfdisplaydoctitle,
+  pdfpagelabels=true,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  colorlinks=true,
+  linkcolor=black]{hyperref}[2007/02/07]
+
+\providecommand{\ebook}{00000} % Overridden during white-washing
+
+% Set title, author here to avoid numerous hyperref warnings from accents
+\hypersetup{pdftitle={The Project Gutenberg eBook \#\ebook:%
+    Note sur une \texorpdfstring{Méthode}{Methode} %
+    pour la \texorpdfstring{Réduction}{Reduction} %
+    d'Integrales \texorpdfstring{Définies}{Definies} %
+    et sur son Application \texorpdfstring{à}{a} %
+    Quelques Formules \texorpdfstring{Spéciales}{Speciales}},
+  pdfauthor={David Bierens de Haan}}
+
+
+%% Conditional compilation: Modernize notation?
+\newboolean{ModernizeNotation}
+% COMMENT the next line to revert to the book's notation
+\setboolean{ModernizeNotation}{true}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% Fixed-width environment to format PG boilerplate %%%%
+% 9.2pt leaves no overfull hbox at 80 char line width
+\newenvironment{PGtext}{%
+\begin{alltt}
+\fontsize{9.2}{10.5}\ttfamily\selectfont}%
+{\end{alltt}}
+
+\newcommand{\TranscriberNote}{%
+  \begin{minipage}{0.85\textwidth}
+    \small
+    \BookMark{0}{Note sur la Transcription}
+    \subsection*{\centering\normalfont\scshape%
+      \normalsize{Note sur la transcription}}%
+
+    \raggedright
+
+    Ce livre a été préparé à l'aide d'images fournies par la Cornell
+    University Library: Historical Mathematics Monographs collection.
+    \bigskip
+
+    Des modifications mineures ont été apportées à la présentation,
+    l'orthographe, la ponctuation et aux notations mathématiques. Le
+    fichier \LaTeX\ source contient des notes de ces corrections.
+  \end{minipage}
+}
+
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{15pt}
+\newcommand{\HeadStyle}[1]{\footnotesize\MakeUppercase{#1}}
+\newcommand{\SetRunningHeads}[2]{%
+  \pagestyle{fancy}
+  \thispagestyle{empty}
+  \fancyhf{}
+  \fancyhead[CE]{\HeadStyle{#1}}
+  \fancyhead[CO]{\HeadStyle{#2}}
+  \fancyhead[LE,RO]{\thepage}
+}
+\newcommand{\FlushRunningHeads}{%
+  \newpage\fancyhf{}\cleardoublepage%
+}
+
+\newcounter{PDFbkmk}
+\newcommand{\BookMark}[2]{%
+  \refstepcounter{PDFbkmk}
+  \phantomsection
+  \pdfbookmark[#1]{#2}{\thePDFbkmk}
+}
+
+%% Restyling
+\setlength{\emergencystretch}{1em}
+\newcommand{\stretchyspace}{\spaceskip0.5em plus 0.5em minus 0.25em}
+\DeclareMathSizes{12}{11}{9}{6}
+
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+\renewcommand{\ieme}{\textsuperscript{\textit{ième}}}
+
+\newlength{\TmpLen}
+\newcommand{\PadTo}[3][c]{%
+  \settowidth{\TmpLen}{\ensuremath{#2}}%
+  \makebox[\TmpLen][#1]{\ensuremath{#3}}%
+}
+
+\newcommand{\DPtypo}[2]{#2}% For errors
+
+% Definitions of "modernized" notation
+\ifthenelse{\boolean{ModernizeNotation}}{%
+  \newcommand{\OpName}[1]{#1}
+  \DeclareMathOperator{\li}{\OpName{Li}}
+  \DeclareMathOperator{\Lg}{log}
+  \newcommand{\DPchg}[2]{#2}%  Changes made for stylistic consistency
+  \DeclareInputMath{183}{\cdot}
+  \newcommand{\Ibar}{\,\bigg]}
+  \newcommand{\Sqrt}[2][]{\,\sqrt[#1]{#2}}
+}{
+  \newcommand{\OpName}[1]{\textit{#1}.}
+  \DeclareMathOperator{\li}{\OpName{li}}
+  \DeclareMathOperator{\Lg}{l}
+  \newcommand{\DPchg}[2]{#1}
+  \DeclareInputMath{183}{\mathbin{.}}
+  \newcommand{\Ibar}{\,\bigg\}}
+  \newcommand{\Sqrt}[2][]{\,\sqrt[#1]{\vphantom{#2}}#2}
+}
+
+% Several instances of "Cr. Journ." not formatted consistently
+\newcommand{\Cr}{\DPchg{\textit{Cr}}{\bsc{Cr}}}
+
+\DeclareMathOperator{\Ei}{\OpName{Ei}}
+\DeclareMathOperator{\Ci}{\OpName{Ci}}
+\DeclareMathOperator{\Si}{\OpName{Si}}
+
+\DeclareMathOperator{\Cos}{\OpName{Cos}}
+\DeclareMathOperator{\Sin}{\OpName{Sin}}
+
+\DeclareMathOperator{\Arctg}{Arctg.}
+\DeclareMathOperator{\Lim}{Lim.}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Neg}{\phantom{-}}
+
+%% Use \textstyle \sum throughout
+\let\oldsum=\sum
+\renewcommand{\sum}{\mathop{\textstyle\oldsum}}
+
+%% Upright capital letters in math mode
+\DeclareMathSymbol{A}{\mathalpha}{operators}{`A}
+\DeclareMathSymbol{B}{\mathalpha}{operators}{`B}
+\DeclareMathSymbol{C}{\mathalpha}{operators}{`C}
+\DeclareMathSymbol{D}{\mathalpha}{operators}{`D}
+\DeclareMathSymbol{E}{\mathalpha}{operators}{`E}
+\DeclareMathSymbol{F}{\mathalpha}{operators}{`F}
+\DeclareMathSymbol{G}{\mathalpha}{operators}{`G}
+\DeclareMathSymbol{H}{\mathalpha}{operators}{`H}
+\DeclareMathSymbol{I}{\mathalpha}{operators}{`I}
+\DeclareMathSymbol{J}{\mathalpha}{operators}{`J}
+\DeclareMathSymbol{K}{\mathalpha}{operators}{`K}
+\DeclareMathSymbol{L}{\mathalpha}{operators}{`L}
+\DeclareMathSymbol{M}{\mathalpha}{operators}{`M}
+\DeclareMathSymbol{N}{\mathalpha}{operators}{`N}
+\DeclareMathSymbol{O}{\mathalpha}{operators}{`O}
+\DeclareMathSymbol{P}{\mathalpha}{operators}{`P}
+\DeclareMathSymbol{Q}{\mathalpha}{operators}{`Q}
+\DeclareMathSymbol{R}{\mathalpha}{operators}{`R}
+\DeclareMathSymbol{S}{\mathalpha}{operators}{`S}
+\DeclareMathSymbol{T}{\mathalpha}{operators}{`T}
+\DeclareMathSymbol{U}{\mathalpha}{operators}{`U}
+\DeclareMathSymbol{V}{\mathalpha}{operators}{`V}
+\DeclareMathSymbol{W}{\mathalpha}{operators}{`W}
+\DeclareMathSymbol{X}{\mathalpha}{operators}{`X}
+\DeclareMathSymbol{Y}{\mathalpha}{operators}{`Y}
+\DeclareMathSymbol{Z}{\mathalpha}{operators}{`Z}
+
+% Display math break with extra space
+\newcommand{\dbreak}{\displaybreak[1] \\[4pt]}
+
+%% "Thought breaks" -- Horizontal rules and vertical spacing
+\newcommand{\tb}[1][1in]{\rule{#1}{0.5pt}}
+\newcommand{\ctb}[1][1in]{\begin{center}\tb\end{center}}
+
+\newcommand{\Par}[1]{%
+  \paragraph*{\indent#1}
+  \BookMark{0}{Numéro #1}
+  \label{numero:#1}
+}
+
+\newenvironment{Théorème}[1]{%
+  \paragraph*{Théorème #1.}\phantomsection\label{theorem:#1}\hangindent2\parindent%
+}{}
+
+% Cross-referencing
+\newcommand{\Tag}[1]{%
+  \phantomsection\label{eqn:#1}%
+  \tag*{\ensuremath{#1}}%
+}
+\newcommand{\Eqref}[1]{%
+  \hyperref[eqn:#1]{\ensuremath{#1}}%
+}
+
+\newcommand{\Theorem}[1]{%
+  \hyperref[theorem:#1]{Théorème~#1}%
+}
+
+\renewcommand{\no}[1]{N\textsuperscript{o}.~#1}
+\renewcommand{\No}[1]{%
+  \hyperref[numero:#1.]{\no{#1}}%
+}
+\newcommand{\Nos}[1]{%
+  \hyperref[numero:#1.]{N\textsuperscript{os}~#1}%
+}
+\newcommand{\Noref}[1]{%
+  \hyperref[numero:#1.]{#1}%
+}
+
+\newcommand{\Numero}[1]{%
+  \hyperref[numero:#1.]{Numéro~#1}%
+}
+
+% Optional argument is interline skip
+\newcommand{\HalfTitle}[1][\vfil]{%
+\textbf{\Huge NOTE}
+#1
+
+\footnotesize SUR UNE MÉTHODE POUR LA RÉDUCTION
+#1
+
+\textbf{\Huge D'INTÉGRALES DÉFINIES}
+#1
+
+\footnotesize ET SUR SON APPLICATION À
+#1
+
+\textbf{\Large QUELQUES FORMULES SPÉCIALES.}
+#1
+
+\footnotesize PAR
+#1
+
+\textbf{\itshape\large D. BIERENS DE HAAN.}
+#1
+
+\tb
+#1
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%% START OF DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagestyle{empty}
+\pagenumbering{alph}
+\BookMark{-1}{Matiére Préliminaire}
+
+%%%% PG BOILERPLATE %%%%
+\BookMark{0}{PG Boilerplate}
+\begin{center}
+\begin{minipage}{\textwidth}
+\begin{PGtext}
+The Project Gutenberg EBook of Note sur une Méthode pour la Réduction
+d'Intégrales Définies, by D. (David) Bierens de Haan
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.net
+
+
+Title: Note sur une Méthode pour la Réduction d'Intégrales Définies
+       et sur son Application à Quelques Formules Spécials
+
+Author: D. (David) Bierens de Haan
+
+Release Date: June 6, 2011 [EBook #36334]
+
+Language: French
+
+Character set encoding: ISO-8859-1
+
+*** START OF THIS PROJECT GUTENBERG EBOOK REDUCTION D'INTEGRALES DEFINIES ***
+\end{PGtext}
+\end{minipage}
+\end{center}
+\clearpage
+%%%% Credits and transcriber's note %%%%
+\begin{center}
+\begin{minipage}{\textwidth}
+\begin{PGtext}
+Produced by Andrew D. Hwang, Joshua Hutchinson, and the
+Online Distributed Proofreading Team at http://www.pgdp.net
+(This ebook was produced using images provided by the
+Cornell University Library Historical Mathematics Monographs
+collection.)
+\end{PGtext}
+\end{minipage}
+\end{center}
+\vfill
+
+\TranscriberNote
+%%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+\pagenumbering{Roman}
+\pagestyle{empty}
+%% -----File: 001.png---Folio 1-------
+\iffalse
+Production Note
+
+Cornell University Library produced this volume to replace the
+irreparably deteriorated original. It was scanned using Xerox
+software and equipment at 600 dots per inch resolution and com-
+pressed prior to storage using CCITT Group 4 compression. The
+digital data were used to create Cornell's replacement volume
+on paper that meets the ANSI Standard Z39.48-1984. The produc-
+tion of this volume was supported in part by the Commission on
+Preservation and Access and the Xerox Corporation. 1990.
+\fi
+%% -----File: 002.png---Folio 2-------
+%[Blank Page]
+%% -----File: 003.png---Folio 3-------
+\iffalse
+%[** TN: Library stamp]
+CORNELL UNIVERSITY LIBRARY
+
+BOUGHT WITH THE INCOME
+FROM THE
+SAGE ENDOWMENT FUND
+THE GIFT OF
+Henry W. Sage
+1891
+\fi
+%% -----File: 004.png---Folio 4-------
+%[Blank Page]
+%% -----File: 005.png---Folio 5-------
+% Title page
+\begin{center}
+\HalfTitle % [** TN: Macro prints the text below]
+\iffalse
+NOTE
+SUR UNE MÉTHODE POUR LA RÉDUCTION
+D'INTÉGRALES DÉFINIES
+ET SUR SON APPLICATION À
+QUELQUES FORMULES SPÉCIALES.
+PAR
+D. BIERENS DE HAAN.
+\fi
+
+\textbf{\footnotesize Publié par l'Académie Royale des Sciences à Amsterdam.}
+\vfil
+
+% Decorative symbol
+\vfil
+\normalsize
+AMSTERDAM,\\
+C. G. VAN DER POST.\\
+1855.
+\end{center}
+\cleardoublepage
+%% -----File: 006.png---Folio 6-------
+%[Blank Page]
+%% -----File: 007.png---Folio 7-------
+\mainmatter
+\BookMark{-1}{Matière Principale}
+\SetRunningHeads{%
+  Note sur une Méthode pour la Réduction d'Intégrales Définies%
+}{%
+  et sur son Application à quelques Formules Spéciales.%
+}
+\begin{center}
+\HalfTitle[\bigskip\bigskip]
+\iffalse
+NOTE
+SUR UNE MÉTHODE POUR LA RÉDUCTION
+D'INTÉGRALES DÉFINIES
+ET SUR SON APPLICATION À
+QUELQUES FORMULES \DPtypo{SPECIALES}{SPÉCIALES}.
+PAR
+D. BIERENS DE HAAN.
+\fi
+\end{center}
+
+\Par{1.} Je prends pour données les formules trouvées par MM. \bsc{Schlömilch}
+et \bsc{Arndt}:
+\begin{alignat*}{2}
+&\int_{0}^{\infty} \frac{e^{-px}\, dx}{x + q}
+  &&= -e^{pq} \li(e^{-pq})
+   = -e^{pq} \Ei(-pq) = a,
+\Tag{(I)} \\
+%
+&\int_{0}^{\infty} \frac{e^{-px}\, dx}{x - q}
+  &&= -e^{-pq} \li(e^{pq})
+   = -e^{-pq} \Ei(pq) = b,
+\Tag{(II)} \\
+%
+&\int_{0}^{\infty} \frac{e^{-px}\, dx}{x^{2} + q^{2}}
+  &&= \frac{1}{q} \bigl\{
+     \Ci(pq) \Sin pq - \Si(pq) \Cos pq + \tfrac{1}{2} \pi\Cos pq
+   \bigr\}
+   = \frac{c}{q},
+\Tag{(III)} \\
+%
+&\int_{0}^{\infty} \frac{e^{-px} x\, dx}{x^{2} + q^{2}}
+  &&= -\Ci(pq) \Cos pq - \Si(pq) \Sin pq + \tfrac{1}{2} \pi\Sin pq = d.
+\Tag{(IV)}
+\end{alignat*}
+
+Sur les deux premières on peut voir: \bsc{Schlömilch} dans ses \textit{Beiträge zur
+Theorie der bestimmten Integrale} III,~5; dans ses \textit{Analytische Studien} I,~§18,
+II,~§20, et \bsc{Grunert}'s \textit{Archif}, Bd.~V, S.~204. --- \bsc{Arndt}.\ \bsc{Gr}.~\textit{Arch.}\ Bd.~X,
+%% -----File: 008.png---Folio 8-------
+S.~247. --- \bsc{Winkler}.\ \bsc{Crelle}'s \textit{Journal}, Bd.~XLV, S.~102. Et sur les
+deux dernières: \bsc{Schlömilch} dans ses \textit{Anal.\ Stud.}\ II,~§21 et \Cr.~\textit{Journal}
+Bd.~XXXIII, S.~325. --- \bsc{Arndt}.\ \bsc{Gr}.~\textit{Arch.}\ Bd.~X, S.~225.
+
+En outre nous aurons besoin de deux autres formules connues, savoir:
+\begin{alignat*}{2}
+&\int_{0}^{\infty} e^{-px}\, dx
+  &&= \frac{1}{p},
+\Tag{(V)} \\
+&\int_{0}^{\infty} e^{-px} x^{a}\, dx
+  &&\DPtypo{}{=} \frac{1^{a/1}}{p^{a + 1}}
+   = \frac{\Gamma(a + 1)}{p^{a + 1}}.
+\Tag{(VI)}
+\end{alignat*}
+
+Sur la première, qui se déduit aisément par l'intégration indéfinie, voyez:
+\bsc{Cisa de Grésy}.\ \textit{Mém.\ de Turin}, 1821, p.~209. II,~\no{45}. \bsc{Liouville}.\
+\textit{Journal de Liouville}, T.~IV, p.~317. --- \bsc{Oettinger}.\ \Cr.~\textit{Journ.}\ Bd.~XXXV,
+S.~13. --- Quant à la dernière, qui est due à Euler, on peut consulter ses
+\textit{Instit.\ Calc.\ Int.}\ T.~IV, Supp.~V, p.~129,~sqq. --- \bsc{Legendre}.\ \textit{Exerc.\ de
+Calcul Intégral}. P.~III, \no{31}. --- \bsc{Poisson}.\ \textit{Journal de l'École Polyt.}\ Cah.~XIX,
+p.~404, \no{68}. --- \bsc{Binet}.\ \textit{Journ.\ de l'Éc.\ Pol.}\ Cah.~XXVII, p.~123. --- \bsc{Lejeune-Dirichlet}.\
+\Cr.~\textit{Journ.}\ Bd.~XV, S.~258. --- \bsc{Oettinger}.\ \Cr.~\textit{Journ.}\
+Bd.~XXXV, S.~13. --- \bsc{Schaar}.\ Mém.\ de Brux.~1848. --- \bsc{Lobatschewsky}.\
+\textit{Mém.\ de Kasan}, 1835, p.~211 et 1836, p.~1, I~form.~(13).
+
+La somme et la différence des formules \Eqref{(I)}~et~\Eqref{(II)} donnent:
+\begin{alignat*}{2}
+&\int_{0}^{\infty} \frac{ e^{-px}\, dx}{x^{2} - q^{2}}
+  &&= \frac{b - a}{2q}
+   = \frac{1}{2q} \left\{e^{pq} \Ei(-pq) - e^{-pq} \Ei(pq) \right\},
+\Tag{(VII)} \\
+%
+&\int_{0}^{\infty} \frac{e^{-px} x\, dx}{x^{2} - q^{2}}
+  &&= \frac{a + b}{2}
+   = -\tfrac{1}{2} \left\{e^{pq} \Ei(-pq) + e^{-pq} \Ei(pq)\right\}.
+\Tag{(VIII)}
+\end{alignat*}
+
+Ces formules ont été trouvées par \bsc{Schlömilch} dans ses \textit{Anal.\ Stud.}\ II,~§20
+et par \bsc{Arndt}, \DPchg{\textit{Gr}}{\bsc{Gr}}.~\textit{Arch.}\ Bd.~X, S.~247.
+
+Les signes $\li$, $\Ei$, $\Ci$ et~$\Si$ dénotent ici les fonctions transcendantes,
+connues sous les noms de logarithme intégral, exponentielle intégrale, sinus
+intégral et cosinus intégral, qui sont exprimées respectivement par les
+équations
+%[** TN: Original seems to use "1" (upright "l"?) for log, and has the
+% peculiar (but mathematically-correct) \tfrac{1}{4} 1q^{4} instead of 1q.
+% \Lg macro modernizes to "\log", otherwise sets upright "l".]
+\begin{align*}
+\li(q) &= \int_{0}^{q} \frac{dx}{\Lg x}
+  = A + \DPtypo{\tfrac{1}{2} \Lg q^{2}}{\log\log q}
+  + \frac{1}{1}\, \frac{\DPtypo{q}{\log q}}{1}
+  + \tfrac{1}{2}\, \frac{\DPtypo{q^{2}}{(\log q)^{2}}}{1·2} + \dots, \\
+%
+\Ei(q) &= -\int_{-q}^{\infty} \frac{e^{-x}\, dx}{x}
+  = A + \DPchg{\tfrac{1}{4} \Lg q^{4}}{\log q}
+  + \frac{1}{1}\, \DPtypo{\frac{1}{q}}{\frac{q}{1}}
+  + \tfrac{1}{2}\, \frac{q^{2}}{1·2} + \dots, \\
+%
+%% -----File: 009.png---Folio 9-------
+\Si(q) &= \int_{0}^{q} \frac{\Sin x\, dx}{x}
+  = \frac{1}{1}\, \frac{q}{1}
+  - \tfrac{1}{3}\, \frac{q^{3}}{1·2·3}
+  + \tfrac{1}{5}\, \frac{q^{5}}{1·2·3·4·5} - \dots, \\
+%
+\Ci(q) &= \int_{\infty}^{q} \frac{\Cos x\, dx}{x}
+  = A + \DPchg{\tfrac{1}{4} \Lg q^{4}}{\log q}
+  - \tfrac{1}{2}\, \frac{q^{2}}{1·2}
+  + \tfrac{1}{4}\, \frac{q^{4}}{1·2·3·4} - \dots.
+\end{align*}
+
+La deuxième ne diffère de la première que dans le cas où $q$~soit imaginaire:
+les deux dernières transcendantes sont introduites dans l'analyse par
+MM. \bsc{Schlömilch} et \bsc{Arndt} en même temps. $A$~est la constante connue
+$0,5772156\dots$ déterminée déjà par \bsc{Mascheroni}. En outre j'ai employé pour
+les factorielles ou facultés numériques la notation de \bsc{Kramp}:
+\[
+p^{a/q} = \DPchg{
+  p · p + q · p + 2q \cdots p + (a - 1) q
+}{
+  p · (p + q) · (p + 2q) \cdots \bigl(p + (a - 1) q\bigr)
+}.
+\]
+
+\Par{2.} Cherchons à présent les intégrales
+\begin{align*}
+\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{x + q} &= A_{h}, &
+\int_{0}^{\infty} \frac{e^{-px}\, dx}{(x + q)^{k}} &= C_{k}, \\
+\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{x - q} &= B_{h}, &
+\int_{0}^{\infty} \frac{e^{-px}\, dx}{(x - q)^{k}} &= D_{k}.
+\end{align*}
+
+Généralement on a
+\begin{align*}
+\int_{0}^{\infty} \frac{e^{-px} x^{h+1}\, dx}{x + q}
+  &= \int_{0}^{\infty} e^{-px} x^{h}\, dx
+  - q\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{x + q}, \\
+%
+\int_{0}^{\infty} \frac{e^{-px} x^{h+1}\, dx}{x - q}
+  &= \int_{0}^{\infty} e^{-px} x^{h}\, dx
+  + q\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{x - q};
+\end{align*}
+ou bien
+\begin{align*}
+A_{h + 1} &= \frac{1^{h/1}}{p^{h+1}} - q A_{h},
+\Tag{(a)} \\
+B_{h + 1} &= \frac{1^{h/1}}{p^{h+1}} + q B_{h}.
+\Tag{(b)}
+\end{align*}
+En appliquant cette réduction, on obtient successivement
+\begin{align*}
+A_{1} &= -aq + \frac{1}{p}, \\
+A_{2} &= +aq^{2} + \frac{1 - pq}{p^{2}}, \\
+%% -----File: 010.png---Folio 10-------
+A_{3} &= -aq^{3} + \frac{1·2 - pq + p^{2} q^{2}}{p^{3}}, \\
+A_{4} &= +aq^{4} + \frac{1·2·3 - 1·2·pq + p^{2} q^{2} - p^{3} q^{3}}{p^{4}};
+\intertext{donc en général}
+A_{h} &= a(-q)^{h} + \frac{1}{p^{h}} \sum_{1}^{h} 1^{h - n/1}(-pq)^{n - 1};
+\Tag{(1)}
+\intertext{et de la même manière}
+B_{h} &= b(q)^{h} + \frac{1}{p^{h}} \sum_{1}^{h} 1^{h - n/1} (pq)^{n - 1};
+\Tag{(2)}
+\end{align*}
+ce qui s'accorde avec les formules de réduction générales.
+
+Pour les deux intégrales $C$~et~$D$ le même chemin ne nous mène pas au
+but: il faut avoir recours à une autre réduction, qui est, si je ne me trompe,
+aussi féconde dans ses résultats, qu'elle est simple et surtout qu'elle est
+sûre dans son application et dans sa déduction.
+
+\Par{3.} La méthode connue d'intégration, dite par parties, est donnée par cette
+formule
+\begin{align*}
+d_{x} \bigl\{f(x)·\phi(x)\bigr\}
+  &= \phi(x)·d_{x} \bigl\{f(x)\bigr\}
+   + f(x)·d_{x} \bigl\{\phi(x)\bigr\},
+\intertext{d'où}
+\phi(x)·d_{x} \bigl\{f(x)\bigr\}
+  &= d_{x}\DPchg{·}{}\bigl\{f(x)·\phi(x)\bigr\}
+   - f(x)·d_{x} \bigl\{\phi(x)\bigr\}.
+\end{align*}
+Intégrons cette formule entre les limites $a$ et $b$, nous obtiendrons
+\[
+\int_{a}^{b} \phi(x)·d_{x}\bigl\{f(x)\bigr\}\, dx
+  = \int_{a}^{b} d_{x}\DPchg{·}{}\bigl\{f(x)·\phi(x)\bigr\}\, dx
+  - \int_{a}^{b} f(x)·d_{x}\DPchg{·}{}\bigl\{\phi(x)\bigr\}\, dx.
+\]
+La deuxième de ces intégrales est facile à déterminer, puisque l'on n'a besoin
+d'aucune intégration: elle est $f(b)·\phi(b) - f(a)·\phi(a)$, sans constante, parce
+que celle-ci se détruit, lorsqu'on prend la différence des valeurs de l'intégrale
+pour les deux limites, dans la supposition toutefois que les fonctions
+$f(x)$~et~$\phi(x)$ restent continues entre ces deux limites. On a donc enfin
+\[
+\int_{a}^{b} \phi(x)·d_{x} \bigl\{f(x)\bigr\}\, dx
+  = f(b)·\phi(b) - f(a)·\phi(a)
+  - \int_{a}^{b} f(x)·d_{x} \bigl\{\phi(x)\bigr\}\, dx.
+\Tag{(A)}
+\]
+%% -----File: 011.png---Folio 11-------
+
+Quand les termes intégrés peuvent se déterminer exactement, sans rester
+indéterminés, comme il peut arriver fréquemment, et que de plus la première
+intégrale soit connue, la seconde s'en déduit directement, entre les mêmes
+limites, qui valent pour la première. Il est de rigueur que les termes intégrés
+aient une valeur déterminée: pour les cas ordinaires des limites $0$~et~$1$,
+$0$~et~$\infty$, $1$~et~$\infty$~etc., il arrive souvent, que ces produits se trouvent sous
+la forme indéterminée $0:0$,~$\infty:\infty$,~$0\DPtypo{.}{:}\infty$; mais dans ces cas l'on peut toujours
+s'assurer par les règles ordinaires et connues, si leur valeur soit vraiment
+indéterminée, ou si elle puisse se réduire à quelque valeur déterminée.
+Il est presque superflu d'ajouter la remarque, que la discontinuité de la fonction~$f(x)·\phi(x)$
+pour quelque valeur~$c$ de~$x$ entre les limites $a$~et~$b$ nécessite
+la correction
+\[
+\Lim \bigl[f(c - \epsilon)\phi(c - \epsilon)
+         - f(c + \epsilon)\phi(c + \epsilon)\bigr]
+\]
+pour la limite zéro de~$\epsilon$. Bien que ce cas de discontinuité ait lieu quelquefois
+auprès des intégrales, que nous allons étudier, la valeur de cette correction
+est toujours nulle: afin de ne pas troubler l'ordre du raisonnement à
+chaque instant, la discussion rélative a été renvoyée à la fin.
+
+Sous cette forme~\Eqref{(A)}, je dis que cette formule est capable de donner un
+grand nombre d'intégrales définies, et premièrement qu'elle peut quelquefois
+fournir des intégrales, que l'on cherche ordinairement par la méthode de la
+différentiation par rapport à une constante sous le signe d'intégration définie;
+méthode qui, dans son application usuelle, n'est certainement pas toujours
+rigoureuse, et qui est exposée en outre à de graves inconvénients, que l'on
+ne rencontre pas auprès de notre formule. En second lieu cette transformation
+peut introduire une nouvelle fonction sous le signe d'intégration définie,
+ce qui donne des résultats non moins intéressants.
+
+Bien que quelquefois on ait fait usage d'une réduction semblable dans le
+cours du calcul de quelque intégrale définie, je ne me rappelle pas, qu'on
+en ait fait autant de cas, qu'elle semble mériter. Je vais tâcher de faire
+voir dans la suite, qu'en effet elle donne beaucoup de formules utiles et surtout
+générales d'intégrales définies. J'en ai fait un usage fréquent dans la
+déduction de nouvelles intégrales définies dans les tables de ces fonctions,
+que je suis occupé de rediger, sans toutefois avoir été aussi loin que dans
+cette Note, et m'arrêtant le plus souvent, lorsque j'avais à recourir à des
+sommations.
+%% -----File: 012.png---Folio 12-------
+
+On a donc le
+\begin{Théorème}{I}
+Si dans une intégrale définie $\ds\int_{a}^{b} F(x)·dx$, la fonction~$F(x)$
+peut être mise sous la forme d'un produit, tel que l'un des facteurs
+soit la différentielle d'une fonction connue quelconque, c'est-à-dire,
+lorsqu'on a
+\[
+F(x) = \phi(x)·d_{x}\DPchg{·}{}\bigl\{f(x)\bigr\},
+\]
+on aura aussi l'équation
+\[
+\int_{a}^{b} \phi(x)·d_{x}\DPchg{·}{}\bigl\{f(x)\bigr\}\, dx
+   = \phi(b)·f(b) - \phi(a)·f(a)
+   - \int_{a}^{b} f(x)·d_{x}\DPchg{·}{}\bigl\{\phi(x)\bigr\}\, dx.
+\]
+\end{Théorème}%
+Quoique dans le cours de cette Note on ne fera usage que de ce théorème,
+il vaudra bien la peine pourtant d'en tirer un corollaire intéressant, en y
+appliquant la méthode d'intégration par rapport à une constante sous le signe
+d'intégration définie. A cet effet prenons $q$ pour la variable, le théorème
+précédent nous fournira l'équation
+\begin{align*}
+\int_{\alpha}^{\beta} \phi(q, x)·d_{q}\DPchg{·}{}\bigl\{f(q, x)\bigr\}\DPchg{·}{\,}dq
+  &= \phi(\beta, x)·f(\beta, x) - \phi(\alpha, x)·f(\alpha, x) \\
+  &- \int_{\alpha}^{\beta} f(q, x)·d_{q}\DPchg{·}{}\bigl\{\phi(q, x)\bigr\}\DPchg{·}{\,}dq;
+\end{align*}
+tandis que la méthode mentionnée est comprise, dans le cas général, sous la
+formule:
+\[
+\int_{\alpha}^{\beta} dy \int_{a}^{b} F(y, z)\, dz
+  = \int_{a}^{b} dz \int_{\alpha}^{\beta} F(y, z)\, dy - \Delta,
+\]
+où $\Delta$ est la correction, qu'il faut ajouter en divers cas de discontinuité. Prenons
+dans cette formule $q$ et $x$ au lieu de $y$ et $z$: nous aurons
+\[
+\int_{\alpha}^{\beta} dq \int_{a}^{b} F(q, x)\, dx
+  = \int_{a}^{b}\, dx \int_{\alpha}^{\beta} F(q, x)\, dq - \Delta.
+\]
+
+Supposons en outre que $F(q, x)$ soit de la forme $\phi(q, x)·d_{q}\bigl\{f(q, x)\bigr\}$, et
+nous trouverons enfin par la substitution de la première équation
+\begin{align*}
+\int_{\alpha}^{\beta} dq \int_{a}^{b} \phi(q, x)·d_{q} \bigl\{f(q, x)\bigr\}\, dx
+  &= \int_{a}^{b} dx\,
+       \bigl[\phi(\beta, x)·f(\beta,x) - \phi(\alpha, x)·f(\alpha, x)\bigr] \\
+  &- \int_{a}^{b} dx
+     \int_{\alpha}^{\beta} f(q, x)·d_{q} \DPchg{·}{}
+       \bigl\{\phi(q, x)\bigr\}\, dq - \Delta.
+\Tag{(B)}
+\end{align*}
+%% -----File: 013.png---Folio 13-------
+
+Il s'en suit donc le
+\begin{Théorème}{II}
+Lorsque dans une intégrale définie $\ds\int_{a}^{b} F(q, x)\, dx$ la fonction
+$F(q, x)$ peut être mise sous la forme d'un produit, tel que l'un des facteurs
+soit la différentielle d'une fonction connue quelconque de $q$, c'est-à-dire,
+lorsqu'on a
+\[
+F(q, x) = \phi(q, x)\DPchg{}{·} d_{q} \bigl\{f(q, x)\bigr\},
+\]
+on aura aussi l'équation
+\begin{align*}
+\llap{$\ds\int_{\alpha}^{\beta} dq$}
+\int_{a}^{b} \phi(q, x)·d_{q}\DPchg{·}{}\bigl\{f(q, x)\bigr\}\, dx
+  &= -\int_{a}^{b} dx
+      \int_{\alpha}^{\beta} f(q, x)·d_{q} \bigl\{\phi(q, x)\bigr\}\, dq - \Delta \\
+  &\quad +\int_{a}^{b} dx\,
+      \bigl[\phi(\beta, x)·f(\beta, x) - \phi(\alpha, x)·f(\alpha, x)\bigr];
+\end{align*}
+où $\Delta$ est la correction nécessaire dans certains cas de discontinuité de
+la fonction $F(a, x)$ --- pour des valeurs de~$q$ et de~$x$, qui tombent entre
+les limites respectives incluses, $\alpha$~et~$\beta$, $a$~et~$b$, --- lors de l'application
+de la méthode du changement dans l'ordre des intégrations. Toutefois
+ce résultat ne peut valoir que sous la double condition, à laquelle ce
+changement est soumis, savoir que
+\[
+y = \tfrac{1}{2} \Lim \epsilon \frac{d^{2}·F(q, x)}{dq^{2}}\quad \text{et}\quad
+\Lim \int_{a}^{b} y\, dx
+\]
+soient toutes deux nulles.
+%[** TN: Need blank line to end paragraph inside environment]
+
+\end{Théorème}
+
+Comme pour le \Theorem{I} il faut observer, qu'on a supposé que
+$\phi(q, x)·f(q, x)$ soit continu entre les limites $\alpha$~et~$\beta$ de~$q$: lorsque cela ne
+serait plus le cas, il faudrait ajouter au second membre de cette équation la
+correction
+\[
+\Lim \int_{\alpha}^{\beta}
+  \bigl[f(c - \epsilon)·\phi(c - \epsilon)
+      - f(c + \epsilon)·\phi(c + \epsilon)\bigr].
+\]
+
+\Par{4.} A l'aide de cette méthode les intégrales $C$~et~$D$ se déduisent aisément.
+Nous pouvons appliquer le théorème ici de trois manières différentes, savoir
+\begin{gather*}
+\begin{aligned}
+\int_{0}^{\infty} \frac{e^{-px}\, dx}{(x + q)^{k}}
+  &= \int_{0}^{\infty} \frac{e^{-px}}{(x + q)^{k}}\, d·x \\
+%[** TN: Added line break]
+  &= \frac{xe^{-px}}{(x + q)^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} x
+     \left\{\frac{-pe^{-px}\, dx}{(x + q)^{k}}
+                  + e^{-px} \frac{-k\, dx}{(x + q)^{k+1}}\right\} \\
+%
+  &= \frac{xe^{-px}}{(x + q)^{k}} \Ibar_{0}^{\infty}
+   + \int_{0}^{\infty} e^{-px}\, dx
+     \left\{\frac{p}{(x + q)^{k-1}} + \frac{k - pq}{(x + q)^{k}}
+         - \frac{kq}{(x + q)^{k+1}}\right\},
+\end{aligned} \dbreak
+%% -----File: 014.png---Folio 14-------
+-p \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x + q)^{k}}
+  = \int_{0}^{\infty} \frac{1}{(x + q)^{k}}\ d·e^{-px}
+   = \frac{e^{-px}}{(x + q)^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px}\, dx \frac{-k}{(x + q)^{k+1}}, \\
+%
+-k \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x + q)^{k+1}}
+  = \int_{0}^{\infty} e^{-px}\, d·\frac{1}{(x + q)^{k}}
+   = \frac{e^{-px}}{(x + q)^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x + q)^{k}}·- pe^{-px}\, dx.
+\end{gather*}
+Ici, comme partout dans la suite, la notation:~$F(x)\Ibar_{a}^{b}$ signifie, que l'on doit
+prendre la fonction~$F(x)$ entre les limites $a$~et~$b$. Voyons d'abord ce que
+deviennent ici les termes déjà intégrés, dont les deux derniers sont égaux.
+Pour la limite~$0$ de~$x$ ils sont
+\[
+\frac{x e^{-px}}{(x + q)^{k}} = \frac{0·1}{q^{k}} = 0
+\quad\text{et} \quad
+\frac{e^{-px}}{(x + q)^{k}} = \frac{1}{q^{k}}.
+\]
+Pour l'autre limite~$\infty$ de~$x$ ils s'offrent sous la forme
+\[
+\frac{x e^{-px}}{(x + q)^{k}} = \frac{\infty·0}{\infty^{k}} = 0,
+\text{ pour $k \geqq 1$},\qquad
+\frac{e^{-px}}{(x + q)^{k}} = \frac{0}{\infty} = 0,
+\text{ pour $k > 0$}.
+\]
+Donc ces termes, quoiqu'on partie ils semblent indéterminés, sont en vérité
+$0$~ou~$q^{-k}$. Donc les équations deviennent, après la séparation des intégrales,
+réunies par les signes $+$~ou~$-$,
+\[
+C_{k} = pC_{k - 1} + (k - pq) C_{k} - kq C_{k + 1},
+\]
+ou bien
+\[
+kq C_{k + 1} = pC_{k - 1} - (pq - k + 1) C_{k},\quad k \geqq 1
+\Tag{(c)}
+\]
+et
+\[
+\left.
+\begin{alignedat}{2}
+-pC_{k} &= -\frac{1}{q^{k}} + kC_{k + 1},\qquad && k > 0 \\
+-kC_{k + 1} &= -\frac{1}{q^{k}} + pC_{k},\qquad && k > 0
+\end{alignedat}
+\right\}
+\Tag{(d)}
+\]
+dont les deux dernières coincident. Dans l'application la formule~\Eqref{(d)} sera la
+plus facile: en tous cas on trouve, parceque $C_{0} = \dfrac{1}{p}$, $C_{1} = a$:
+\begin{align*}
+C_{2} &= -ap + \frac{1}{q}, \\
+C_{3} &= \frac{ap^{2}}{2} + \frac{1 - pq}{2q^{2}}, \\
+%% -----File: 015.png---Folio 15-------
+C_{4} &= -\frac{ap^{3}}{2·3}
+  + \frac{2 - pq + p^{2} q^{2}}{2·3\DPchg{}{·}q^{3}}, \\
+C_{5} &= \frac{ap^{4}}{2·3·4}
+  + \frac{2·3 - 2pq + p^{2} q^{2} - p^{3} q^{3}}{2·3·4·q^{4}};
+\end{align*}
+donc en général
+\[
+C_{k} = \frac{(-p)^{k-1}}{1^{k-1/1}}\, a
+  + \frac{1}{1^{k-1/1}\, q^{k-1}}
+    \sum_{1}^{k-1} 1^{k - n - 1/1}\, (-pq)^{n - 1}
+\Tag{(3)}
+\]
+en accord avec les deux formules générales de réduction. On trouverait
+de même
+\[
+D_{k} = \frac{(-p)^{k-1}}{1^{k-1/1}}\, b
+  + \frac{1}{1^{k-1/1}\, (-q)^{k-1}}
+    \sum_{1}^{k-1} 1^{k - n - 1/1}\, (pq)^{n - 1}.
+\Tag{(4)}
+\]
+
+\Par{5.} Restent encore les intégrales analogues
+\[
+\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x + q)^{k}} = E_{h, k},\qquad
+\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x - q)^{k}} = F_{h, k},
+\]
+qui ne sont pas aussi simples. En premier lieu notre méthode donne ici
+d'un triple point de vue
+\begin{align*}
+(h + 1) \int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x + q)^{k}}
+  &= \int_{0}^{\infty} \frac{e^{-px}}{(x + q)^{k}}\, d·x^{h+1}
+   = \frac{e^{-px} x^{h+1}}{(x - q)^{k}} \Ibar_{0}^{\infty} \\
+  &- \int_{0}^{\infty} x^{h+1}\left\{
+    \frac{-pe^{-px}\, dx}{(x + q)^{k}}
+      + e^{-px}\, \frac{-k\, dx}{(x + q)^{k+1}}
+    \right\}; \dbreak
+%
+-p \int_{0}^{\infty} \frac{e^{-px} x^{h+1}\, dx}{(x + q)^{k}}
+  &= \int_{0}^{\infty} \frac{x^{h+1}}{(x + q)^{k}}\, d·e^{-px}
+   = \frac{e^{-px} x^{h+1}}{(x + q)^{k}} \Ibar_{0}^{\infty} \\
+  &- \int_{0}^{\infty} e^{-px} \left\{
+    \frac{(h + 1) x^{h}\, dx}{(x + q)^{k}}
+      + x^{h+1}\, \frac{-k\, dx}{(x + q)^{k+1} }
+    \right\}; \dbreak
+%
+-k \int_{0}^{\infty} \frac{e^{-px} x^{h+1}\, dx}{(x - q)^{k+1}}
+  &= \int_{0}^{\infty} e^{-px} x^{h+1}\, d·\frac{1}{(x + q)^{k}}
+   = \frac{e^{-px} x^{h+1}}{(x + q)^{k}} \Ibar_{0}^{\infty} \\
+  &- \int_{0}^{\infty} \frac{1}{(x + q)^{k}} \left\{
+    -pe^{-px} x^{h+1}\, dx + (h + 1) x^{h} e^{-px}\, dx
+  \right\}.
+\end{align*}
+Les termes déjà intégrés, qui ici sont les mêmes dans les trois formules,
+%% -----File: 016.png---Folio 16-------
+donnent pour la limite $x = 0$, $\dfrac{1·0}{q^{k}} = 0$; mais pour la limite supérieure
+$x = \infty$, ils semblent indéterminés, vid.\ $\dfrac{0·\infty^{h+1}}{\infty^{k}}$.  Voyons ce qui en est
+et mettons les sous la forme $\dfrac{x^{h+1}}{e^{px} (x + q)^{k}}$. Nous aurons
+$\dfrac{x^{h+1}}{e^{px}(x + q)^{k}}
+  = \dfrac{(h + 1) x^{h}}{e^{px} \bigl\{{p(x + q)^{k} + k(x + q)^{k-1}}\bigr\}}$.
+Donc la puissance diminue de degré dans le numérateur, jusqu'à ce que l'on aura~$1^{h+1/1}$; dans le dénominateur on aura alors
+\[
+e^{px} \bigl\{p^{h} (x + q)^{k} + \cdots\cdots + \cdots (x + q)^{k - h}\bigr\}
+\]
+si $k > h$; dans le cas contraire le dernier terme est $(x + q)^{0}$. Ce polynome
+est infini pour $x = \infty$, $e^{px}$~est de même infini: donc la fraction est devenue
+$\dfrac{0}{\infty·\infty}$ bien certainement zéro. Les équations deviennent ainsi:
+\begin{align*}
+(h + 1) E_{h, k}
+  &= pE_{h+1, k} + kE_{h+1, k+1}, \\
+-pE_{h+1, k}
+  &= -(h + 1) E_{h, k} + kE_{h+1, k+1}, \\
+-kE_{h+1, k+1}
+  &= pE_{h+1, k} - (h + 1)\DPtypo{,}{} E_{h, k}.
+\end{align*}
+Ces trois équations sont donc identiques, et l'on a en général
+\[
+(k - 1) E_{h, k} = -pE_{h, k-1} + hE_{h-1, k-1}.
+\Tag{(e)}
+\]
+En application elle donne
+\begin{align*}
+E_{h,1} &= A_{h}, \\
+E_{h,2} &= -pA_{h} + hA_{h-1}, \\
+E_{h,3} &= \tfrac{1}{2} (-pE_{h, 2} + hE_{h-1, 2})
+  = \tfrac{1}{2} \bigl(p^{2} A_{h} - 2p·hA_{h-1} + h·(h - 1) A_{h-2}\DPtypo{}{\bigr)}, \\
+E_{h,4} &= \tfrac{1}{2\DPtypo{,}{·}3}(-pE_{h, 3} + hE_{h-1, 3}) \\
+%[** TN: Re-breaking]
+ &= \tfrac{1}{2\DPtypo{,}{·}3} \bigl(-p^{3} A_{h+3} p^{2} hA_{h-1}
+     - 3 p·h(h - 1) A_{h-2}
+     + h·(h - 1)(h - 2) A_{h-3}\bigr);
+\end{align*}
+donc en général
+\[
+E_{h, k+1} = \frac{1}{1^{k/1}} \sum_{0}^{k}
+  1^{k-m/1} \binom{h}{k - m} \binom{k}{m} (-p)^{m} A_{h-k+m}
+\Tag{(5)}
+\]
+où $\dbinom{x}{y}$ est la notation usuelle pour le coefficient à index~$y$ de la puissance~$x$\ieme.
+%% -----File: 017.png---Folio 17-------
+Mais cette formule a le grave inconvénient d'obliger à recourir à
+$k + 1$ valeurs différentes de~$A$: l'on ne peut y remédier, qu'en perdant la
+forme simple, obtenue jusqu'ici. Car en vertu de~\Eqref{(a)} on a
+\[
+qA_{h-1} = \frac{1^{h-1/1}}{p^{h}} - A_{h};
+\]
+\DPtypo{Substituons}{substituons} cette valeur dans l'équation pour~$E_{h, 2}$ et il ne reste que $A_{h}$ et
+une quantité déterminée, non fonction de~$A_{h}$: donc tous les~$E_{h, k}$ peuvent se
+déterminer de la même manière. Par le calcul on trouve en effet
+\begin{align*}
+E_{h,2}
+  &= \frac{1^{h/1}}{p^{h}}\, \frac{1}{q} - \frac{pq + h}{q}\, A_{h}, \\
+E_{h,3}
+  &= -\frac{1^{h/1}}{p^{h}}\, \frac{pq + h - 1}{1·2·q^{2}}
+   + \frac{p^{2} q^{2} + h·2pq + h·(h - 1)}{1·2·q^{2}}\, A_{h}, \\
+E_{h,4}
+  &= \frac{1^{h/1}}{p^{h}}\,
+     \frac{pq + \bigl(p^{2} q^{2} + (h - 1)\DPchg{}{·}2pq + (h - 1)·(h - 2)\bigr)}
+          {1·2·3·q^{3}} \\
+%[** TN: Added line break]
+  &\qquad
+   - \frac{p^{3} q^{3} + h·3p^{2} q^{2} + h·(h - 1)\DPchg{}{·}3pq + h·(h - 1)(h - 2)}
+          {1·2·3·q^{3}}\, A_{h}.
+\intertext{L'acte de progression dans le coefficient de~$A_{h}$ est facile à saisir: nous ne
+transcrirons donc dorénavant que le premier terme, comme suit:}
+E_{h, 5}
+  &= -\frac{1^{h/1}}{p^{h}}\,
+      \frac{\left\{\begin{alignedat}{2}
+          2pq (pq + h - 2)
+          &+ \bigl(p^{3} q^{3} &&+ (h - 1)\DPchg{}{·}3p^{2} q^{2} \\
+          &&&+  (h - 1)(h - 2)·3pq \\
+          &&&+ (h - 1)·(h - 2)·(h - 3)\bigr)
+        \end{alignedat}\right\}}
+           {1·2·3·4·q^{4}} + \&c.
+\dbreak
+E_{h, 6}
+  &= \frac{1^{h/1}}{p^{h}}\,
+     \frac{\left\{\begin{aligned}
+           2p^{2} q^{2}
+           &+ 3pq \bigl(p^{2} q^{2} + (h - 2)·2pq + (h - 2)·(h - 3)\bigr) \\
+           &+ \bigl(p^{4} q^{4} + (h - 1)·4p^{3} q^{3} + \text{etc.}\bigr)
+         \end{aligned}\right\}}
+           {1·2·3·4·5·q^{5}} - \&c.
+\dbreak
+E_{h, 7}
+  &= -\frac{1^{h/1}}{p^{h}}\,
+      \frac{\left\{\begin{alignedat}{2}
+            &\rlap{$3·2\DPchg{}{·}p^{2} q^{2} (pq + h - 3)$} \\
+            &\qquad+ 4pq \bigl(p^{3} q^{3} &&+ (h - 2)\DPchg{}{·}3p^{2} q^{2} \\
+            &&&+ (h - 2)·(h - 3)\DPchg{}{·}3pq \\
+            &&&+ (h - 2)·(h - 3)·(h - 4)\bigr) \\
+            &\qquad+ \rlap{$(p^{5} q^{5} + \text{etc.})$}\end{alignedat}\right\}}
+            {1·2·3·4·5·6·q^{6}} + \&c.
+\dbreak
+E_{h, 8}
+  &= \frac{1^{h/1}}{p^{h}}\,
+     \frac{\left\{\begin{alignedat}{2}
+           2·3\DPchg{}{·}p^{3} q^{3}
+           &+ 6·2\DPchg{}{·}p^{2} q^{2} \bigl(p^{2} q^{2} &&+ (h - 3)\DPchg{}{·}2pq \\
+           &&&+ (h - 3)·(h - 4)\bigr) \\
+           &\rlap{${}+ 5pq \bigl(p^{4} q^{4} + (h - 2)\DPchg{}{·}4p^{3} q^{3} + \text{etc.}\bigr)$} \\
+           &\rlap{${}+ (p^{6} q^{6} + \text{etc.})$}\end{alignedat}\right\}}
+          {1·2·3·4·5·6·7·q^{7}} - \&c.
+\dbreak
+E_{h, 9}
+  &= -\frac{1^{h/1}}{p^{h}}\,
+      \frac{\left\{\begin{aligned}
+            &4·2·3\DPchg{}{·}p^{3} q^{3} (pq + h - 4) \\
+            &\qquad+ 10·2\DPchg{}{·}p^{2} q^{2} \bigl(p^{3} q^{3} + (h - 3)\DPchg{}{·}3p^{2} q^{2}+ \text{etc.}\bigr) \\
+            &\qquad+ 6pq \bigl(p^{5} q^{5} + (h - 2)\DPchg{}{·}5p^{4} q^{4} + \text{etc.}\bigr) \\
+            &\qquad+ (p^{7} q^{7} + \text{etc.})\end{aligned}\right\}}
+           {1·2·3·4·5·6·7·8·q^{8}} + \&c.
+\end{align*}
+d'où l'on pourra juger de l'acte de progression dans le premier terme: donc
+on aura en général
+\begin{align*}
+E_{h, k+1}
+  &= \frac{A_{h}}{1^{k/1}\, (-q)^{k}}
+    \sum_{1}^{k} 1^{k-m/1} \binom{h}{k - m} \binom{k}{m} (pq)^{m} \\
+%% -----File: 018.png---Folio 18-------
+  &+ \frac{1}{p^{h} (-q)^{k}}\,
+  \frac{1^{h/1}}{1^{k/1}}\biggl[
+    \sum_{1}^{k} 1^{k-m/1} \binom{h - 1}{k - m} \binom{k - 1}{m - 1} (pq)^{m-1} \\
+  &\qquad+ \binom{k - 2}{1} pq \sum_{3}^{k}
+    1^{k-m/1} \binom{h - 2}{k - m} \binom{k - 3}{m - 3} (pq)^{m-3} \\
+  &\qquad+ \binom{k - 3}{2} 1^{2/1} p^{2} q^{2} \sum_{5}^{k} 1^{k-m/1}
+    \binom{h - 3}{k - m} \binom{k - 5}{m - 5} (pq)^{m-5} \\
+  &\qquad+ \binom{\DPtypo{h}{k} - 4}{3} 1^{3/1} p^{3} q^{3} \sum_{7}^{k} 1^{k-m/1}
+    \binom{h - 4}{k - m} \binom{k - 7}{m - 7} (pq)^{m-7} + \&c.\biggr]
+\Tag{(6)}
+\end{align*}
+où les coefficients du binôme ne valent que pour des valeurs positives de
+$k$--$l$: celles, où $k < l$, étant nulles.
+\begin{align*}
+\llap{$F_{h, k+1}$}
+  &= \frac{1}{1^{k/1}} \sum_{0}^{k} 1^{k-m/1}
+    \binom{h}{k - m} \binom{k}{m}(p)^{m} B_{h - k+m},
+\Tag{(7)} \dbreak
+%
+\llap{$F_{h, k+1}$}
+  &= \frac{B_{h}}{1^{k/1}\, q^{k}} \sum_{1}^{k} 1^{k-m/1}
+          \binom{h}{k - m} \binom{k}{m} (-pq)^{m} \\
+  &\qquad + \frac{1}{p^{h} q^{k}} \frac{1^{h/1}}{1^{k/1}} \biggl[
+     \sum_{1}^{k} 1^{k-m/1} \binom{h - 1}{k - m} \binom{k - 1}{m - 1} (-pq)^{m-1} \\
+  &\qquad\qquad- \binom{k - 2}{1} pq \sum_{3}^{k} 1^{k-m/1}
+     \binom{h - 2}{k - m} \binom{k - 3}{m - 3} (-pq)^{m-3} \\
+  &\qquad\qquad+ \binom{k - 3}{2} 1^{2/1} p^{2} q^{2} \sum_{5}^{k} 1^{k-m/1}
+     \binom{h - 3}{k - m} \binom{k - 5}{m - 5} (-pq)^{m-5} - \&c.
+     \biggr].
+\Tag{(8)}
+\end{align*}
+En effet, on voit que les formules \Eqref{(6)},~\Eqref{(8)} ne sont pas aussi simples que
+\Eqref{(5)},~\Eqref{(7)}, mais en révanche, elles ne contiennent que le seul $A_{h}$~ou~$B_{h}$, qui
+se substitue aisément des formules \Eqref{(1)}~et~\Eqref{(2)}.
+
+\Par{6.} Passons aux intégrales, dont le dénominateur est de la forme~$(x^{2} - q^{2})^{k}$.
+L'équation de réduction
+\[
+\int_{0}^{\infty} \frac{x^{h+2} e^{-px}\, dx}{(x^{2} - q^{2})^{k+1}}
+  = \int_{0}^{\infty} \frac{x^{h} e^{-px}\, dx}{(x^{2} - q^{2})^{k+1}}
+  + q^{2} \int_{0}^{\infty} \frac{x^{h} e^{-px}\, dx}{(x^{2} - q^{2})^{k+1}}
+\]
+nous apprend d'abord, que ces intégrales se divisent en deux classes, savoir
+à exponent~$h$ pair ou impair, de telle sorte que les intégrales d'une de ces
+classes se déterminent à l'aide d'intégrales de la même classe seulement.
+Les intégrales, que nous avons à étudier, sont donc les suivantes:
+\begin{align*}
+\int_{0}^{\infty} \frac{e^{-px} \PadTo{x^{2h+1}}{x^{2h}}\, dx}{x^{2} - q^{2}} &= G_{2h}, &
+\int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{2} - q^{2})^{k}} &= H_{k}, &
+\int_{0}^{\infty} \frac{e^{-px} \PadTo{x^{2h+1}}{x^{2h}}\, dx}{(x^{2} - q^{2})^{k}} &= K_{h, k}\DPchg{}{,} \\
+%
+\int_{0}^{\infty} \frac{e^{-px} x^{2h+1}\, dx}{x^{2} - q^{2}} &= G_{2h+1}, &
+\int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{2} - q^{2})^{k}} &= I_{k}, &
+\int_{0}^{\infty} \frac{e^{-px} x^{2h+1}\, dx}{(x^{2} - q^{2})^{k}} &= L_{h, k}.
+\end{align*}
+%% -----File: 019.png---Folio 19-------
+Pour les deux premières on a
+\[
+\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{x^{2} - q^{2}}
+  = \int_{0}^{\infty} e^{-px} x^{h-2}\, dx
+  + q^{2} \int_{0}^{\infty} \frac{e^{-px} x^{h-2}\, dx}{x^{2} - q^{2}}\DPchg{}{,}
+\]
+ou bien
+\[
+G_{2h} = \frac{1^{2h-2/1}}{p^{2h-1}} + q^{2} G_{2h-2},\qquad
+G_{2h+1} = \frac{1^{2h-1/1}}{p^{2h}} + q^{2} G_{2h-1};
+\Tag{(f)}
+\]
+ce qui donne en application
+\begin{align*}
+G_{0} &= \frac{1}{2q} (b - a),\qquad \text{Voir \Eqref{(VII)}} &
+G_{1} &= \tfrac{1}{2} (a + b),\qquad \text{Voir \Eqref{(VIII)}} \\
+%
+G_{2} &= \frac{1}{p} + \tfrac{1}{2} q(b - a), &
+G_{3} &= \frac{1}{p^{2}} + \tfrac{1}{2} q^{2} (a + b), \\
+%
+G_{4} &= \frac{1^{2/1}}{p^{3}} + \frac{q^{2}}{p} + \tfrac{1}{2} q^{3}(b - a), &
+G_{5} &= \frac{1^{3/1}}{p^{4}} + \frac{q^{2}}{p^{2}} + \tfrac{1}{2} q^{4}(a + b), \\
+%
+G_{6} &= \frac{1^{h/1}}{p^{5}} + \frac{1^{2/1} q^{2}}{p^{3}}
+       + \frac{q^{4}}{p} + \tfrac{1}{2} q^{5}(b - a), &
+G_{7} &= \frac{1^{5/1}}{p^{6}} + \frac{1^{3/1} q^{2}}{p^{4}}
+       + \frac{q^{4}}{p^{2}} + \tfrac{1}{2} q^{6} (a + b);
+\end{align*}
+donc en général
+\begin{alignat*}{5}
+&G_{2h} &&= \tfrac{1}{2} q^{2h-1} &&(b - a)
+  + \frac{1}{p^{2h-1}} &&\sum_{1}^{h} 1^{2h-2n/1} &&(p^{2} q^{2})^{n-1},
+\Tag{(9)} \\
+%
+&G_{2h+1} &&= \tfrac{1}{2} q^{2h} &&(b + a)
+  + \frac{1}{p^{2h}} &&\sum_{1}^{h} 1^{2h-2n+1/1} &&(p^{2} q^{2})^{n-1},
+\Tag{(10)}
+\end{alignat*}
+Quant à ces intégrales, on peut rémarquer, qu'on aurait pu les déduire des
+formules \Eqref{(1)}~et~\Eqref{(2)} par les rélations:
+\begin{alignat*}{6}
+&A_{2h} &&+ B_{2h} &&= 2G_{2h+1},\qquad &
+&B_{2h} &&- A_{2h} &&= 2q G_{2h}, \\
+%
+&A_{2h-1} &&+ B_{2h-1} &&= 2G_{2h}, &
+&B_{2h-1} &&- A_{2h-1} &&= 2q G_{2h-1};
+\end{alignat*}
+d'où
+\begin{alignat*}{7}
+&G_{2h} &&= \frac{1}{2q} \biggl\{B_{2h} &&- A_{2h} &&\biggr\}
+  = \tfrac{1}{2} \biggl\{B_{2h-1} &&+ A_{2h-1} &&\biggr\}, \\
+%
+&G_{2h+1} &&= \frac{1}{2q} \biggl\{B_{2h+1} &&- A_{2h+1} &&\biggr\}
+  = \tfrac{1}{2} \biggl\{B_{2h} &&+ A_{2h} &&\biggr\}.
+\end{alignat*}
+%% -----File: 020.png---Folio 20-------
+
+\Par{7.} Pour les deux suivantes $H_{k}$~et~$I_{k}$, il faut avoir recours au \Theorem{I}
+de~\No{3}. Comme dans \No{4}, on aura ici
+\begin{align*}
+&\int_{0}^{\infty} \frac{e^{-px}}{(x^{2} - q^{2})^{k}}\, d·x \\
+  &\qquad= \frac{xe^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} x
+   \left\{
+     \frac{-pe^{-px}\, dx}{(x^{2} - q^{2})^{k}}
+     + e^{-px} \frac{-k·2x\, dx}{(x^{2} - q^{2})^{k+1}}
+   \right\}\\
+%
+  &\qquad= \frac{xe^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   + \int_{0}^{\infty} e^{-px}\, dx
+   \left\{
+       \frac{px}{(x^{2} - q^{2})^{k}}
+     + \frac{2k}{(x^{2} - q^{2})^{k}}
+     + \frac{2k q^{2}}{(x^{2} - q^{2})^{k+1}}
+   \right\},
+\end{align*}
+ou bien
+\begin{gather*}
+(1 - 2k) \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{2} - q^{2})^{k}}
+  = \frac{xe^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+  + \int_{0}^{\infty} e^{-px}\, dx
+  \left\{
+    \frac{px}{(x^{2} - q^{2})^{k}} + \frac{2k q^{2}}{(x^{2} - q^{2})^{k+1}}
+  \right\}; \dbreak
+%
+\begin{aligned}
+\int_{0}^{\infty} \frac{xe^{-px}}{(x^{2} - q^{2})^{k}}\, \DPchg{d·x}{dx}
+  &= \frac{x^{2} e^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} x
+   \left\{
+     \frac{-pe^{-px} x + e^{-px}}{(x^{2} - q^{2})^{k}}\, dx
+     + xe^{-px}\, \frac{-k·2x\, dx}{(x^{2} - q^{2})^{k+1}}
+   \right\} \\
+%
+  &= \frac{x^{2} e^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   + \int_{0}^{\infty} e^{-px}\, dx
+   \left\{
+     \begin{aligned}%[** TN: Re-broken]
+       & \frac{p}{(x^{2} - q^{2})^{k-1}}
+       + \frac{pq^{2}}{(x^{2} - q^{2})^{k}} \\
+       &\quad+ \frac{(2k - 1) x}{(x^{2} - q^{2})^{k}}
+       + \frac{2kq^{2} x}{(x^{2} - q^{2})^{k+1}}
+     \end{aligned}
+   \right\}\DPtypo{:}{;}
+\end{aligned}
+\end{gather*}
+si l'on voulait prendre $\ds2 \int_{0}^{\infty} \frac{e^{-px}}{(x^{2} - q^{2})^{k}} x\, dx
+  = \int_{0}^{\infty} \frac{e^{-px}}{(x^{2} - q^{2})^{k}}\, d·x^{2}$ ou retrouverait
+la dernière équation elle-même.
+\begin{align*}%[** TN: Add several line breaks]
+-p \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{2} - q^{2})^{k-1}}
+  &= \int_{0}^{\infty} \frac{1}{\DPtypo{(x^{2} - q)^{2k-1}}{(x^{2} - q^{2})^{k-1}}}\,
+ d·e^{-px} \\
+  &= \frac{e^{-px}}{\DPtypo{(x^{2} - q)^{2k-1}}{(x^{2} - q^{2})^{k-1}}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px}\,
+     \frac{-(k - 1) 2x\, dx}{(x^{2} - q^{2})^{k}}, \dbreak
+%
+-p \int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{2} - q^{2})^{k}}
+  &= \int_{0}^{\infty} \frac{x}{(x^{2} - q^{2})^{k}}\, d·e^{-px} \\
+  &= \frac{xe^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px}\, dx \left\{
+     \frac{1}{(x^{2} - q^{2})^{k}} + x \frac{-k·2x}{(x^{2} - q^{2})^{k+1}}
+   \right\} \\
+%
+  &= \frac{xe^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+  + \int_{0}^{\infty} e^{-px}\, dx
+  \left\{
+    \frac{2k - 1}{(x^{2} - q^{2})^{k}} + \frac{2k q^{2}}{(x^{2} - q^{2})^{k+1}}
+  \right\}, \dbreak
+%
+-2k \int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{2} - q^{2})^{k+1}}
+  &= \int_{0}^{\infty} e^{-px}\, d·\frac{1}{(x^{2} - q^{2})^{k}} \\
+  &= \frac{e^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x^{2} - q^{2})^{k}}\, (-pe^{-px}\, dx), \dbreak
+%
+-2k \int_{0}^{\infty} \frac{e^{-px} x^{2}\, dx}{(x^{2} - q^{2})^{k+1}}
+  &= \int_{0}^{\infty} xe^{-px}\, d\DPchg{}{·}\frac{1}{(x^{2} - q^{2})^{k}} \\
+  &= \frac{xe^{-px}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x^{2} - q^{2})^{k}}
+   \biggl\{e^{-px} + x·(-pe^{-px})\biggr\}\, dx,
+\intertext{mais aussi}
+\int_{0}^{\infty} \frac{e^{-px} x^{2}\, dx}{(x^{2} - q^{2})^{k+1}}
+  &= q^{2} \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{2} - q^{2})^{k+1}}
+   + \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{2} - q^{2})^{k}}.
+\end{align*}
+%% -----File: 021.png---Folio 21-------
+Dans ces six équations on a des termes intégrés $\dfrac{e^{-px}}{(x^{2} - q^{2})^{a}}$ et $\dfrac{x^{b} e^{-px}}{(x^{2} - q^{2})^{a}}$.
+Pour la limite inférieure $x = 0$, ils deviennent respectivement $\dfrac{1}{(-q^{2})^{a}}$~et~$0$.
+Pour la limite supérieure $x = \infty$, le premier est $\dfrac{1}{e^{\infty}\, \infty^{a}} = \dfrac{1}{\infty} = 0$, et le
+second semble être indéterminé de la forme~$\dfrac{\infty^{b}\, 0}{\infty^{a}}$: mais si on le met sous
+la forme $\dfrac{x^{b}}{e^{+px}(x^{2} - q^{2})^{a}}$, et si l'on différentie le numérateur et le dénominateur
+de cette fraction, il vient:
+\[
+\frac{bx^{b-1}}{pe^{px} (x^{2} - q^{2})^{a} + e^{\DPtypo{-}{}px} a(x^{2} - q^{2})^{a-1} 2x}
+  = \frac{bx^{b-1}}{e^{px}(x^{2} - q^{2})^{a-1}\, (px^{2} + 2ax - \DPtypo{p^{2}}{p} q^{2})}.
+%[**TN: Third factor not in denominator in the original]
+\]
+Le degré du numérateur s'est abaissé d'une unité, celui du dénominateur
+n'a pas diminué: en réitérant cette différentiation, le numérateur devient à
+la fin~$1^{b/1}$ et alors la fraction a la valeur
+\[
+\frac{1^{b/1}}{e^{\infty}·\infty^{a}} = \frac{1^{b/1}}{\infty·\infty} = 0.
+\]
+Ce raisonnement exige que $a$~soit~$\geqq 0$, c'est-à-dire~$k \geqq 1$.
+
+A présent la première, la quatrième et la sixième des équations trouvées
+donnent:
+\[
+0 = pI_{\DPtypo{h}{k}}
+  + (2\DPtypo{h}{k} - 1) H_{k} + 2k q^{2} H_{k+1}\DPtypo{}{;}
+\Tag{(g')}
+\]
+la seconde donne:
+\[
+pH_{k-1} + pq^{2} H_{k} + 2(k - 1) I_{k} + 2k q^{2} I_{k+1} = 0;
+\]
+la troisième et la cinquième enfin:
+\[
+\frac{1}{(-q^{2})^{k}} = pH_{k} + 2kI_{k+1}.
+\Tag{(h')}
+\]
+Par la substitution de la dernière dans l'avant-dernière de ces formules on
+obtient une équation identique. Il nous reste donc les deux autres, qui
+doivent servir réciproquement à éliminer les~$I$ ou les~$H$: de sorte que nous
+trouvons
+%% -----File: 022.png---Folio 22-------
+\begin{align*}
+4q^{2}·k·\DPchg{k - 1}{(k - 1)}·H_{k+1}
+  &= \frac{-p}{(-q^{2})^{k+1}} - 2·\DPchg{k - 1}{(k - 1)}·\DPchg{2k - 1}{(2k - 1)}·H_{k} + p^{2} H_{k-1}\DPchg{}{,}
+\Tag{(g)} \\
+%
+4q^{2}·k·\DPchg{k - 1}{(k - 1)}·I_{k+1}
+  &= \frac{-1}{(-q^{2})^{k+1}} - 2·\DPchg{k - 1}{(k - 1)}·\DPchg{2k - 3}{(2k - 3)}·I_{k} + p^{2} I_{k-1}.
+\Tag{(h)}
+\end{align*}
+Or, nous avons
+\[
+H_{0} = \frac{1}{p},\qquad
+H_{1} = \frac{b - a}{2q},\qquad\qquad
+I_{0} = \frac{1}{p^{2}},\qquad
+I_{1} = \frac{a + b}{2}.
+\]
+Donc il nous faut encore $H_{2}$~et~$I_{2}$ pour pouvoir faire usage des formules
+\Eqref{(g)}~et~\Eqref{(h)}, qui valent seulement pour $k\geqq 1$. Les formules \Eqref{(g')}~et~\Eqref{(h')} nous
+aideront ici en donnant pour $k = 1$:
+\begin{align*}
+-2q^{2} H_{2} &= 1·H_{1} + pI_{1}
+  = \frac{b - a}{2q} + \frac{a + b}{2} p, \\
+%
+-2I_{2} &= \frac{1}{(-q^{2})^1} + pH_{1}
+  = \frac{-1}{q^{2}} + \frac{b - a}{2a} p;
+\end{align*}
+donc
+\[
+H_{2} = \frac{b - a}{2q}\, \frac{1}{2(-q^{2})}
+  + \frac{a + b}{2(-q^{2})}\, \frac{p}{2},\qquad
+I_{2} = -\frac{1}{2(-q^{2})} - \frac{b - a}{2q}\, \frac{p}{2}.
+\]
+
+Le calcul de \Eqref{(g)}~et~\Eqref{(h)} nous donne à présent successivement:
+\begin{align*}
+H_{3} &= \frac{1}{4(-q^{2})^{2}} \left\{
+  p + \frac{p^{2} q^{2} + 3}{(-q^{2})}\, \frac{b - a}{2q} + 3p(a + b)
+\right\}, \\
+%
+H_{4} &= \frac{1}{24(-q^{2})^{3}} \left\{
+  6p + \frac{6p^{2} q^{2} + 30}{(-q^{2})}\, \frac{b - a}{2q}
+     + (p^{2} q^{2} + 15) p(a + b)
+\right\}, \\
+%
+H_{5} &= \frac{1}{96(-q^{2})^{4}} \left\{
+  p(p^{2} q^{2} + 88)
+  + \frac{p^{4} q^{4} + 45p^{2} q^{2} + 210}{(-q^{2})}\,
+    \frac{b - a}{2q}\, (10p^{2} q^{2} + 105) p(a + b)
+\right\}, \\
+\multispan{2}{\dotfill} \dbreak
+I_{3} &= \frac{1}{2(-q^{2})} \left\{
+  \frac{2}{(-q^{2})} - p^{2} \frac{(a + b)}{2} + p\frac{b - a}{2q}
+\right\}, \\
+%
+I_{4} &= \frac{1}{12(-q^{2})^{2}} \left\{
+  \frac{p^{2} q^{2} + 26}{-q^{2}} - 6p^{2} \frac{a + b}{2}
+    - (p^{2} q^{2} - 12) p \frac{b - a}{2q}
+\right\} \\
+\multispan{2}{\dotfill}
+\end{align*}
+%% -----File: 023.png---Folio 23-------
+Vu la complication des formules \Eqref{(g)}~et~\Eqref{(h)}, l'on ne pourra mettre la valeur
+générale de $H_{k}$~et~$I_{k}$ sous une forme assez simple pour pouvoir en faire usage.
+
+\Par{8.} Le \Theorem{I} du \No{3} nous fournira ensuite pour les intégrales
+$K$~et~$L$ les formules suivantes:
+\begin{align*}
+h \int_{0}^{\infty} \frac{e^{-px} x^{h-1}\, dx}{(x^{2} - q^{2})^{k}}
+  &= \int_{0}^{\infty} \frac{e^{-px}}{(x^{2} - q^{2})^{k}}\, d·x^{h} \\
+  &= \frac{e^{-px} x^{h}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} x^{h} \left\{
+     \frac{-pe^{-px}}{(x^{2} - q^{2})^{k}}
+     + e^{-px} \frac{-k·2x }{(x^{2} - q^{2})^{k+1}}
+   \right\} dx, \\
+%
+-p \int_{0}^{\infty} \frac{e^{-px} \PadTo{x^{h-1}}{x^{h}}\, dx}{(x^{2} - q^{2})^{k}}
+  &= \int_{0}^{\infty} \frac{x^{h}}{(x^{2} - q^{2})^{k}}\, d·e^{-px} \\
+  &= \frac{e^{-px} x^{h}}{(x^{2} - q^{2})^{k} } \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px}\left\{
+     \frac{hx^{h-1}}{(x^{2} - q^{2})^{k}}
+     + x^{h} \frac{-k·2x}{(x^{2} - q^{2})^{k+1}}
+   \right\} dx, \\
+%
+-2k \int_{0}^{\infty} \frac{e^{-px} \PadTo{x^{h-1}}{\DPtypo{xh}{x^{h}}}\, dx}{(x^{2} - q^{2})^{k+1}}
+  &= \int_{0}^{\infty} e^{-px} x^{h}\, d·\frac{1}{(x^{2} - q^{2})^{k}} \\
+  &= \frac{e^{-px} x^{h}}{(x^{2} - q^{2})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x^{2} - q^{2})^{k}}\left\{
+     hx^{h-1} e^{-px} - pe^{-px} x^{h}
+   \right\} dx.
+\end{align*}
+Le terme intégré étant zéro, comme on a vu au numéro précédent, ces
+trois équations se réduisent à une seule. Mais en vertu de ce que l'on a
+observé plus haut, il faut distinguer entre le cas où $h$~est pair et est impair.
+Si l'on met $2h$~et~$2h + 1$ successivement au lieu de~$h$, on a respectivement:
+\[
+0 = 2hL_{h-1, k} + 2kL_{h, k+1} + pK_{h, k}\quad\text{et}\quad
+0 = (2h + 1) K_{h, k} + 2kK_{h+1, k+1} + pL_{h, k}.
+\Tag{(i')}
+\]
+On peut se servir de ces deux équations pour éliminer réciproquement les~$L$
+ou les~$K$: de cette manière on obtient:
+\[
+\left.
+\begin{aligned}
+0 &= p^{2} K_{h, k} + (4h^{2} - 4hk - 2h - k)\DPchg{}{·}2q^{2} K_{h, k+2} \\
+  &\qquad- (2h - 1)\DPchg{}{·}2hq^{4} K_{h-1, k+2}
+    - 2(k - h)(2k - 2h + 1) K_{h+1, k+2}\DPchg{}{,} \\
+%
+0 &= p^{2} L_{h, k} + (4h^{2} - 4hk + 2h - 3k)\DPchg{}{·}2q^{2} L_{h, k+2} \\
+  &\qquad- (2h + 1)\DPchg{}{·}2hq^{4} L_{h-1, k+2}
+    - 2(k - h)(2k - 2h - 1) L_{h+1, k+2}\DPchg{}{.}
+\end{aligned}
+\right\}\DPchg{.}{}
+\Tag{(i)}
+\]
+Afin de pouvoir en faire usage, il sera plus commode de les ramener au
+même index partiel. En premier lieu, par exemple, au même~$k$: alors il
+faut substituer les équations identiques
+\begin{align*}
+K_{h, k} &= K_{h+2, k+2} - 2q^{2} K_{h+1, k+2} + q^{4} K_{h, k+2}, \\
+%
+L_{h, k} &= L_{h+2, k+2} - 2q^{2} L_{h+1, k+2} + q^{4} L_{h, k+2};
+\end{align*}
+et l'on obtient, en diminuant~$k$ de deux unités après la réduction:
+\[
+%[** TN: Re-broken]
+\left.
+\begin{alignedat}{2}
+0 &= p^{2} K_{h+1, k}
+  &&- \bigl\{p^{2} q^{2} + (k - h - 1)(2k - 2h - 1)\bigr\}\DPchg{}{·}2K_{h, k} \\
+  &&&+ \bigl\{p^{2} q^{2} + 2(4h^{2} - 4hk - 2h + 3k)\bigr\} q^{2} K_{h-1, k}  \\
+  &&&- (h - 1)(2h - 3)\DPchg{}{·}2q^{4} K_{h-2, k}\DPchg{}{,} \\[4pt]
+%
+0 &= p^{2} L_{h+1, k}
+  &&- \bigl\{p^{2} q^{2} + (k - h - 1)(2k - 2h - 3)\bigr\}\DPchg{}{·}2L_{h, k} \\
+  &&&+ \bigl\{p^{2} q^{2} + 2(4h^{2} - 4hk + 2h - k)\bigr\} q^{2} L_{h-1, k} \\
+  &&&- (h - 1)(2h - 1)\DPchg{}{·}2q^{4} L_{h-2, k}\DPchg{}{.}
+\end{alignedat}
+\right\}\DPchg{.}{}
+\Tag{(k)}
+\]
+%% -----File: 024.png---Folio 24-------
+Pour $k=1$, on a $K_{h, 1} = G_{2h}$, $L_{h, 1} = G_{2h+1}$; on a dans ce cas pour
+ces formules:
+\begin{align*}
+%[** TN: Re-broken]
+0 = p^{2} G_{2h+2} &- \bigl\{p^{2} q^{2} + h(2h - 1)\bigr\}\DPchg{}{·}2G_{2h} \\
+  &+ \bigl\{p^{2} q^{2} + 2(4h^{2} - 6h + 3)\bigr\} q^{2} G_{2h-2} \\
+  &- (h - 1)(2h - 3)\DPchg{}{·}2q^{4} G_{2h-4}, \\
+%
+0 = p^{2} G_{2h+3} &- \bigl\{p^{2} q^{2} + h(2h + 1)\bigr\}\DPchg{}{·}2G_{2h+1} \\
+  &+ \bigl\{p^{2} q^{2} + 2(4h^{2} - 2h - 1)\bigr\} q^{2} G_{2h-1} \\
+  &- (h - 1)(2h - 1)\DPchg{}{·}2q^{4} G_{2h-3},
+\end{align*}
+équations, qui sont identiques par la substitution des formules~\Eqref{(f)}, comme il
+doit être.
+
+Au contraire, l'on pourrait aussi ramener les formules~\Eqref{(i)} au même index~$h$:
+dans ce cas on a les substitutions
+\begin{align*}
+\llap{$K_{h, k}$} &= K_{h-1, k-1} + q^{2} K_{h-1, k}, &
+L_{h, k} &= L_{h-1, k-1} + q^{2} L_{h-1, k}, \\
+%
+\llap{$K_{h+1, k}$} &= K_{h-1, k-2} + 2q^{2} K_{h-1, k-1} + q^{4} K_{h-1, k},&
+L_{h+1, k} &= L_{h-1, k-2} + 2q^{2} L_{h-1, k-1} + q^{4} L_{h-1, k}.
+\end{align*}
+A l'aide de ces formules, en diminuant~$k$ d'une unité, et en augmentant~$h$
+d'une unité, après les substitutions diverses, on a enfin:
+\[
+\left.
+\begin{aligned}
+0 = &- k(k - 1)\DPchg{}{·}4q^{4} K_{h, k+1}
+  + (4h - 4k + 5)(k - 1)\DPchg{}{·}2q^{2} K_{h, k} \\
+    &+ \bigl\{p^{2} q^{2} - 2(k - h - 2)(2k - 2h - 3)\bigr\} K_{h, k-1}
+     + p^{2} K_{h, k-2}, \\
+%
+0 = &- k(k - 1)\DPchg{}{·}4q^{4} L_{h, k+1}
+  + (4h - 4k + 7)(k - 1)\DPchg{}{·}2q^{2} L_{h, k} \\
+    &+ \bigl\{p^{2} q^{2} - 2(k - h - 2)(2k - 2h - 5)\bigr\} L_{h, k-1}
+     + p^{2} L_{h, k-2}.
+\end{aligned}
+\right\}
+\Tag{(l)}
+\]
+Pour $h = 0$, on a $K_{0, k} = H_{k}$, $L_{0, k} = I_{k}$: donc ces formules donnent:
+\begin{alignat*}{4}
+\llap{$0 ={}$}&-k(k - 1)\DPchg{}{·}4q^{4} H_{k+1}
+  &&- (4k - 5)(k - 1)\DPchg{}{·}2q^{2} H_{k}
+  &&+ \bigl\{p^{2} q^{2} - 2(k - 2)(2k - 3)\bigr\} H_{k-1} &&+ p^{2} H_{k-2}, \\
+%
+\llap{$0 = {}$}&-k(k - 1)\DPchg{}{·}4q^{4} I_{k+1}
+  &&- (4k - 7)(k - 1)\DPchg{}{·}2q^{2} I_{k}
+  &&+ \bigl\{p^{2} q^{2} - 2(k - 2)(2k - 5)\bigr\} I_{k-1} &&+ p^{2} I_{k-2}.
+\end{alignat*}
+Ces derniers résultats doivent être identiques avec les formules \Eqref{(g)}~et~\Eqref{(h)};
+en effet la substitution de ces dernières en \DPtypo{demontre}{démontre} la vérité.
+
+Si les formules \Eqref{(g)}~et~\Eqref{(h)} étaient déjà trop compliquées pour se traduire en
+expression générale, simple, à plus forte raison ces formules \Eqref{(i)},~\Eqref{(h)} ou~\Eqref{(l)}
+ne permettent pas de chercher un tel résultat. Néanmoins elles sont propres
+à déduire dans chaque cas spécial, pour des valeurs données de $h$~et~$k$, une
+intégrale $K_{h, k}$~ou~$L_{h, k}$, soit par les formules \Eqref{(g)}~et~\Eqref{(h)}, soit par les équations
+\Eqref{(9)}~et~\Eqref{(10)} en faisant usage respectivement des équations \Eqref{(k)}~ou~\Eqref{(l)}:
+la dernière voie sera bien la plus aisée à suivre.
+%% -----File: 025.png---Folio 25-------
+
+\Par{9.} Quant aux intégrales au dénominateur $(x^{2} + q^{2})^{k}$, leurs valeurs et les
+formules de réduction respectives se déduisent de la même manière, que pour
+les précédentes, dont on s'est occupé dans les trois derniers numéros. Pour
+celles-ci, si l'on met:
+\begin{align*}
+\int_{0}^{\infty} \frac{e^{-px} \PadTo{x^{2h+1}}{x^{2h}}\, dx}{x^{2} + q^{2}} &= M_{2h}, &
+\int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{2} + q^{2})^{k}} &= N_{k}, &
+\int_{0}^{\infty} \frac{e^{-px} \PadTo{x^{2h+1}}{x^{2h}}\, dx}{(x^{2} + q^{2})^{k}} &= P_{h, k}, \\
+%
+\int_{0}^{\infty} \frac{e^{-px} x^{2h+1}\, dx}{x^{2} + q^{2}} &= M_{2h+1}, &
+\int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{2} + q^{2})^{k}} &= O_{k}, &
+\int_{0}^{\infty} \frac{e^{-px} x^{2h+1}\, dx}{(x^{2} + q^{2})^{k}} &= Q_{h, k},
+\end{align*}
+on trouve, en ayant égard aux formules \Eqref{(III)}~et~\Eqref{(IV)}, savoir $M_{0} = \dfrac{1}{q} c$ et
+$M_{1} = d$, au lieu des formules \Eqref{(9)}~et~\Eqref{(10)} les suivantes:
+\[
+\left.
+\begin{alignedat}{4}
+M_{2h} &= (-1)^{h} cq^{2h-1}
+  &&+ \frac{1}{p^{2h-1}} &&\sum_{1}^{h} 1^{2h-2n/1} &&(-p^{2} q^{2})^{n-1}, \\
+%
+M_{2h+1} &= (-1)^{h} dq^{2h}
+  &&+ \frac{1}{p^{2h}} &&\sum_{1}^{h} 1^{2h-2n+1/1} &&(-p^{2} q^{2})^{n-1}.
+\end{alignedat}
+\right\}
+\Tag{(11)}
+\]
+De la même manière les formules \Eqref{(g)}~et~\Eqref{(h)} deviennent ici:
+\[
+\left.
+\begin{aligned}
+4q^{2}·k(k - 1) N_{k+1}
+  &= \frac{p}{q^{2k-2}} + 2(k - 1)(2k - 1) N_{k} - p^{2} N_{k-1}, \\
+%
+4q^{2}·k(k - 1) O_{k+1}
+  &= \frac{1}{q^{2k-1}} + 2(k - 1)(2k - 3) O_{k} - p^{2} O_{k-1}\DPtypo{.}{,}
+\end{aligned}
+\right\}
+\Tag{(m)}
+\]
+avec les cas spéciaux:
+\begin{align*}
+N_{0} &= \frac{1}{p}\qquad \text{Voir \Eqref{(V)}}, &
+O_{0} &= \frac{1}{p^{2}}\qquad \text{Voir \Eqref{(VI)}}, \\
+%
+N_{1} &= \frac{1}{\DPtypo{p}{q}}c\qquad \text{Voir \Eqref{(III)}}, &
+O_{1} &= d\qquad \text{Voir \Eqref{(IV)}}, \\
+%
+N_{2} &= \frac{1}{2q^{2}} \left(1N_{1} - pO_{1}\right)
+  = \frac{1}{2q^{2}} \left(\frac{1}{q}c - pd\right), &
+O_{2} &= -\tfrac{1}{2} \left(\frac{-1}{q^{2}} + pN_{1}\right)
+  = \tfrac{1}{2} \left(\frac{1}{q^{2}} - \frac{p}{q} c\right), \\
+%
+&\qquad\qquad\text{etc.} && \qquad\qquad\text{etc.}
+\end{align*}
+tandis qu'\DPtypo{ }{}au lieu des équations de réduction \Eqref{(i)},~\Eqref{(k)} et~\Eqref{(l)}, il faut mettre
+respectivement les suivantes:
+%% -----File: 026.png---Folio 26-------
+\begin{align*}
+%[** TN: Re-broken]
+&\left.
+\begin{alignedat}{2}
+0 &= p^{2} P_{h, k} &&- (4h^{2} - 4hk - 2h - k)\DPchg{}{·}2q^{2} P_{h, k+2} \\
+  &&&- (2h - 1)\DPchg{}{·}2hq^{4} P_{h-1, k+2} \\
+  &&&- 2(k - h)(2k - 2h + 1) P_{h+1, k+2}, \\
+%
+0 &= p^{2} Q_{h, k} &&- (4h^{2} - 4hk + 2h - 3k)\DPchg{}{·}2q^{2} Q_{h, k+2} \\
+  &&&- (2h + 1)\DPchg{}{·}2hq^{4} Q_{h-1, k+2} \\
+  &&&- 2(k - h)(2k - 2h - 1) Q_{h+1, k+2},
+\end{alignedat}
+\right\}
+\Tag{(n)} \dbreak
+%
+&\left.
+\begin{alignedat}{2}
+0 &= p^{2} P_{h+1, k}
+  &&+ \left\{p^{2} q^{2} - (k - h - 1)(2k - 2h - 1)\right\}\DPchg{}{·}2P_{h, k} \\
+  &&&+\left\{p^{2} q^{2} - 2(4h^{2} - 4hk - 2h - 3k)\right\} q^{2} P_{h-1, k} \\
+  &&&- (h - 1)(2h - 3)\DPchg{}{·}2q^{4} P_{h-2, k}, \\
+%
+0 &= p^{2} Q_{h+1, k}
+  &&+ \left\{p^{2} q^{2} - (k - h - 1)(2k - 2h - 3)\right\}\DPchg{}{·}2Q_{h, k} \\
+  &&&+\left\{p^{2} q^{2} - 2(4h^{2} - 4hk + 2h - k)\right\} q^{2} Q_{h-1, k} \\
+  &&&- (h - 1)(2h - 1)\DPchg{}{·}2q^{4} Q_{h-2, k},
+\end{alignedat}
+\right\}
+\Tag{(o)} \dbreak
+%
+&\left.
+\begin{alignedat}{2}
+0 &= k(k - 1)\DPchg{}{·}4q^{4} P_{h, k+1}
+  &&+ (4h - 4k + 5)(h - 1)\DPchg{}{·}2q^{2} P_{h, k} \\
+  &&&+ \left\{p^{2} q^{2} + 2(k - h - 2)(2k - 2h - 3)\right\} P_{h, k-1} \\
+  &&&- p^{2} P_{h, k-2}, \\
+%
+0 &= k(k - 1)\DPchg{}{·}4q^{4} Q_{h, k+1}
+  &&+ (4h - 4k + 7)(h - 1)\DPchg{}{·}2q^{2} Q_{h, k} \\
+  &&&+ \left\{p^{2} q^{2} + 2(k - h - 2)(2k - 2h - 5)\right\} Q_{h, k-1} \\
+  &&&- p^{2} Q_{h, k-2}.
+\end{alignedat}
+\right\}
+\Tag{(p)}
+\end{align*}
+L'emploi de ces formules est restreint tout comme celui des formules analogues
+\Eqref{(i)},~\Eqref{(k)} et~\Eqref{(l)}: c'est-à-dire, qu'elles peuvent fournir aisément des résultats
+pour chaque cas spécial, sans toutefois être susceptibles de pouvoir
+donner une valeur simple pour les intégrales générales $N_{k}$,~$O_{k}$, $P_{h,k}$,~$Q_{h,k}$.
+
+\Par{10.} {\stretchyspace Puisque nous connaissons à présent les intégrales à dénominateur}
+$(x^{2} - q^{2})^{k}$ et $(x^{2} + q^{2})^{k}$, dont on a traité respectivement dans les \No{6} à
+8~et~9, nous pourrions en déduire les intégrales de même forme, mais à
+dénominateur $(x^{4} - q^{4})^{k}$. L'équation de réduction
+\[
+\int_{0}^{\infty} \frac{e^{-px} x^{h-4}\, dx}{(x^{4} - q^{4})^{k}}
+  = \int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x^{4} - q^{4})^{k+1}}
+  - q^{4} \int_{0}^{\infty} \frac{e^{-px} x^{h-4}\, dx}{(x^{4} - q^{4})^{k+1}}
+\]
+nous montre d'abord, que nous avons à distinguer ici entre quatre classes
+d'intégrales, où les valeurs de~$h$ sont respectivement de la forme
+\[
+4h,\qquad 4h + 1,\qquad 4h + 2,\qquad 4h + 3.
+\]
+En effet, si l'on nomme l'intégrale
+\[
+\int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{x^{4} - q^{4}} = R_{h},
+\]
+%% -----File: 027.png---Folio 27-------
+l'équation précédente mène aisément par le chemin du \Numero{2} aux formules
+suivantes:
+\[
+\left.
+\begin{alignedat}{2}
+R_{4h} &= \frac{1^{4h-4/1}}{p^{4h-3}} + q^{4} R_{4h-4}
+  &&= q^{4h} R_{0}
+  + \frac{1}{p^{4h-3}} \sum_{1}^{h} 1^{4h-4n\DPtypo{}{/}1} (p^{4} q^{4})^{n-1}, \\
+%
+R_{4h+1} &= \frac{1^{4h-3/1}}{p^{4h-2}} + q^{4} R_{4h-3}
+  &&= q^{4h} R_{1}
+  + \frac{1}{p^{4h-2}} \sum_{1}^{h} 1^{4h-4n+1/1} (p^{4} q^{4})^{n-1}, \\
+%
+R_{4h+2} &= \frac{1^{4h-2/1}}{p^{4h-1}} + q^{4} R_{4h-2}
+  &&= q^{4h} R_{2}
+  + \frac{1}{p^{4h-1}} \sum_{1}^{h} 1^{4h-4n+2/1} (p^{4} q^{4})^{n-1}, \\
+%
+R_{4h+3} &= \frac{1^{4h-1/1}}{p^{4h}} + q^{4} R_{4h-1}
+  &&= q^{4h} R_{3}
+  + \frac{1}{\PadTo{p^{4h-1}}{p^{4h}}} \sum_{1}^{h} 1^{4h-4n+3/1} (p^{4} q^{4})^{n-1}.
+\end{alignedat}
+\right\}
+\Tag{(q)}
+\]
+Ces formules font voir qu'il y a vraiment quatre classes distinctes et indépendantes,
+et que pour la connaissance de ces intégrales générales il nous faut
+auparavant la valeur des intégrales spéciales $R_{0}$,~$R_{1}$, $R_{2}$,~$R_{3}$. On peut
+observer ici, que ces mêmes formules résulteraient soit de l'addition, soit
+de la soustraction des équations \Eqref{(9)},~\Eqref{(10)} et~\Eqref{(11)}: remarque analogue à celle
+faite à la fin du \No{6}, et qui donnerait des formules de réduction tout-à-fait
+semblables à celles, que l'on a trouvées là.
+
+Quant aux intégrales nécessaires $R_{0}$,~$R_{1}$, $R_{2}$,~$R_{3}$, la soustraction et l'addition
+des formules \Eqref{(III)}~et~\Eqref{(VII)} nous fournissent:
+\[
+\left.
+\begin{gathered}
+R_{0} = \frac{1}{4q^{3}} (b - a - 2c), \qquad
+R_{2} = \frac{1}{4q    } (b - a + 2c), \\
+%
+\makebox[0pt][c]{\makebox[\textwidth-1em][l]{comme celles des formules \Eqref{(IV)}~et~\Eqref{(VIII)} les suivantes:}} \\
+%
+R_{1} = \frac{1}{4q^{2}} (b + a-2d), \qquad
+R_{\DPtypo{4}{3}} = \frac{1}{4} (b + a + 2d).
+\end{gathered}
+\right\}
+\Tag{(12)}
+\]
+On a donc enfin:
+\[
+\left.
+\begin{alignedat}{4}
+R_{4h} &= \frac{-a + b - 2c}{4} q^{4h-3}
+  &&+ \frac{1}{p^{4h-3}} &&\sum_{1}^{h} 1^{4h-4n/1} &&(p^{4} q^{4})^{n-1}, \\
+%
+R_{4h+1} &= \frac{\Neg a + b - 2d}{4} q^{4h-2}
+  &&+ \frac{1}{p^{4h-2}} &&\sum_{1}^{h} 1^{4h-4n+1/1} &&(p^{4} q^{4})^{n-1}, \\
+%
+R_{4h+2} &= \frac{-a + b + 2c}{4} q^{4h-1}
+  &&+ \frac{1}{p^{4h-1}} &&\sum_{1}^{h} 1^{4h-4n+2/1} &&(p^{4} q^{4})^{n-1}, \\
+%
+R_{4h+3} &= \frac{\Neg a + b + 2d}{4} q^{4h}
+  &&+ \frac{1}{p^{4h}}   &&\sum_{1}^{h} 1^{4h-4n+3/1} &&(p^{4} q^{4})^{n-1}.
+\end{alignedat}
+\right\}
+\Tag{(13)}
+\]
+%% -----File: 028.png---Folio 28-------
+
+Suivent les intégrales
+\[
+\int_{0}^{\infty} \!\!\!\frac{e^{-px}\, dx}    {(x^{4} - q^{4})^{k}} = S_{k},\
+\int_{0}^{\infty} \!\!\frac{e^{-px} x\, dx}  {(x^{4} - q^{4})^{k}} = T_{k},\
+\int_{0}^{\infty} \frac{e^{-px} x^{2}\, dx}{(x^{4} - q^{4})^{k}} = U_{k},\
+\int_{0}^{\infty} \frac{e^{-px} x^{3}\, dx}{(x^{4} - q^{4})^{k}} = V_{k},
+\]
+qui sont toutes distinctes par la même cause, qui fournissait les quatre valeurs
+des~$R$, c'est-à-dire, que les exposants~$h$ des quatre formes mentionnées
+précédemment ne peuvent se réduire l'un à l'autre, mais qu'ils sont
+tout-à-fait indépendants.
+
+Commençons à y appliquer le Théorème du \No{3}, afin d'obtenir des formules,
+qui pourront servir à la réduction successive et indépendante de ces
+quatre séries d'intégrales, et prenons à cette fin pour~$f(x)$ successivement
+$x$,~$x^{2}$,~$x^{3}$,~$x^{4}$, ou~$e^{-px}$, ou encore~$(x^{4} - q^{4})^{-k}$, tout comme nous avons
+fait auparavant, lorsque nous avions à étudier les intégrales à dénominateur
+$(x ± q)^{k}$~etc.
+
+La première supposition nous donne
+\begin{align*}
+\llap{$\ds\int_{0}^{\infty}$} \frac{e^{-px}\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{xe^{-px}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} x\left\{
+    \frac{-pe^{-px}}{(x^{4} - q^{4})^{k}}
+    + e^{-px}\, \frac{-k·4x^{3}}{(x^{4} - q^{4})^{k+1}}
+  \right\} dx \\
+%
+  &= \frac{xe^{-px}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+  + \int_{0}^{\infty} e^{-px}\, dx \left\{
+    \frac{px}{(x^{4} - q^{4})^{k}} + \frac{4k}{(x^{4} - q^{4})^{k}}
+    \DPtypo{-}{+} \frac{4kq^{4}}{(x^{4} - q^{4})^{k+1}}
+  \right\};
+%\end{align*}
+\intertext{et de même}
+%\begin{align*}
+\llap{$\ds2 \int_{0}^{\infty}$} \frac{e^{-px} x\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{x^{2} e^{-px}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+  + \int_{0}^{\infty} e^{-px}\, dx \left\{
+    \frac{px^{2}}{(x^{4} - q^{4})^{k}} + \frac{4kx}{(x^{4} - q^{4})^{k}}
+    + \frac{4k q^{4}x}{(x^{4} - q^{4})^{k+1}}
+  \right\}, \\
+%
+\llap{$\ds3 \int_{0}^{\infty}$} \frac{e^{-px} x^{2}\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{x^{3} e^{-px}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+  + \int_{0}^{\infty} e^{-px}\, dx \left\{
+    \frac{px^{3}}{(x^{4} - q^{4})^{k}} + \frac{4kx^{2}}{(x^{4} - q^{4})^{k}}
+    + \frac{4k q^{4} x^{2}}{(x^{4} - q^{4})^{k+1}}
+  \right\}, \\
+%
+\llap{$\ds4 \int_{0}^{\infty}$} \frac{e^{-px} x^{3}\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{x^{4} e^{-px}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+  + \int_{0}^{\infty} e^{-px}\, dx \left\{
+    \begin{aligned}%[** TN: Added line break]
+      &\frac{p}{(x^{4} - q^{4})^{k-1}} + \frac{pq^{4}}{(x^{4} - q^{4})^{k}} \\
+      &\quad + \frac{4k x^{3}}{(x^{4} - q^{4})^{k}}
+      + \frac{4k q^{4} x^{3}}{(x^{4} - q^{4})^{k+1}}
+    \end{aligned}
+  \right\},
+\end{align*}
+ce qui revient à écrire --- à cause de la valeur zéro qu'obtient le terme intégré
+d'après le même raisonnement que dans le \No{7}~---
+\[
+\left.
+\begin{alignedat}{2}
+S_{k} &= pT_{k} + 4kS_{k} + 4kq^{4} S_{k+1}, &\text{ ou }
+0 &= \DPtypo{}{p}T_{k} + (4k - 1) S_{k} + 4kq^{4} S_{k+1}, \\
+%
+2T_{k} &= pU_{k} + 4kT_{k} + 4kq^{4} T_{k+1}, &\text{ ou }
+0 &= \DPtypo{}{p}U_{k} + (4k - 2) T_{k} + 4kq^{4} T_{k+1}, \\
+%
+3U_{k} &= pV_{k} + 4kU_{k} + 4kq^{4} U_{k+1},\quad &\text{ ou }
+0 &= \DPtypo{}{p}V_{k} + (4k - 3) U_{k} + 4kq^{4} \DPtypo{V}{U}_{k+1}, \\
+%
+4V_{k} & \begin{aligned}[t]
+  &= pS_{k-1} + pq^{4} S_{k} \\ &+ 4kV_{k} + 4kq^{4} V_{k+1},
+\end{aligned} &\text{ ou }
+0 & \begin{aligned}[t]
+  &= pS_{k-1} + pq^{4} S_{k} \\ &+ (4k - 4) V_{k} + 4kq^{4} V_{k+1}.
+\end{aligned}
+\end{alignedat}
+\right\}
+\Tag{(r')}
+\]
+%% -----File: 029.png---Folio 29-------
+
+Encore a-t-on par la deuxième supposition pour~$f(x)$:
+\begin{align*}
+-p \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{e^{-px}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px}\, \frac{-k·4x^{3}\, dx}{(x^{4} - q^{4})^{k+1}}
+   \DPchg{}{,} \dbreak
+%
+-p \int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{e^{-px} x}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px} \left\{
+     \frac{1}{(x^{4} - q^{4})^{k}} + x\frac{-k·4x^{3}}{(x^{4} - q^{4})^{k+1}}
+   \right\} dx \\
+%
+  &= \frac{e^{-px} x}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   + \int_{0}^{\infty} e^{-px}\, dx \left\{
+     \frac{4k - 1}{(x^{4} - q^{4})^{k}} + \frac{4kq^{4}}{(x^{4} - q^{4})^{k+1}}
+   \right\}\DPchg{.}{,} \dbreak
+%
+-p \int_{0}^{\infty} \frac{e^{-px} x^{2}\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{e^{-px} x^{2}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px} \left\{
+     \frac{2x}{(x^{4} - q^{4})^{k}} + x^{2} \frac{-k·4x^{3}}{(x^{4} - q^{4})^{k+1}}
+   \right\} dx \\
+%
+  &= \frac{e^{-px} x^{2}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   + \int_{0}^{\infty} e^{-px}\, dx \left\{
+     \frac{(4k - 2) x}{(x^{4} - q^{4})^{k}} + \frac{4kq^{4} x}{(x^{4} - q^{4})^{k+1}}
+   \right\}\DPchg{.}{,} \dbreak
+%
+-p \int_{0}^{\infty} \frac{e^{-px} x^{3}\, dx}{(x^{4} - q^{4})^{k}}
+  &= \frac{e^{-px} x^{3}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} e^{-px} \left\{
+     \frac{3x^{2}}{(x^{4} - q^{4})^{k}} + x^{3} \frac{-k·4x^{3}}{(x^{4} - q^{4})^{k+1}}
+   \right\} dx \\
+%
+  &= \frac{e^{-px} x^{3}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   + \int_{0}^{\infty} e^{-px}\, dx\left\{
+     \frac{(4k - 3) x^{2}}{(x^{4} - q^{4})^{k}} + \frac{4kq^{4} x^{2}}{(x^{4} - q^{4})^{k+1}}
+   \right\}.
+\end{align*}
+Or pour la première de ces quatre équations, le terme intégré devient $\dfrac{1}{(-q^{4})^{k}}$
+pour la limite inférieure~$0$ de~$x$, tandis qu'il devient pour la limite supérieure
+$x = \infty$, $\dfrac{1}{\infty·\infty^{k}} = 0$: donc cette équation donne
+\[
+-p S_{k} = -\frac{1}{(-q^{4})^{k}} + 4kV_{k};
+\Tag{(r'')}
+\]
+tandis que les trois équations suivantes sont absolument les mêmes que les
+trois premières de celles, que l'on a trouvées en premier lieu: et cela parceque
+les termes intégrés s'annulent ici par la même raison, qui avait lieu là.
+
+Enfin on obtient par la troisième supposition:
+\begin{align*}
+-4k \int_{0}^{\infty} \frac{e^{-px} x^{3}\, dx}{(x^{4} - q^{4})^{k+1}}
+  &= \frac{e^{-px}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x^{4} - q^{4})^{k}} (-pe^{-px}\, dx), \\
+%
+-4k \int_{0}^{\infty} \frac{e^{-px} x^{4}\, dx}{(x^{4} - q^{4})^{k+1}}
+  &= \frac{e^{-px} x}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x^{4} - q^{4})^{k}} \left\{
+     -pe^{-px} x + e^{-px}
+   \right\} dx, \\
+%% -----File: 030.png---Folio 30-------
+-4k \int_{0}^{\infty} \frac{e^{-px} x^{5}\, dx}{(x^{4} - q^{4})^{k+1}}
+  &= \frac{e^{-px} x^{2}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x^{4} - q^{4})^{k}}\left\{
+     -pe^{-px} x^{2} + 2xe^{-px}
+   \right\} dx, \\
+%
+-4k \int_{0}^{\infty} \frac{e^{-px} x^{6}\, dx}{(x^{4} - q^{4})^{k+1}}
+  &= \frac{e^{-px} x^{3}}{(x^{4} - q^{4})^{k}} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \frac{1}{(x^{4} - q^{4})^{k}}\left\{
+     -pe^{-px} x^{3} + 3x^{2} e^{-px}
+   \right\} dx.
+\end{align*}
+En observant que d'un autre côté, on a identiquement:
+\begin{align*}
+\int_{0}^{\infty} \frac{e^{-px} x^{4}\, dx}{(x^{4} - q^{4})^{k+1}}
+  &= \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{4} - q^{4})^{k}}
+  + q^{4} \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{4} - q^{4})^{k+1}}, \\
+%
+\int_{0}^{\infty} \frac{e^{-px} x^{5}\, dx}{(x^{4} - q^{4})^{k+1}}
+  &= \int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{4} - q^{4})^{k}}
+  + q^{4} \int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{4} - q^{4})^{k+1}}, \\
+%
+\int_{0}^{\infty} \frac{e^{-px} x^{6}\, dx}{(x^{4} - q^{4})^{k+1}}
+  &= \int_{0}^{\infty} \frac{e^{-px} x^{2}\, dx}{(x^{4} - q^{4})^{k}}
+  + q^{4} \int_{0}^{\infty} \frac{e^{-px} x^{2}\, dx}{(x^{4} - q^{4})^{k+1}},
+\end{align*}
+on voit facilement que ces quatre formules coincident directement avec les
+quatre équations précédentes: de sorte que nous avons les cinq équations
+différentes \Eqref{(r')}~et~\Eqref{(r'')} pour chercher des équations de réduction entre les
+intégrales des quatre classes diverses séparément. Dans ce but substituons
+la valeur de~$S_{k}$ de~\Eqref{(r'')} dans la première des équations~\Eqref{(r')}; la résultante
+exprimera~$T_{k}$ en fonction de divers~$V$: substituons cette valeur dans la
+deuxième de~\Eqref{(r')}, et l'intégrale~$U_{k}$ se trouve donnée par divers~$V$: enfin
+éliminons les~$U$ entre cette dernière équation et la troisième des~\Eqref{(r')}: il en
+résultera une équation de condition entre les~$V$ seulement; et maintenant
+à l'aide des équations originales, on peut aisément obtenir des formules où
+l'on ne rencontre que les seules intégrales $S$,~$U$, ou~$T$. Le résultat sera
+enfin donné par les formules suivantes:
+\[
+\left.
+\begin{aligned}
+%[** TN: Extensively reformatted]
+\llap{$0$} &= \frac{6}{(-q^{4})^{k}}
+  - \left\{p^{4} - (4k - 3)(4k - 2)(4k - 1)\DPchg{}{·}4k\right\} V_{k} \\
+  &\qquad + (16k^{2} + 1) k(k + 1)\DPchg{}{·}48 q^{4} V_{k+1} \\
+  &\qquad + (2k + 1) k(k + 1)(k + 1)\DPchg{}{·}384 q^{8} V_{k+2} \\
+  &\qquad + k(k + 1)(k + 2)(k + 3)·256 q^{12} V_{k+3}, \\[4pt]
+  %
+\llap{$0$} &= \frac{6p}{(-q^{4})^{k}}
+  + \left\{p^{4} - (4k - 3)(4k - 2)(4k - 1)\DPchg{}{·}4k\right\} (4k - 3) U_{k} \\
+  &\qquad + \left\{p^{4} - (256k^{4} + 144k^{3} + 104k^{2} + 9k + 3) 4\right\} 4kq^{4} U_{k+1} \\
+  &\qquad -(32k^{3} + 76k^{2} + 67k + 21) k(k + 1)\DPchg{}{·}192q^{8} U_{k+2} \\
+  &\qquad -(16k^{2} + 51k + 39) k(k + 1)(k + 2)·256q^{12} U_{k+3} \\
+  &\qquad -k(k + 1)(k + 2)(k + 3)^{2}\DPchg{}{·}1024 q^{16} U_{k+4}, \\[4pt]
+%% -----File: 031.png---Folio 31-------
+\llap{$0$} &= \frac{3p^{2}}{(-q^{4})^{k}}
+  - \left\{p^{4} - (4k - 3)(4k - 2)(4k - 1)\DPchg{}{·}4k\right\}(4k - 3)(2k - 1) T_{k} \\
+  &\qquad -\left\{p^{4}(8k - 1) - \DPtypo{}{(}640k^{5} + 256k^{4} + 584k^{3} + 64k^{2} + 24k + 3)\DPchg{}{\!·\!}8\right\} 2kq^{4} T_{k+1} \\
+  &\qquad -\left\{p^{4} - (640k^{4} + 1632k^{3} + 2276k^{2} + 1239k + 39) 4\right\} k(k + 1)\DPchg{}{·}8q^{8} T_{k+2} \\
+  &\qquad + (160k^{3} + 592k^{2} + 723k + 36) k(k + 1)(k + 2)\DPchg{}{·}128q^{12} T_{k+3} \\
+  &\qquad + (20k^{2} + 77k + 45) k(k + 1)(k + 2)(k + 3)\DPchg{}{·}512q^{16} T_{k+4} \\
+  &\qquad + k(k + 1)(k + 2)^{2} (k + 3)^{2}\DPchg{}{·}4096q^{20} T_{k+5}, \\[4pt]
+%
+\llap{$0$} &= \frac{p^{3}}{(-q^{4})^{k}}
+  - \left\{p^{4} - (4k - 3)(4k - 2)(4k - 1)\DPchg{}{·}4k\right\} S_{k} \\
+  &\qquad + (16k^{2} + 1) k^{2}\DPchg{}{·}48q^{4} S_{k+1} \\
+  &\qquad + (2k + 1) k^{2}(k + 1)\DPchg{}{·}384q^{8} S_{k+2} \\
+  &\qquad + k^{2}(k + 1)(k + 2)\DPchg{}{·}256q^{12} S_{k+3}.
+\end{aligned}
+\right\}
+\Tag{(s)}
+\]
+
+\Par{11.} On pourrait encore aller plus loin et déterminer généralement les intégrales
+de la forme
+\[
+\int_{0}^{\infty}
+  \frac{e^{-px} x^{h}\, dx}{(x + q)^{k} (x - q)^{l} (x^{2} + q^{2})^{m}},
+\]
+mais outre que les réductions deviennent de plus en plus compliquées, ces
+intégrales ne sont plus aussi remarquables que les précédentes. Car, en
+mettant successivement~$x$ au lieu de~$x^{2}$ et de~$x^{4}$ --- ce qui est évidemment
+permis, puisque entre les mêmes limites ces fonctions de~$x$, savoir $x^{2}$~et~$x^{4}$,
+restent continues, et n'ont ni un maximum ni un minimum --- les limites
+de la nouvelle variable~$x$ restent les mêmes $0$~et~$\infty$. Dès-lors les formules
+trouvées donneront aussi la valeur des intégrales suivantes:
+\begin{alignat*}{4}
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{x - q^{2}} &&= 2G_{2h+1}, &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{x - q^{2}}\, \Sqrt{x} &&= 2G_{2h+2}, \\
+%
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}}\, dx}{(x - q^{2})^{k}} &&= 2I_{k}, &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}}\, dx}{(x - q^{2})^{k}}\, \Sqrt{x} &&= 2H_{k+1}, \\
+%
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{(x - q^{2})^{k}} &&= 2L_{h,k}, &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{(x - q^{2})^{k}}\, \Sqrt{x} &&= 2K_{h+1, k}, \\
+%
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{x + q^{2}} &&= 2M_{2h+1},\qquad &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{x + q^{2}}\, \Sqrt{x} &&= 2M_{2h+2}, \\
+%
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}}\, dx}{(x + q^{2})^{k}} &&= 2O_{k}, &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}}\, dx}{(x + q^{2})^{k}}\, \Sqrt{x} &&= 2N_{k+1}, \\
+%% -----File: 032.png---Folio 32-------
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{(x + q^{2})^{k}} &&= 2Q_{h, k}, &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt{x}} x^{h}\, dx}{(x + q^{2})^{k}}\, \Sqrt{x} &&= 2P_{h+1, k}, \\
+%
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt[4]{x}} x^{h}\, dx}{x - q^{4}} &&= 4R_{4h+3}, &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt[4]{x}} x^{h}\, dx}{x - q^{4}}\, \Sqrt{x} &&= 4R_{4h+5}, \\
+%
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt[4]{x}}\, dx}{(x - q^{4})^{k}} &&= 4V_{k}, &
+&\int_{0}^{\infty} \frac{e^{-p\Sqrt[4]{x}}\, dx}{(x - q^{4})^{k}}\, \Sqrt{x} &&= T_{k+1}.
+\end{alignat*}
+De ces deux séries d'intégrales semblables, la première peut être regardée
+comme la suite de la série des intégrales \Eqref{(I)},~\Eqref{(1)}, \Eqref{(3)}, \Eqref{(5)} et~\Eqref{(II)}\DPtypo{}{,} \Eqref{(2)},
+\Eqref{(4)},~\Eqref{(6)}: la différence consiste en ce que l'exponentielle~$e^{-px}$ est changée
+ici en~$e^{-p\Sqrt{x}}$~et~$e^{-p\Sqrt[4]{x}}$.
+\ctb
+
+\Par{12.} Passons à un autre genre d'application du \Theorem{I}, démontré
+dans le \No{3}. Jusqu' ici nous avions pris pour~$f(x)$ soit~$x^{h}$, soit~$(x ± q)^{-k}$,
+$(x^{2} ± q^{2})^{-k}$, soit~$e^{-px}$, et nous avons vu que ces trois suppositions différentes
+menaient généralement aux mêmes \DPtypo{resultats}{résultats} auprès des intégrales étudiées
+plus haut. Maintenant prenons pour~$f(x)$ en premier lieu $\frac{1}{2} l·(q ± x)^{2}$
+ou $\frac{1}{2} l·(q^{2} ± x^{2})^{2}$, forme à laquelle se prêtent les intégrales citées ou trouvées:
+le résultat sera tout autre que celui qu'on vient d'obtenir, puisque,
+outre les fonctions algébriques et exponentielles, on devra acquérir un logarithme
+sous le signe d'intégration définie.
+
+Commençons par les intégrales \Eqref{(I)},~\Eqref{(1)},~\Eqref{(3)},~\Eqref{(6)} et \Eqref{(II)},~\Eqref{(2)},~\Eqref{(4)},~\Eqref{(8)},
+dont le dénominateur est respectivement $x + q$~et~$x - q$, et voyons d'abord,
+si l'on peut déterminer la valeur du terme intégré entre les deux limites
+$0$~et~$\infty$. L'expression la plus générale de ce terme est évidemment
+\[
+\frac{e^{-px} x^{h} l·(q ± x)^{2}}{(x ± q)^{k}}.
+\]
+
+Pour la limite $x = 0$, le facteur $e^{-px} l·(q ± x)^{2}·(x ± q)^{-k}$ est égal à
+$l·q^{2} : (±q)^{k}$: il reste alors le facteur~$x^{h}$, dont la valeur est zéro pour $h > 0$:
+pour $h = 0$ au contraire ce facteur n'existe pas; donc pour ces deux cas le
+terme en question devient pour la limite inférieure
+\[
+0\quad\text{ou}\quad l·q^{2} : (±q)^{k},\quad
+\text{selon que $h > $ ou $= 0$}.
+\]
+%% -----File: 033.png---Folio 33-------
+
+Quant à l'autre limite $x = \infty$, il faut agir autrement: là la règle ordinaire
+pour la détermination de la valeur indéterminée $\dfrac{e^{-\infty} \infty^{h} l·\infty}{\infty^{k}}$ donne pour la valeur
+du terme:
+\begin{align*}
+\frac{l·(q ± x)^{2}}{e^{px} x^{-h} (x ± q)^{k}}
+  &= \frac{±2 : (q ± x)}
+    {pe^{px} x^{-h} (x ± q)^{k}
+      - hx^{-h-1} e^{px} (x ± q)^{k}
+      + k(x ± q)^{k-1} e^{px} x^{-h}} \\
+%
+  &= \frac{2x^{h+1}}{e^{px}\bigl[(px - h)(x ± q)^{k+1} + kx(x ± q)^{k}\bigr]} \\
+%
+  &= \frac{2x^{h+1}}
+  {e^{px} \bigl[p(x ± q)^{k+2}
+    - (pq + h - k)(x ± q)^{k+1}
+    \mp kq(x ± q)^{k}\bigr]}.
+\end{align*}
+
+Si l'on poursuit la différentiation, on verra que le numérateur se réduit
+enfin à~$1^{h+1/1}$, tandis que le dénominateur garde toujours la forme
+\[
+e^{px} \bigl[\dots (x ± q)^{k+2} + \dots\bigr];
+\]
+donc la fraction est toujours égale à~$\dfrac{1^{h+1/1}}{e^{\infty}·\infty} = 0$, sous la condition de $k > -2$:
+ce qu'il s'agissait de chercher. On voit donc que le terme, déjà intégré,
+a une valeur zéro dans les intégrales dérivées des équations \Eqref{(1)},~\Eqref{(2)}, \Eqref{(6)},~\Eqref{(8)}:
+tandis que sa valeur pour les intégrales déduites des formules \Eqref{(I)},~\Eqref{(II)},~\Eqref{(3)}
+et~\Eqref{(4)}, sera respectivement
+\[
+-l·q^{2},\quad
+-l·q^{2},\quad
+\frac{-l·q^{2}}{q^{k}},\quad
+\frac{-l·q^{2}}{(-q)^{k}}.
+\]
+
+\Par{13.} Après ces observations préliminaires le théorème~I du \No{3} donnera
+tout de suite par les intégrales \Eqref{(I)},~\Eqref{(II)}, \Eqref{(1)}, \Eqref{(2)}, \Eqref{(3)}, \Eqref{(4)}, \Eqref{(6)},~\Eqref{(8)} respectivement:
+\begin{align*}
+&2a = \int_{0}^{\infty} e^{-px}\, d·l·(q + x)^{2}
+  = -l·q^{2} - \int_{0}^{\infty} l·(q + x)^{2} (-pe^{-px}\, dx), \\
+%
+  &\qquad\qquad\therefore
+  \int_{0}^{\infty} e^{-px} l·(q + x)^{2}\, dx = \frac{1}{p} (2a + l·q^{2})\DPchg{}{,}
+\Tag{(14)} \\
+%
+&2b = \int_{0}^{\infty} e^{-px}\, d·l·(q - x)^{2}
+  = -l·q^{2} - \int_{0}^{\infty} l·(q - x)^{2} (-pe^{-px}\, dx), \\
+%
+  &\qquad\qquad\therefore
+  \int_{0}^{\infty} e^{-px} l·(q - x)^{2}\, dx = \frac{1}{p} (2b + l·q^{2})\DPchg{}{,}
+\Tag{(15)} \dbreak
+%\end{align*}
+%% -----File: 034.png---Folio 34-------
+%\begin{align*}
+&\left.
+\begin{aligned}
+2A_{h} &= \int_{0}^{\infty} e^{-px} x^{h}·d·l·(q + x)^{2}
+  = \int_{0}^{\infty} e^{-px} l·(q + x)^{2} \bigl\{px^{h} - hx^{h-1}\bigr\}\, dx\DPchg{}{,} \\
+  %
+2B_{h} &= \int_{0}^{\infty} e^{-px} x^{h}·d·l·(q - x)^{2}
+  = -\int_{0}^{\infty} e^{-px} l·(q - x)^{2} \bigl\{px^{h} - hx^{h-1}\bigr\}\, dx\DPchg{}{,} \\
+\end{aligned}
+\right\}
+\Tag{(t')} \dbreak
+&\left.
+\begin{aligned}
+%[** TN: Added line breaks]
+2C_{k} &= \int_{0}^{\infty} \frac{e^{-px}}{(x + q)^{k-1}}\, d·l·(q + x)^{2} \\
+  &= -\frac{l·q^{2}}{q^{k-1}}
+  - \int_{0}^{\infty} l·(q + x)^{2} \left\{
+    \frac{-pe^{-px}}{(x + q)^{k-1}}
+    + e^{-px} \frac{-(k - 1)}{(x + q)^{k} }
+  \right\} dx\DPchg{}{,} \\
+%
+2D_{k} &= \int_{0}^{\infty} \frac{e^{-px}}{(x - q)^{k-1}}\, d·l·(\DPtypo{q + x}{q - x})^{2} \\
+  &= -\frac{l·q^{2}}{(-q)^{k-1}}
+  - \int_{0}^{\infty} l·(q - x)^{2} \left\{
+    \frac{-pe^{-px}}{(x - q)^{k-1}} + e^{-px} \frac{-(k - 1)}{(x - q)^{k}}
+  \right\} dx\DPchg{}{,} \\
+\end{aligned}
+\right\}
+\Tag{(u')} \dbreak
+&\left.
+\begin{aligned}
+2E_{h, k} &= \int_{0}^{\infty} \frac{e^{-px} x^{h}}{(x + q)^{k-1}}\, d·l·(q + x)^{2} \\
+  &= -\int_{0}^{\infty} l·(q + x)^{2} \left\{
+    \frac{-pe^{-px} x^{h} + hx^{h-1} e^{-px}}{(\DPtypo{x - q}{x + q})^{k-1}}
+    + e^{-px} x^{h}\frac{-(k - 1)}{(\DPtypo{x - q}{x + q})^{k} }
+  \right\} \DPtypo{}{dx}\DPchg{}{,} \\
+%
+2F_{h, k} &= \int_{0}^{\infty} \frac{e^{-px} x^{h}}{(x - q)^{k-1}}\, d·l·(q - x)^{2} \\
+  &= -\int_{0}^{\infty} l·(q - x)^{2} \left\{
+    \frac{-pe^{-px} x^{h} + hx^{h-1} e^{-px}}{(x - q)^{k-1}}
+    + e^{-px} x^{h} \frac{-(k - 1)}{(x - q)^{k}}
+  \right\} \DPtypo{}{dx}\DPchg{}{.}
+\end{aligned}
+\right\}
+\Tag{(v')}
+\end{align*}
+
+Les intégrales \Eqref{(t')}, \Eqref{(u')}, \Eqref{(v')} se présentent sous la forme d'une équation
+de réduction. Tâchons de les ramener à une forme, où la valeur des intégrales
+soit exprimée généralement. Si nous nommons:
+\[
+\int_{0}^{\infty} e^{-px} x^{h}\, dx·l·(q + x)^{2} = A'_{h},\qquad
+\int_{0}^{\infty} e^{-px} x^{h}\, dx·l·(q - x)^{2} = B'_{h},
+\]
+la première des équations \Eqref{(t')} donne:
+\[
+pA'_{h} - hA'_{h-1} = 2A_{h}\quad\text{ou}\quad
+p^{h} A'_{h} = 2p^{h-1} A_{h} + hp^{h-1} A'_{h-1}.
+\Tag{(t_{1})}
+\]
+
+Parceque $\DPtypo{A_{0}^{1}}{A'_{0}}$ n'est autre chose que l'intégrale~\Eqref{(14)} et qu'elle est connue
+par conséquent, on trouve:
+\begin{align*}
+p   A'_{1} &= 2A_{1} + 1A'_{0}, \\
+p^{2} A'_{2} &= p·2A_{2} + 2·2A_{1} + 1·2\DPchg{·}{}A'_{0}, \\
+p^{3} A'_{3} &= p^{2}·3A_{3} + 3p·2A_{2} + 2·3·2A_{1} + 1·2·3\DPchg{·}{}A'_{0},
+\intertext{donc en général}
+p^{h} A'_{h}
+  &= 1^{h/1} A'_{0} + 1^{h/1} \sum_{1}^{h} \frac{p^{m-1}}{1^{m/1}}\, 2A_{m},
+\end{align*}
+ou par la substitution de la valeur de~$A'_{0}$, tirée de l'équation~\Eqref{(14)},
+\[
+p^{h+1} A'_{h}
+  = 1^{h/1} (2a + l·q^{2}) + 2·1^{h/1} \sum_{1}^{h} \frac{p^{m}}{1^{m/1}} A_{m}.
+\Tag{(16)}
+\]
+%% -----File: 035.png---Folio 35-------
+
+Mais si l'on veut éviter la sommation toujours difficile des diverses intégrales~$A_{h}$,
+on peut substituer successivement dans chaque résultat précédent
+les valeurs de~$A'_{h-1}$ trouvées par~\Eqref{(t_{1})}, et celles de~$A_{h}$ suivant la formule~\Eqref{(1)};
+où l'on peut toujours prendre les intégrales $A'_{0}$~et~$A_{1}$ pour données. Alors
+on trouvera l'équation:
+\[
+p^{h} A'_{h} = 1^{h/1} A'_{0}
+  + 2^{h-1/1}\, 2A_{1} \sum_{0}^{h-1} 2^{n/1}(-pq)^{n}
+  + \frac{2}{p}\, 3^{h-2/1} \sum_{0}^{h-2} \left\{
+    \frac{(pq)^{n}}{3^{n/1}} \sum_{0}^{n} \frac{1^{m+1/1}}{(-pq)^{m}}
+  \right\},
+\]
+donc par la substitution des valeurs connues de~$A'_{0}$ et de~$A_{1}$ on obtient enfin:
+\begin{multline*}
+%[** TN: Added line break]
+p^{h+1} A'_{h} = 1^{h/1} (2a + l·q^{2})
+  - 2(apq - 1) 2^{h-1/1} \sum_{0}^{h-1} 2^{n/1}(-pq)^{n} \\
+  + \DPtypo{2}{\frac{2}{p}}·3^{h-2/1} \sum_{0}^{h-2} \left\{
+    \frac{(pq)^{n}}{3^{n/1}}\sum_{0}^{n} \frac{1^{m+1/1}}{(-pq)^{m}}
+  \right\}.
+\Tag{(17)}
+\end{multline*}
+
+De même manière la seconde des équations~\Eqref{(t')} donnera respectivement,
+en remarquant qu'ici $B'_{0}$~est donnée par l'équation~\Eqref{(15)}:
+\begin{align*}
+&pB'_{h} - hB'_{h-1} = 2B_{h},
+\Tag{(t_{2})} \\
+%
+&p^{h+1} B'_{h}
+  = 1^{h/1} (2b + l·q^{2}) + 2·1^{h/1} \sum_{1}^{h} \frac{p^{m}}{1^{m/1}} B_{m};
+\Tag{(18)}
+\end{align*}
+d'où par la même méthode que ci-dessus, on trouve:
+\begin{multline*}
+%[** TN: Added line break]
+p^{h+1} B'_{h}
+  = 1^{h/1}(2b + l·q^{2})
+  + 2(bpq + 1) 2^{h-1/1} \sum_{0}^{h-1} 2^{n/1}(pq)^{n} \\
+  + 2·3^{h-2/1} \sum_{0}^{h-2} \left\{
+    \frac{(-pq)^{n}}{3^{n/1}}\sum_{0}^{h}\frac{1^{m+1/1}}{(pq)^{m}}
+  \right\}.
+\Tag{(19)}
+\end{multline*}
+
+\Par{14.} Pour les intégrales qui suivent à présent, sav.
+\[
+\int_{0}^{\infty} \frac{e^{-px} l·(q + x)^{2}}{(x + q)^{k}}\, dx = C'_{k},\qquad
+%
+\int_{0}^{\infty} \frac{e^{-px} l\DPchg{}{·}(q - x)^{2}}{(x - q)^{k}}\, dx = D'_{k},
+\]
+la première des équations~\Eqref{(u')} nous fournit d'abord:
+\[
+(k - 1) C'_{k} = \frac{l·q^{2}}{q^{k-1}} + 2C_{k} - pC'_{k-1}
+\Tag{(u_{1})}
+\]
+formule, qui ne vaut que pour $k > 1$, comme l'on a remarqué au \No{12}.
+Or on a par l'équation~\Eqref{(14)}
+\[
+%[** TN: Not displayed in the original]
+C'_{0} = \frac{2a + l·q^{2}}{p};
+\]
+donc cette formule~\Eqref{(u_{1})} donne dans le cas de $k = 1$:
+\[
+0·C'_{1} = \frac{l·q^{2}}{q^{0}} + 2C_{1} - pC'_{0}
+  = l·q^{2} + 2a - p \frac{2a + l·q^{2}}{p} = 0
+\]
+donc la valeur de~$C'_{1}$ est indéterminée ici, comme l'on pouvait s'y attendre
+%% -----File: 036.png---Folio 36-------
+d'avance, parceque la formule ne vaut plus pour ce cas; j'ai tâché en vain
+de déterminer l'intégrale~$C'_{1}$ de quelque autre manière. Par suite de l'équation~\Eqref{(u_{1})}
+toutes les intégrales~$C'_{k}$ restent indéterminées.
+
+Tout de même nous aurons par la seconde des équations~\Eqref{(u')}:
+\[
+(k - 1) D'_{k} = \frac{l·q^{2}}{(-q)^{k-1}} + 2D_{k} - pD'_{k-1}
+\Tag{(u_{2})}
+\]
+formule, qui, d'après la valeur de~$D'_{0}$ connue par l'intégrale~\Eqref{(15)}, ne donne
+dans la supposition de $k = 1$, pour $D^{0}_{1}$ que~$0:0$, c'est-à-dire une valeur indéterminée;
+donc on ne pourra déterminer ici aucune des intégrales~$D'_{k}$,
+comme nous l'apprend l'équation~\Eqref{(u_{2})}.
+
+Il est clair que les mêmes observations valent des intégrales contenues
+dans les équations~\Eqref{(v')} où se trouve la même cause d'indétermination, savoir
+le facteur~$k - 1$.
+
+\Par{15.} Vient le tour des intégrales à dénominateur $q^{2} - x^{2}$, que l'on
+pourra transformer par le \Theorem{I} du \No{3}, à l'aide de la supposition
+$f(x) = \frac{1}{2} l·(q^{2} - x^{2})^{2}$. Ce sont les équations \Eqref{(VII)},~\Eqref{(VIII)}, \Eqref{(9)},~\Eqref{(10)},
+\Eqref{(g)},~\Eqref{(h)},~\Eqref{(l)}. D'abord il faut chercher la valeur du terme déjà intégré, dont
+la forme la plus générale sera:
+\[
+\frac{e^{-px} x^{h} l·(q^{2} - x^{2})^{2}}{(x^{2} - q^{2})^{k}}.
+\]
+
+Le facteur $e^{-px} l·(q^{2} - x^{2})^{2}·(x^{2} - q^{2})^{-k}$ devient $\dfrac{2l·q^{2}}{(-q^{2})^{k}}$ pour la limite
+inférieure~$0$ de~$x$: l'autre facteur~$x^{h}$ est zéro pour $h$~plus grand que zéro:
+dans ce cas le terme sera nul; mais lorsqu'il n'y a pas de facteur~$x^{h}$, sa
+valeur reste~$2l·q^{2}·(-q^{2})^{-k}$. Pour la limite supérieure~$\infty$ de~$x$, le terme
+se présente sous la forme~$\dfrac{\infty·0·\infty}{\infty^{k}}$: donc il faut ici appliquer les règles
+usuelles, comme suit:
+\begin{align*}
+%[** TN: Added line break]
+&\frac{l(q^{2} - x^{2})^{2}}{e^{-px} x^{-h}(x^{2} - q^{2})^{k}} \\
+  &\qquad= \frac{2·(-2x) : (q^{2} - x^{2})}
+          {pe^{px} x^{-h}(x^{2} - q^{2})^{k} - hx^{-h-1}
+            e^{px}(x^{2} - q^{2})^{k} + k·2x(x^{2} - q^{2})^{k-1} e^{px} x^{-h}} \\
+%
+  &\qquad= \frac{4x^{h+1}}{e^{px}
+    \bigl[(p - hx)(x^{2} - q^{2})^{k+1} + 2kx(x^{2} - q^{2})^{k}\bigr]}.
+\end{align*}
+
+Tout comme au \No{12}, la valeur sera nulle, sous la condition de~$k \geqq 0$.
+%% -----File: 037.png---Folio 37-------
+Le terme intégré devient donc pour la suite des intégrales, suivant que dans
+la numérateur de la fraction il y a le facteur~$x^{h}$ ou non:
+\[
+0\quad \text{et}\quad -\frac{2l·q^{2}}{(-q^{2})^{k}}.
+\]
+
+%[** TN: No parentheses arund equation numbers in the original]
+Les intégrales \Eqref{(VII)}~et~\Eqref{(VIII)} donnent à présent par le \Theorem{I} du \No{3}:
+\begin{align*}
+%[** TN: Added line breaks]
+4 \int_{0}^{\infty} \frac{e^{-px}\, dx}{x^{2} - q^{2}}
+  &= \int_{0}^{\infty} \frac{e^{-px}}{x}\, d·l·(q^{2} - x^{2})^{2} \\
+  &= \frac{e^{-px} l·(q^{2} - x^{2})^{2}}{x} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} l·(q^{2} - x^{2})^{2} \left\{
+    \frac{-pe^{-px}}{x} + e^{-px} \frac{-1}{x^{2}}
+  \right\} dx, \\
+%
+4 \int_{0}^{\infty} \frac{e^{-px} x\, dx}{x^{2} - q^{2}}
+  &= \DPtypo{}{\int_{0}^{\infty}} e^{-px}\, d·l·(q^{2} - x^{2})^{2} \\
+  &= e^{-px} l·(q^{2} - x^{2})^{2} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} l·(q^{2} - x^{2})^{2} (-pe^{-px})\, dx.
+\end{align*}
+
+Pour la première intégrale obtenue ici, le terme intégré ne tombe pas
+sous la forme étudiée ci-dessus: pour $x = 0$, il sera~$\dfrac{e^{0} l·q^{4}}{0} = \infty$; donc ce
+terme étant infini, cette équation ne peut rien nous apprendre. Pour la seconde,
+au contraire, le terme déjà intégré est~$-2l·q^{2}$, ce qui donne
+\[
+2(a + b) = -2lq^{2} + p \int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2}\, dx,
+\]
+ou bien
+\[
+\int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2}\, dx
+  = \frac{2}{p} (a + b + l·q^{2});
+\Tag{(20)}
+\]
+résultat, qui est une suite nécessaire des équations \Eqref{(14)}~et~\Eqref{(15)}.
+
+Pour l'application aux formules \Eqref{(9)}~et~\Eqref{(10)}, nommons l'intégrale
+\[
+\int_{0}^{\infty} e^{-px} x^{h} l·(q^{2} - x^{2})^{2}\, dx = G'_{\DPtypo{k}{h}};
+\]
+elles nous donnent les équations suivantes:
+\begin{align*}
+%[** TN: Re-broken]
+4G_{2h} &= \int_{0}^{\infty} e^{-px} x^{2h-1}\, d·l·(q^{2} - x^{2})^{2} \\
+  &= e^{-px} x^{2h-1} (l·q^{2} - x^{2})^{2} \Ibar_{0}^{\infty} \\
+  &\qquad\qquad- \int_{0}^{\infty} l·(q^{2} - x^{2})^{2} \left\{
+    -pe^{-px} x^{2h-1} + (2h - 1) x^{2h-2} e^{-px}
+  \right\} \\
+%
+  &= \int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2} \left\{
+    px^{2h-1} - (2h - 1) x^{2h-2}
+  \right\}, \\
+%% -----File: 038.png---Folio 38-------
+4G_{2h+1} &= \int_{0}^{\infty} e^{-px} x^{2h}\, d·l·(q^{2} - x^{2})^{2} \\
+  &= e^{-px} x^{2h} l·(q^{2} - x^{2})^{2} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} l·(q^{2} - x^{2})^{2} \left\{
+    -pe^{-px} x^{2h} + 2h x^{2h-1} e^{-px}
+  \right\} \\
+%
+  &= \int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2} \left\{
+    px^{2h} - 2hx^{2h-1}
+  \right\},
+\end{align*}
+parceque les termes déjà intégrés ont une valeur nulle, d'après le raisonnement
+précédent. On s'assure aisément, qu'ici il n'y a pas occasion de distinguer
+entre les deux cas de $h$ pair et impair, puisque dans la même formule
+on rencontre une~$G'$ à $h$~pair et une à $h$~impair. De plus, on peut
+mettre ces équations sous la forme:
+\[
+4G_{2h} = pG'_{2h-1} - (2\DPtypo{k}{h} - 1) G'_{2h-2},\qquad
+4G_{2h+1} = pG'_{2h} - 2hG'_{2h-1},
+\]
+d'où il suit que les deux équations sont identiques et qu'elles peuvent être
+remplacées par la seule
+\[
+pG'_{h} = hG'_{h-1} + 4G_{h+1}.
+\Tag{(w')}
+\]
+
+Puisque la valeur de~$G'_{0}$ revient à celle de l'intégrale~\Eqref{(20)}, on a successivement:
+\begin{align*}
+pG'_{1} &= 1·G'_{0}       + 4\DPchg{}{·}G_{2}, \\
+p^{2} G'_{2} &= 1·2·G'_{0}   + 2·4\DPchg{}{·}G_{2}    + 4\DPchg{}{·}pG_{3}, \\
+p^{3}G'_{3} &= 1·2·3·G'_{0} + 2·3·4·G_{2} + 3·4·pG_{3} + 4\DPchg{}{·}p^{2} G_{4},
+\intertext{donc en général}
+p^{h}G'_{h}
+  &= 1^{h/1} G'_{0} + 4·1^{h/1} \sum_{1}^{h} \frac{p^{m-1}}{1^{m/1}}\, G_{m+1},
+\end{align*}
+ou bien, par la substitution de la valeur~\Eqref{(20)} au lieu de~$G'_{0}$,
+\[
+G'_{h} = \frac{2}{p^{h+1}} 1^{h/1} \left\{
+  a + b + l·q^{2} + 2\sum_{1}^{h} \frac{p^{m}}{1^{m/1}}\, G_{m+1}
+  \DPtypo{}{\right\}.}
+\Tag{(21)}
+\]
+
+Dans ce cas-ci, on peut trouver pour les~$G'_{h}$, une autre valeur indépendante,
+assez simple, sans avoir besoin pour cela de recourir aux intégrales~$G_{h}$.
+Lorsqu'on substitue pour $G'_{1}$,~$G'_{2}$~etc.\ leurs valeurs successivement calculées,
+pour~$G'_{0}$ la valeur de~\Eqref{(20)} et pour $G_{1}$,~$G_{2}$,~etc., leurs valeurs tirées des formules
+\Eqref{(9)}~et~\Eqref{(10)}, on obtient successivement:
+%% -----File: 039.png---Folio 39-------
+\begin{align*}
+\tfrac{1}{2} p G'_{1}
+  &= \frac{1}{p}\, l·q^{2} + \frac{1}{p} (a + b) + q (b - a) + 2 \frac{1}{p}, \\
+\tfrac{1}{2} p^{2} G'_{2}
+  &= \frac{1·2}{p}\, l·q^{2}
+   + \frac{2 + p^{2} q^{2}}{p} (a + b)
+   + 2q (b - a) + 2\left(\frac{1}{p} + \frac{1}{p}\right), \\
+\tfrac{1}{2} p^{3} G'_{3}
+  &= \frac{1·2·3}{p}\, l·q^{2}
+   + \frac{2·3 + 3p^{2} q^{2}}{p} (a + b) \\
+  &\qquad+ (2·3\DPchg{·}{} + p^{2} q^{2}) q(b - a)
+   + 2 \left\{2·3 \frac{1}{p} + \frac{1·2 + p^{2} q^{2}}{p} + 3·\frac{1}{p}\right\}, \\
+\tfrac{1}{2} p^{4} G'_{4}
+  &= \frac{1·2·3·4}{p}\, l·q^{2}
+   + \frac{2·3·4 + 3·4p^{2} q^{2} + p^{4} q^{4}}{p} (a + b)
+   + (2·3·4 + 4p^{2} q^{2}) q(b - a) \DPchg{+}{} \\
+  &\qquad+ 2 \left\{2·3·4 \frac{1}{p} + 4 \frac{1·2 + p^{2} q^{2}}{p}
+    + 3·4 \frac{1}{p} + \frac{1·2·3 + p^{2} q^{2}}{p}\right\}.
+\end{align*}
+
+L'inspection de la formation des termes fait voir assez aisément --- surtout
+si l'on continue le calcul des~$G'$ suivantes, et si l'on fait attention à l'ordre
+gardé dans le dernier terme, dont $2$~est le coefficient, --- qu'ici il y a de
+nouveau différence entre les expressions de~$G'_{h}$ pour $h$~pair et impair: cette
+différence a sa source dans celle entre les expressions de $G_{2h}$~et~$G_{2h+1}$. On
+trouvera enfin les valeurs générales:
+\begin{align*}
+\tfrac{1}{2} p^{2h+1} G'_{2h}
+  = 1^{2h/1} l·q^{2}
+  &+ 1^{2h/1} a \sum_{0}^{2h-1} \frac{(-pq)^{n}}{1^{n/1}}
+   + 1^{2h/1} b \sum_{0}^{2h-1} \frac{(pq)^{n}}{1^{n/1}} \\
+  &+ 2^{2h-1/1} \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m/1} (p^{2} q^{2})^{m}
+  \right\} \\
+  &+ 3^{2h-2/1} \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n-1/1}} \sum_{0}^{n-1} 2^{2n-2m-1/1} (p^{2} q^{2})^{m}
+  \right\},
+\Tag{(22)} \dbreak
+%
+\tfrac{1}{2} p^{2h+2} G'_{2h+1}
+  = 1^{2h+1/1} l·q^{2}
+  &+ 1^{2h+1/1} a \sum_{0}^{2h} \frac{(-pq)^{n}}{1^{n/1}}
+   + 1^{2h+1/1} b \sum_{0}^{2h} \frac{(pq)^{n}}{1^{n/1}} \\
+  &+ 2^{2h/1}     \sum_{1}^{h+1} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m+1/1} (p^{2} q^{2})^{m}
+  \right\} \\
+  &+ 3^{2h-1/1}   \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m/1} (p^{2} q^{2})^{m}
+  \right\}.
+\Tag{(23)}
+\end{align*}
+
+L'on voit que la différence entre ces deux expressions se trouve principalement
+dans les deux dernières sommations, les trois autres termes ne changeant
+pas de nature.
+
+Quant à la formule~\Eqref{(g)}, elle est dans le même cas que~\Eqref{(VII)} et par la
+%% -----File: 040.png---Folio 40-------
+même raison ne donnerait rien: mais on peut pourtant l'employer à l'aide de
+l'équation~\Eqref{(h)}, si l'on fait attention à la rélation identique
+\[
+H_{k-1} + q^{2} H_{k}
+  = \int_{0}^{\infty} \frac{e^{-px} x^{2}\, dx}{(x^{2} - q^{2})^{k}};
+\]
+alors celle-ci, et l'équation~\Eqref{(h)} nous fourniront pour les intégrales
+\[
+\int_{0}^{\infty} \frac{e^{-px} l·(q^{2} - x^{2})^{2}\, dx}{(x^{2} - q^{2})^{k}}
+  = H'_{k}
+\quad \text{et}\quad
+\int_{0}^{\infty} \frac{e^{-px} l·(q^{2} - x^{2})^{2} x\, dx}{(x^{2} - q^{2})^{k}}
+  = I'_{k}
+\]
+les formules suivantes:
+\[
+\left.
+\begin{aligned}
+%[** TN: Re-breaking]
+&4I_{k}
+  = \int_{0}^{\infty} \frac{e^{-px}}{(x^{2} - q^{2})^{k-1}}\, d·l·(q^{2} - x^{2})^{2}
+   = \frac{e^{-px} l·(q^{2} - x^{2})^{2}}{(x^{2} - q^{2})^{k-1}} \Ibar_{0}^{\infty} \\
+  &\qquad\qquad- \int_{0}^{\infty} l·(q^{2} - x^{2})^{2} \left\{
+    \frac{-pe^{-px}}{(x^{2} - q^{2})^{k-1}}
+    + e^{-px} \frac{-(k - 1) 2x}{(x^{2} - q^{2})^{k}}
+  \right\} dx, \\[4pt]
+%
+&4\{H_{k-1} + q^{2} H_{k}\} \\
+  &\qquad= \int_{0}^{\infty} \frac{xe^{-px}}{(x^{2} - q^{2})^{k-1}}\, d·l·(q^{2} - x^{2})
+  = \frac{xe^{-px} l·(q^{2} - x^{2})^{2}}{(x^{2} - q^{2})^{k-1}} \Ibar_{0}^{\infty} \\
+  &\qquad\qquad- \int_{0}^{\infty} l·(q^{2} - x^{2})^{2} \left\{
+    \frac{e^{-px} - pe^{-px} x}{(x^{2} - q^{2})^{k-1}}
+    + xe^{-px}\frac{-(k - 1) 2x}{(x^{2} - q^{2})^{k}}
+  \right\} dx.
+\end{aligned}
+\right\}
+\Tag{(x')}
+\]
+
+La valeur des termes intégrés est ici, d'après ce que l'on a dit à ce sujet,
+$-\dfrac{2lq^{2}}{(-q^{2})^{k}}$~et~$0$ respectivement. On a donc les équations:
+\[
+\left.
+\begin{aligned}
+4I_{k} &= \frac{2·lq^{2}}{(-q^{2})^{k-1}} + pH'_{k-1} + 2(k - 1) I'_{k}, \\
+4(H_{k-1} + q^{2} H_{k})
+  &= -H'_{k-1} + pI'_{k-1} + 2(k - 1) \{H'_{k-1} + q^{2} H'_{k}\} \\
+  &= (2k - 3) H'_{k-1} + 2(k - 1) q^{2} H'_{k} + pI'_{k-1}.
+\end{aligned}
+\right\}
+\Tag{(x'')}
+\]
+
+Mais si l'on élimine par la première de ces formules soit les~$I'$, soit les~$H'$
+de la seconde, et que l'on augmente~$k$ d'une unité dans le premier résultat,
+on obtient à l'aide des équations \Eqref{(g')}~et~\Eqref{(h')}:
+\begin{multline*}
+4k(k - 1) q^{2} H'_{k+1} + 2(k - 1)(2k - 1) H'_{k} - p^{2} H'_{k-1} \\
+  = 4(4k - 3) H_{k} + 8(2k - 1) q^{2} H_{k+1}
+  - \frac{2pl·q^{2}}{(-q^{2})^{k-1}}\DPchg{.}{,}
+\Tag{(x_{1})}
+\end{multline*}
+\begin{multline*}
+4k(k - 1) q^{2} I'_{k+1} + 2(k - 1)(2k - 3) I'_{k} - p^{2} I'_{k-1} \\
+  = 4(4k - 5) I_{k} + 8(2k - 1) q^{2} I_{k+1}
+  - \frac{2l·q^{2}}{(-q^{2})^{k-1}}.
+\Tag{(x_{2})}
+\end{multline*}
+%% -----File: 041.png---Folio 41-------
+
+Dans le cas de $k = 1$, elles donnent bien, comme il doit être:
+\begin{align*}
+H'_{0} &= \frac{2}{p} (a + b + l·q^{2}), \qquad\text{Voyez \Eqref{(20)}} \\
+I'_{0} &= G'_{1} = \frac{2}{p} \bigl\{2 + a + b + (b - a) pq + l·q^{2}\bigr\};
+\end{align*}
+mais le coefficient de~$H'_{k}$ et de~$I'_{k}$ devient zéro: de même, pour $k = 0$, les
+coefficients de~$H'_{\DPtypo{k+2}{k+1}}$ et de~$I'_{\DPtypo{k+2}{k+1}}$ s'annulent aussi: donc la valeur des intégrales
+$H'_{1}$~et~$I'_{1}$ ne saurait être tirée des équations \Eqref{(x_{1})}~et~\Eqref{(x_{2})}, qui la laissent
+indéterminée. Donc les~$H'_{k}$ et les~$I'_{k}$ restent indéterminées de même. On aurait
+pu s'attendre à ce résultat en vertu de ce que l'on a observé à l'égard des
+équations \Eqref{(u_{1})}~et~\Eqref{(u_{2})}.
+
+\Par{16.} Passons à la transformation d'intégrales à dénominateur $x^{2} + q^{2},$
+savoir \Eqref{(III)},~\Eqref{(IV)}, \Eqref{(11)}, \Eqref{(m)} et~\Eqref{(p)}. De premier abord nous pouvons exclure
+les quatre intégrales \Eqref{(m)}~et~\Eqref{(p)} de nos recherches, parce qu'elles ne
+donneraient qu'un résultat indéterminé, d'après ce qu'on a observé au sujet
+des intégrales précédentes. Encore l'équation~\Eqref{(III)} est dans le cas de~\Eqref{(VII)},
+et ne pourrait offrir qu'une formule indéterminée, où l'un des termes a une
+valeur infinie. Restent donc les intégrales \Eqref{(IV)}~et~\Eqref{(11)}.
+
+L'application du \Theorem{I} de \No{3} donnera ici pour le terme déjà intégré
+soit $e^{-px} l·(x^{2} + q^{2})^{2}$, soit $e^{-px} x^{h} l·(x^{2} + q^{2})^{2}$\DPtypo{}{.}
+
+Un raisonnement, tout-à-fait analogue à celui du \No{15}, fera voir que,
+entre les limites $0$~et~$\infty$ de~$x$, la valeur de ces termes est respectivement
+$-2l. q^{2}$~et~$0$. Donc le théorème cité donnera ici immédiatement par
+l'équation~\Eqref{(IV)}:
+\[
+4 \int_{0}^{\infty} \frac{e^{-px} x\, dx}{x^{2} + q^{2}}
+  = \int_{0}^{\infty} e^{-px}\, dl·(x^{2} + q^{2})^{2}
+  = -2l·q^{2} - \int_{0}^{\infty} l·(q^{2} + x^{2})^{2}(-pe^{-px})\DPtypo{}{\, dx},
+\]
+d'où
+\[
+\int_{0}^{\infty} e^{-px} l·(q^{2} + x^{2})^{2}\, dx
+  = \frac{2}{p}(l·q^{2} + 2d).
+\Tag{(24)}
+\]
+Les équations~\Eqref{(11)} donnent de plus pour l'intégrale, que nous nommerons:
+\[
+\int_{0}^{\infty} e^{-px} x^{h} l·(q^{2} + x^{2})^{2}\, dx = M'h
+\]
+à l'aide toujours du même Théorème et d'après les observations précédentes
+sur le terme intégré:
+%% -----File: 042.png---Folio 42-------
+\begin{align*}
+4M_{2h} &= \int_{0}^{\infty} e^{-px} x^{2h-1}\, d·l·(q^{2} + x^{2})^{2} \\
+  &= -\int_{0}^{\infty} l·(q^{2} + x^{2})^{2} \left\{
+    -pe^{-px} x^{2h-1} + (2h - 1) x^{2h-2} e^{-px}
+  \right\}, \\
+4M_{2h+1} &= \int_{0}^{\infty} e^{-px} x^{2h}\, d·l·(q^{2} + x^{2})^{2} \\
+  &= -\int_{0}^{\infty} l·(q^{2} + x^{2})^{2} \left\{
+    -pe^{-px} x^{2h} + 2hx^{2h-1} e^{-px}
+\right\}.
+\end{align*}
+La distinction entre le cas de $h$ pair et impair s'évanouit ici, parce que dans
+la même formule on rencontre une~$M'$ à $h$~pair et une à $h$~impair; de plus
+ces deux équations deviennent alors identiques, et l'on retombe sur la seule:
+\[
+4\DPtypo{M}{M'}_{h} = pM'_{h-1} - (h - 1) M'_{h-2} \quad\text{ou bien}\quad
+pM'_{h} = hM'_{h-1} + 4M'_{h+1}
+\Tag{(y')}
+\]
+lorsqu'on augmente le $h$ d'une unité. Puisque $M'_{0}$ est donnée par l'équation~\Eqref{(24)},
+on trouve par l'application successive de cette formule de réduction~\Eqref{(y')}
+enfin l'équation générale
+\[
+p^{h} M'_{h}
+  = 1^{h/1} M'_{0} + 4·1^{h/1} \sum_{1}^{h} \frac{p^{m-1}}{1^{m/1}} M_{m+1},
+\]
+ou bien par substitution de la valeur de~$M'_{0}$,
+\[
+p^{h+1} M'_{h}
+  = 2·1^{h/1} \bigl[l·q^{2} + 2d + 2 \sum_{1}^{h} \frac{p^{m}}{p^{m/1}} M_{m+1}\bigr].
+\Tag{(25)}
+\]
+Mais lorsqu'on ne veut pas dépendre d'une sommation des diverses intégrales~$M_{h}$,
+on peut suivre le même chemin, comme pour les formules \Eqref{(22)}~et~\Eqref{(23)};
+on obtiendra alors des formules analogues, où de nouveau l'on doit
+distinguer entre les cas de $h$ pair et impair:
+\begin{align*}
+\tfrac{1}{2} p^{2h+1} M'_{2h}
+  &= 1^{2h/1} l·q^{2}
+  + 1^{2h/1} 2d \sum_{0}^{h} \frac{(-p^{2} q^{2})^{n}}{1^{2n/1}}
+  + 1^{2h/1} 2c \sum_{1}^{h} \frac{(pq)^{2n-1}}{1^{2n-1/1}} \DPchg{+}{} \\
+  &+ 2^{2h-1/1} \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m/1} (-p^{2} q^{2})^{m}
+  \right\} \DPchg{+}{} \\
+  & +3^{2h-2/1} \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n-1/1}} \sum_{0}^{n-1} 1^{2n-2m/1} (-p^{2} q^{2})^{m}
+  \right\},
+\Tag{(26)} \\
+%
+\tfrac{1}{2} p^{2h+2} M'_{2h+1}
+  &= 1^{2h+1/1} l·q^{2}
+  + 1^{2h+1/1} 2d \sum_{1}^{h} \frac{(-p^{2} q^{2})^{n}}{1^{2n/1}}
+  + 1^{2h+1/1} 2c \sum_{1}^{h+1} \frac{(pq)^{2n-1}}{1^{2n-1/1}} \DPchg{+}{} \\
+  &+ 2^{2h/1} \sum_{1}^{h+1} \left\{
+    \frac{1}{1^{2n+1/1}} \sum_{1}^{n-1} 1^{2n-2m+1/1} (-p^{2} q^{2})^{m}
+  \right\} \DPchg{+}{} \\
+  &+ 3^{2h-1/1} \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m/1} (-p^{2} q^{2})^{m}
+  \right\}.
+\Tag{(27)}
+\end{align*}
+%% -----File: 043.png---Folio 43-------
+
+\Par{17.} Pour les intégrales au dénominateur $q^{4} - x^{4}$, nous avons les formules
+\Eqref{(12)}~et~\Eqref{(13)} à transformer. Des quatre formules dans~\Eqref{(12)} on ne peut
+employer que la~$R_{3}$, puisque la transformation par le \Theorem{I} du \No{3}
+des trois premières donnerait des termes intégrés à dénominateur $x^{3}$,~$x^{2}$ et~$x$
+successivement, lesquelles donc pour la limite inférieure~$0$ de~$x$ deviendraient
+nécessairement infinies, ce qui rendrait le résultat indéterminé. Cette circonstance
+n'a pas lieu auprès de la quatrième, car on aura:
+\[
+8 R_{3}
+  = \int_{0}^{\infty} e^{-px}\, d·l·(x^{4} - q^{4})^{2}
+  = e^{-px} l·(x^{4} - q^{4})^{2} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} l·(x^{4} - q^{4})^{2}(-pe^{-px}\, dx),
+\]
+donc, puisque l'on voit aisément que le terme déjà intégré se réduit nécessairement
+à~$-4l·q^{2}$, on obtient en réduisant:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q^{4} - x^{4})^{2}\, dx
+  &= \frac{2}{p}(b + a + 2d) + \frac{4}{p}\, l·q^{2} \\
+  &= \frac{2}{p}(b + a + 2d + 2l·q^{2}).
+\Tag{(28)}
+\end{align*}
+Ajoutons, que l'on aurait trouvé ce résultat de même par l'addition des \DPtypo{forles}{formules}
+\Eqref{(20)}~et~\Eqref{(24)}.
+
+Lorsque nous nommons l'intégrale
+\[
+\int_{0}^{\infty} e^{-px} x^{h} l·(q^{4} - x^{4})^{2}\, dx = R'_{h},
+\]
+les quatre équations~\Eqref{(13)} donnent:
+\begin{align*}
+8R_{4h}
+  &=  \int_{0}^{\infty} x^{4h-3} e^{-px}\, d·l·(q^{4} - x^{4})^{2} \\
+  &= -\int_{0}^{\infty} l·(q^{4} - x^{4})^{2} \left\{
+    -pe^{-px} x^{4h-3} + (4h - 3) x^{4h-4} e^{-px}
+  \right\} dx, \\
+%
+8R_{4h+1}
+  &=  \int_{0}^{\infty} x^{4h-2} e^{-px}\, d·l·(q^{4} - x^{4})^{2} \\
+  &= -\int_{0}^{\infty} l·(q^{4} - x^{4})^{2} \left\{
+    -pe^{-px} x^{4h-2} + (4h - 2) x^{4h-3} e^{-px}
+  \right\} dx, \\
+%
+8R_{4h+2}
+  &=  \int_{0}^{\infty} x^{4h-1} e^{-px}\, d·l·(q^{4} - x^{4})^{2} \\
+  &= -\int_{0}^{\infty} l·(q^{4} - x^{4})^{2} \left\{
+    -pe^{-px} x^{4h-1} + (4h - 1) x^{4h-2} e^{-px}
+  \right\} dx, \\
+%
+8R_{4h+3}
+  &=  \int_{0}^{\infty} x^{4h} e^{-px}\, d·l·(q^{4} - x^{4})^{2} \\
+  &= -\int_{0}^{\infty} l·(q^{4} - x^{4})^{2} \left\{
+    -pe^{-px} x^{4h} + 4h x^{4h-1} e^{-px}
+  \right\} dx.
+\end{align*}
+Les termes intégrés sont de suite omis dans ces formules-ci, parcequ'ils ont
+évidemment une valeur nulle, d'après un raisonnement tout-à-fait égal à
+celui pour les cas précédents. Pour chaque forme de~$h$, c'est-à-dire pour
+%% -----File: 044.png---Folio 44-------
+les $R_{4h}$,~$R_{4h+1}$,~$R_{4h+2}$,~$R_{4h+3}$, ces équations donnent précisément la même
+chose, savoir:
+\begin{align*}
+8R_{h+3}
+  &= -\int_{0}^{\infty} l·(q^{4} - x^{4})^{2} \left\{
+    -pe^{-px} x^{h} + hx^{h-1} e^{-px}
+  \right\} dx;
+\intertext{donc}
+8R_{h+3}
+  &= pR'_{h} - h R'_{h-1} \quad\text{ou}\quad
+     pR'_{h} = hR'_{h-1} + 8R_{h+3};
+\Tag{(z')}
+\end{align*}
+ce qui donne en application, attendu que la valeur de l'intégrale~$R'_{0}$ est
+donnée par la formule~\Eqref{(28)}, les expressions suivantes:
+\begin{align*}
+p R'_{1}
+  &= 1\DPchg{·}{}R'_{0}     + 8R_{4}, \\
+p^{2} R'_{2}
+  &= 1·2R'_{0}    + 2·8R_{4}   + 8pR_{5},\\
+\DPtypo{p_{3}}{p^{3}} R'_{3}
+  &= 1·2·3\DPchg{·}{}R'_{0} + 2·3·8R_{4} + 3·8pR_{5} + 8p^{2} R_{6},
+\intertext{donc en général}
+p^{h} R'_{h}
+  &= 1^{h/1} R'_{0} + 8·1^{h/1} \sum_{1}^{h} \frac{p^{m-1}}{1^{m/1}} R_{m+3},
+\intertext{ou bien, lorsqu'on remplace~$R'_{0}$ par sa valeur~\Eqref{(28)},}
+p^{h+1} R'_{h}
+  &= 2·1^{h/1} \left\{
+    b + a + 2d + 2l·q^{2} + 4 \sum_{1}^{h} \frac{p^{m}}{1^{m/1}} R_{m+3}
+  \right\}.
+\Tag{(29)}
+\end{align*}
+Si l'on préfère d'éviter la sommation des~$R_{h}$, il faut observer d'abord que
+nécessairement il y aura différence entre les divers résultats pour les cas où
+$h$~est de la forme $4h$,~$4h + 1$, $4h + 2$,~$4h + 3$, puisque déjà les premiers
+termes des valeurs de~$R_{h}$ diffèrent entre eux, en ce qu'ils dépendent de
+$b - a$~et~$a + b$, de $c$~et~$d$ alternativement. Il vaudra donc mieux de faire
+d'abord cette distinction et de chercher la formule générale pour chaque cas
+en particulier. A cet effet l'on doit tenir les huit termes, qui appartiennent
+aux diverses valeurs de $R_{4h}$,~$R_{4h+1}$, $R_{4h+2}$,~$R_{4h+3}$ respectivement, soigneusement
+séparés, et alors seulement on pourra en déduire les actes de progression,
+auxquels ces huit sommations sont assujetties, chacune pour soi,
+tant les quatre sommations simples que les quatre autres sommations
+doubles; et cela pour chacune des formes de~$h$ en particulier. Vu la complication
+nécessaire des résultats, nous ne transcrirons ici que les trois premières
+valeurs:
+%% -----File: 045.png---Folio 45-------
+\[
+\left.
+\begin{aligned}
+p^{2} R'_{1}
+  &= 1·4l·q^{2} + 2(a + b) + 2pq(b - a) - 4pqc + 4d + 8, \\[4pt]
+p^{3}R'_{2}
+  &= 1·2·4l·q^{2} + (1·2 + p^{2} q^{2}) 2(a + b) + 2pq(b - a) \\
+  &\qquad - 2·4pqc + (1·2 - p^{2} q^{2}) 4d + 8·3, \\[4pt]
+p^{4}R'_{3}
+  &= 1·2·3·4l·q^{2} + (1·2·3 + 3p^{2} q^{2}) 2(a + b)
+  + (2·3 + p^{2} q^{2}) 2pq(b - a) \\
+  &\qquad- (2·3 - p^{2} q^{2}) 4pqc
+  + (1·2·3 - 3p^{2} q^{2}) 4d + 8·11.
+\end{aligned}
+\right\}
+\Tag{(30)}
+\]
+\iffalse
+%[** TN: Code below more-or-less duplicates the original]
+\[
+\left.
+\begin{alignedat}{4}
+p^{2} R'_{1}
+  &=& 1·4l·q^{2} &{}+& 2(a + b) &{}+& 2pq(b - a) & \\
+  &&{}- 4pqc &{}+& 4d &&+ 8, & \\[4pt]
+p^{3}R'_{2}
+  &=& 1·2·4l·q^{2} &{}+& (1·2 + p^{2} q^{2}) 2(a + b) &{}+& 2pq(b - a) & \\
+  &&{}- 2·4pqc &{}+& (1·2 - p^{2} q^{2}) 4d &&+ 8·3, & \\[4pt]
+p^{4}R'_{3}
+  &=& 1·2·3·4l·q^{2} &{}+& (1·2·3 + 3p^{2} q^{2}) 2(a + b)
+  &{}+{}& (2·3 + p^{2} q^{2}) 2pq(b - a) & \\
+  &{}-& (2·3 - p^{2} q^{2}) 4pqc &{}+& (1·2·3 - 3p^{2} q^{2}) 4d &&+ 8·11. & \\
+\end{alignedat}
+\right\}
+\Tag{(30)}
+\]
+\fi
+
+\Par{18.} Ici l'on pourra faire la même remarque qu'au \No{11}, c'est-à-dire
+que par la substitution de~$x$ pour $x^{2}$~et~$x^{4}$ --- ce qui est évidemment permis
+à cause des mêmes raisons, discutées dans le Numéro cité --- on connait
+aussi la valeur des intégrales suivantes:
+\begin{alignat*}{6}
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} &&l·(q^{2} - x)^{2}\, dx &&= 2G'_{1}, &
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} &&l·(q^{2} - x)^{2}\, dx·\Sqrt{x} &&= 2G'_{2}, \\
+%
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} x^{h} &&l·(q^{2} - x)^{2}\, dx &&= 2G'_{2h+1},\quad &
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} x^{h} &&l·(q^{2} - x)^{2}\, dx·\Sqrt{x} &&= 2G'_{2h + 2}, \\
+%
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} &&l·(q^{2} + x)^{2}\, dx &&= 2M'_{1}, &
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} &&l·(q^{2} + x)^{2}\, dx·\Sqrt{x} &&= 2M'_{2}, \\
+%
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} x^{h} &&l·(q^{2} + x)^{2}\, dx &&= 2M'_{2h+1}, &
+&\int_{0}^{\infty} e^{-p\Sqrt{x}} x^{h} &&l·(q^{2} + x)^{2}\, dx·\Sqrt{x} &&= 2M'_{2h+2}, \\
+%
+&\int_{0}^{\infty} e^{-p\Sqrt[4]{x}} &&l·(q^{4} - x)^{2}\, dx &&= 4R'_{3}, &
+&\int_{0}^{\infty} e^{-p\Sqrt[4]{x}} &&l·(q^{4} - x)^{2}\, dx·\Sqrt{x} &&= 4R'_{5}, \\
+%
+&\int_{0}^{\infty} e^{-p\Sqrt[4]{x}} x^{h} &&l·(q^{4} - x)^{2}\, dx &&= 4R'_{4h+3}, &
+&\int_{0}^{\infty} e^{-p\Sqrt[4]{x}} x^{h} &&l·(q^{4} - x)^{2}\, dx·\Sqrt{x} &&= 4R'_{4h+5}.
+\end{alignat*}
+De ces deux séries, la première est la suite des intégrales analogues, trouvées
+dans les équations \Eqref{(14)},~\Eqref{(17)} et \Eqref{(15)},~\Eqref{(19)}.
+
+Toutes les intégrales, calculées dans les \Nos{13} jusqu'ici, sont de la même
+forme: les intégrales sont entières, à un facteur exponentiel et un facteur
+logarithmique, et souvent encore à un troisième facteur algébrique; tandis que
+les intégrales analogues, à facteur algébrique de forme fractionnaire semblent
+être indéterminées. Mais au lieu de la fonction logarithmique, que l'on a fait
+entrer sous le signe d'intégration définie, l'on peut aussi quelquefois y introduire
+une fonction circulaire inverse par la même méthode.
+\ctb
+%% -----File: 046.png---Folio 46-------
+
+\Par{19.} Parce que l'on a $d_{x}·\Arctg\dfrac{x}{q} = \dfrac{q}{q^{2} + x^{2}}$, la supposition de
+$f(x) = \Arctg\dfrac{x}{q}$ peut offrir au \Theorem{I} de \No{3} une application non
+moins intéressante, que celle qu'on a étudiée précédemment; parmi les formules
+citées et trouvées jusqu'ici, ils se trouvent qui se \DPtypo{prètent}{prêtent} à une telle
+transformation, savoir \Eqref{(III)},~\Eqref{(IV)}, \Eqref{(11)}, \Eqref{(m)} et~\Eqref{(p)}: voyons ce qui en résulte.
+
+Les deux premières formules donnent:
+\begin{align*}
+%[** TN: Added two line breaks]
+q \int_{0}^{\infty} \frac{e^{-px}\, dx}{x^{2} + q^{2}}
+  &= \int_{0}^{\infty} e^{-px}\, d·\Arctg\frac{x}{q} \\
+  &= e^{-px} \Arctg\frac{x}{q} \Ibar_{0}^{\infty}
+     - \int_{0}^{\infty} \Arctg\frac{x}{q} \left\{-pe^{-px}\, dx \right\}, \\
+q \int_{0}^{\infty} \frac{e^{-px} x\, dx}{x^{2} + q^{2}}
+  &= \int_{0}^{\infty} xe^{-px}\, d·\Arctg\frac{x}{q} \\
+  &= xe^{-px} \Arctg\frac{x}{q} \Ibar_{0}^{\infty}
+     - \int_{0}^{\infty} \Arctg\frac{x}{q} \left\{-pe^{-px} + e^{-px}\right\} dx.
+\end{align*}
+Quant aux termes déjà intégrés, pour la limite inférieure~$0$ de~$x$ la valeur
+en est $1·0$~et~$0·1·0$: donc zéro dans les deux cas. Pour l'autre limite
+supérieure~$\infty$ de~$x$, ils deviennent, puisque $\Arctg\infty = \frac{1}{2}\pi$, soit~$\frac{\pi}{2}:\infty$ soit
+$\infty·\frac{\pi}{2}:\infty$: donc la première valeur est nulle, tandis que la seconde est donnée
+sous une forme indéterminée. Il faut donc y appliquer les règles usuelles;
+pour cela on peut ôter le facteur~$\Arctg\dfrac{x}{q}$, parcequ'il est~$\frac{1}{2}\pi$, constant: il
+reste donc:
+\[
+\frac{x}{e^{px}} = \frac{1}{pe^{-px}} = \frac{1}{\infty} = 0.
+\]
+Les termes s'évanouissent donc dans les deux cas entre les limites de~$x$, $0$~et~$\infty$,
+et l'on obtient, lorsqu'on substitue le premier résultat dans la seconde
+équation:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}\, dx
+  &= \frac{1}{p}·q·\frac{c}{q}
+   = \frac{c}{p},
+\Tag{(31)} \dbreak
+\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}·x\, dx
+  &= \frac{1}{p} \left(qd + \frac{c}{p}\right)
+   = \frac{1}{p^{2}}(pqd + c).
+\Tag{(32)}
+\end{align*}
+
+Les intégrales~\Eqref{(4)} ensuite nous donnent ici par la même méthode:
+\begin{align*}
+%[** TN: Re-breaking]
+qM_{2h}
+  &= \int_{0}^{\infty} e^{-px} x^{2h}\, d·\Arctg\frac{x}{q} \\
+  &= e^{-px} x^{2h} \Arctg\frac{x}{q} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \Arctg\frac{x}{q} \left\{
+     -pe^{-px} x^{2h} + 2hx^{2h-1} e^{-px}
+   \right\} dx, \\
+%% -----File: 047.png---Folio 47-------
+qM_{2h+1}
+  &= \int_{0}^{\infty} e^{-px} x^{2h+1}\, d·\Arctg\frac{x}{q} \\
+  &= e^{-px} x^{2h+1} \Arctg\frac{x}{q} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} \Arctg\frac{x}{q}\left\{
+     -pe^{-px} x^{2h+1} + (2h + 1) x^{2h} e^{-px}
+   \right\} dx.
+\end{align*}
+Quant au terme intégré, pour la limite inférieure de~$x$, il devient~$1·0·0$,
+donc zéro, et pour la limite supérieure~$0·\infty·\frac{\pi}{2}$ donc de forme indéterminée.
+En ôtant le facteur~$\Arctg\frac{x}{q}$, constant dans ce cas et égal à~$\frac{1}{2}\pi$, on a par
+la règle ordinaire
+\[
+\frac{x^{h}}{e^{px}} = \frac{hx^{h-1}}{pe^{px}}
+  = \cdots = \frac{1^{h/1}}{p^{h} e^{px}}
+\]
+donc pour la limite~$\infty$ de~$x$ ce terme devient $\dfrac{1^{h/1}}{p^{h}\infty} = 0$: donc les termes
+s'évanouissent pour les deux limites de~$x$. Lorsqu'on nomme l'intégrale
+\[
+\int_{0}^{\infty} e^{-px} x^{h} \Arctg\frac{x}{q}\, dx = M''_{h},
+\]
+on voit clairement, que les deux équations précédentes coincident et reviennent
+à la seule formule
+\[
+qM_{h} = p M''_{h} - hM''_{h-1}\DPtypo{,}{.}
+\Tag{(aa)}
+\]
+Or, puisque $M''_{0}$ est exprimée par intégrale~\Eqref{(31)}, on a successivement:
+\begin{align*}
+pM''_{1}
+  &= 1M''_{0}      + qM_{1}, \\
+p^{2}M''_{2}
+  &= 1·2·M''_{0}   + 2·qM_{1} + pqM_{2}, \\
+p^{3}M''_{3}
+  &= 1·2·3·M''_{0} + 2·3·qM_{1} + 3pqM_{2} + p^{2} qM_{3},
+\intertext{donc en général:}
+p^{h} M''_{h}
+  &= 1^{h/1} M''_{0} + 1^{h/1} q \sum_{1}^{h} \frac{p^{n-1}}{1^{n/1}} M_{n},
+\intertext{ou bien, en vertu de la valeur calculée de $M''_{0}$}
+p^{h+1}M''_{h}
+  &= 1^{h/1}\left\{c + pq \sum_{1}^{h} \frac{p^{n-1}}{1^{n/1}} M_{n}\right\}.
+\Tag{(33)}
+\end{align*}
+Lorsqu'au contraire on veut exprimer les~$M''_{h}$, sans avoir recours aux~$M_{h}$,
+il faut substituer les valeurs calculées des~$M''_{h}$ par l'équation~\Eqref{(aa)} et celles
+de~$M_{h}$ calculées par~\Eqref{(11)} successivement. A cause de la différence entre
+$M_{2h}$~et~$M_{2h+1}$, on doit ici aussi distinguer entre les intégrales $M''_{2h}$~et~$M''_{2h+1}$
+%% -----File: 048.png---Folio 48-------
+non seulement, mais encore on doit tenir séparées les parties des
+expressions obtenues, que l'on doit à la substitution des~$M_{2h}$ de celles que
+l'on acquiert par les~$M_{2h+1}$. De telle sorte enfin on trouvera les formules
+suivantes:
+\begin{align*}
+p^{2h+1}M''_{2h}
+  &= 1^{2h/1}c \sum_{0}^{h} \frac{(-p^{2} q^{2})^{n}}{1^{2n/1}}
+   + 1^{2h/1} pqd \sum_{0}^{h-1} \frac{(-p^{2} q^{2})^{n}}{1^{2n+1/1}} \\
+  &\qquad+ 3^{2h-2/1} pq \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m/1}(-p^{2} q^{2})^{m}
+  \right\} \\
+  &\qquad+ 4^{2h-3/1} pq \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m-1/1}(-p^{2} q^{2})^{m}
+  \right\},
+\Tag{(34)} \dbreak
+%
+p^{2h+2}M''_{2h+1}
+  &= 1^{2h+1/1}c \sum_{0}^{h} \frac{(-p^{2} q^{2})^{n}}{1^{2n/1}}
+   + 1^{2h+1/1} pqd \sum_{0}^{h} \frac{(-p^{2} q^{2})^{n}}{1^{2n+1/1}} \\
+  &\qquad+ 3^{2h-1/1} pq \sum_{1}^{h+1} \left\{
+    \frac{1}{1^{2n+1/1}} \sum_{0}^{n-1} 1^{2n-2m+1/1}(-p^{2} q^{2})^{m}
+  \right\} \\
+  &\qquad+ 4^{2h-2/1} pq \sum_{1}^{h} \left\{
+    \frac{1}{1^{2n/1}} \sum_{0}^{n-1} 1^{2n-2m/1}(-p^{2} q^{2})^{m}
+  \right\}.
+\Tag{(35)}
+\end{align*}
+
+Les intégrales~\Eqref{(m)} se transforment de la même manière dans les équations:
+\[
+\left.
+\begin{aligned}
+&qN_{k+1}
+  = \int_{0}^{\infty} \frac{e^{-px}\, dx}{(x^{2} + q^{2})^{k}}\, d·\Arctg\frac{x}{q} \\
+  &\quad= \frac{e^{-px} \Arctg\frac{x}{q}}{(x^{2} + q^{2})^{k}} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} \Arctg\frac{x}{q} \left\{
+    \frac{-pe^{-px}}{(x^{2} + q^{2})^{k}}
+    + e^{-px} \frac{-k·2x}{(x^{2} + q^{2})^{k+1}}
+  \right\} dx, \\
+%
+&qO_{k+1}
+  = \int_{0}^{\infty} \frac{e^{-px} x\, dx}{(x^{2} + q^{2})^{k}}\, d·\Arctg\frac{x}{q} \\
+  &\qquad= \frac{e^{-px} x\Arctg\frac{x}{q}}{(x^{2} + q^{2})^{k}} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} \Arctg\frac{x}{q} \left\{
+    \frac{e^{-px} - pe^{-px} x}{(x^{2} + q^{2})^{k}}
+    + xe^{-px} \frac{-k·2x}{(x^{2} + q^{2})^{k+1}}
+  \right\} dx\DPtypo{,}{} \\
+  &\qquad= \frac{e^{-px} x\Arctg\frac{x}{q}}{(x^{2} + q^{2})^{k}} \Ibar_{0}^{\infty} \\
+  &\qquad\qquad\qquad- \int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}\, dx \left\{
+    \frac{1 - 2k}{(x^{2} + q^{2})^{k}}
+    - \frac{px}{(x^{2} + q^{2})^{k}}
+    + \frac{2kq^{2}}{(x^{2} + q^{2})^{k+1}}
+  \right\}.
+\end{aligned}
+\right\}
+%[** TN: Manually force tag into the margin]
+%\Tag{(bb)}
+\rlap{$(bb)$}
+\label{eqn:(bb)}
+\]
+Voyons d'abord ce que deviennent les fonctions déjà intégrées ici. Pour la
+limite inférieure $x = 0$, elles sont respectivement égales à $\dfrac{1·0}{q^{2k}}$ et $\dfrac{1·0·0}{q^{2k}}$,
+toutes deux zéro. Mais pour la limite supérieure $x = \infty$, elles deviennent
+$\dfrac{\frac{1}{2}\pi}{\infty·\infty}$ et $\dfrac{\infty·\frac{1}{2}\pi}{\infty·\infty}$: donc la première est nulle, et la seconde se présente sous
+une forme indéterminée; mais à raison du calcul précédent pour un cas parfaitement
+analogue, elle s'annulle de même: donc les termes intégrés s'évanouissent
+et pour les intégrales
+%% -----File: 049.png---Folio 49-------
+\[
+\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}\frac{dx}{(x^{2} + q^{2})^{k}}
+  = N''_{k},\quad
+\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}\frac{x\, dx}{(x^{2} + q^{2})^{k}}
+  = O''_{k},
+\]
+les équations précédentes peuvent s'écrire comme suit:
+\[
+\left.
+\begin{aligned}
+qN_{k+1} &= pN''_{k} + 2kO''_{k + 1}\DPchg{}{,} \\
+qO_{k+1} &= (2k - 1)N''_{k} + pO''_{k} - 2kq^{2}N''_{k+1}\DPchg{}{.}
+\end{aligned}
+\right\}
+\Tag{(cc)}
+\]
+Par l'élimination de $O''$~et~$N''$ alternativement de la seconde équation à l'aide
+de leurs valeurs, tirées de la première, on obtient, après avoir diminué~$k$
+d'une unité dans le second résultat:
+\[
+\left.
+\begin{aligned}
+&4k(k - 1)N''_{k+1} - 2(k - 1)(2k - 1)N''_{k} + p^{2}N''_{k-1}
+  = pqN_{k} - 2(k - 1) qO_{k+1}\DPchg{}{,} \\
+&4k(k - 1)O''_{k+1} - 2(k - 1)(2k - 3)O''_{k} + p^{2}O''_{k-1} \\
+  &\qquad\qquad= 2(k - 1) q^{3}N_{k+1} - (2k - 3) qN_{k} + pqO_{k}\DPchg{}{.}
+\end{aligned}
+\right\}
+\Tag{(dd)}
+\]
+Tant pour la supposition de $k = 0$ que pour $k = 1$, ces formules ne donnent
+pour $N''_{1}$~et~$O''_{1}$ que~$\frac{0}{0}$, valeur indéterminée. Ces intégrales sont parsuite
+dans le même cas, dont on a traité ci-dessus, par ex.\ au \No{14}.
+\ctb
+
+\Par{20.} Quoique d'un côté nous soyons parvenus à des résultats remarquables,
+et que d'un autre côté nous étions forcés de nous arrêter à quelques résultats
+indéterminés --- le but principal de cette note était de faire valoir la
+fécondité du théorème déduit au \No{3}, dans un cas spécial. Et comme ici
+des intégrales \Eqref{(I)},~\Eqref{(II)},~\Eqref{(III)},~\Eqref{(IV)} nous avons déduit nombre d'autres, il y
+a beaucoup de formules d'intégration définie auxquelles on peut appliquer le
+même Théorème, pourvu seulement, que les termes intégrés aient une valeur
+déterminée.
+
+Mais on peut encore par le même chemin trouver des rélations entre diverses
+intégrales définies. Voyez ici quelques unes de ces formules déduites
+de ce que l'on a trouvé plus haut:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q ± x)^{2} \frac{2\, dx}{x ± q}
+  &= e^{-px}\bigl[l·(q ± x)^{2}\bigr]^{2} \Ibar_{0}^{\infty} \\
+  &- \int_{0}^{\infty} l·(q ± x)^{2} \left\{
+    -pe^{-px} l·(q ± x)^{2} + e^{-px} \frac{2}{x ± q}
+  \right\}, \\
+%
+\int_{0}^{\infty} e^{-px} l·(q^{2} ± x^{2})^{2} \frac{4x\, dx}{x^{2} ± q^{2}}
+  &= e^{-px} \bigl[l·(q^{2} ± x^{2})^{2}\bigr]^{2} \Ibar_{0}^{\infty} \\
+  &- \int_{0}^{\infty} l·(q^{2} ± x^{2})^{2} \left\{
+    -pe^{-px} l·(q^{2} ± x^{2})^{2} + e^{-px} \frac{2·2x}{x^{2} ± q^{2}}
+  \right\}.
+\end{align*}
+%% -----File: 050.png---Folio 50-------
+Or les termes intégrés deviennent pour la limite inférieure de~$x:1·(l·q^{2})^{2}$
+et $1·(l·q^{4})^{2}$, et pour la limite supérieure~$0·\infty$. La règle ordinaire
+donne ici:
+\begin{align*}
+\frac{\bigl[l·(q ± x)^{2}\bigr]^{2}}{e^{px}}
+  &= \frac{2·l·(q ± x)^{2} \dfrac{±2}{q ± x}}{pe^{px}}
+   = \frac{4}{p}\, \frac{l·(q ± x)^{2}}{e^{px}(q ± x)}
+   = \frac{4}{p}\, \frac{\dfrac{±2}{q ± x}}{pe^{px}(x ± q) + e^{px}} \\
+  &= \frac{±8}{pe^{px}(q ± x) \{px ± pq + 1\}}, \dbreak
+%
+\frac{\bigl[l·(q^{2} ± x^{2})^{2}\bigr]^{2}}{e^{px}}
+  &= \frac{2·l·(q^{2} ± x^{2})^{2} \dfrac{±2·2x}{q^{2} ± x^{2}}}{pe^{px}}
+   = \frac{8}{p}\, \frac{l·(q^{2} ± x^{2})^{2}}{e^{px}(x ± q^{2} x^{-1})} \\
+  &= \frac{8}{p}\, \frac{\dfrac{±2·2x}{q^{2} ± x^{2}}}
+       {pe^{px}(x ± q^{2} x^{-1}) + e^{px} \DPchg{\{}{(}1 \mp q^{2} x^{-2}\DPchg{\}}{)}}
+   = \frac{32}{p}\, \frac{x^{3}}{e^{px} \bigl\{px(x^{2} ± q^{2})^{2} + x^{4} - q^{4}\bigr\}}.
+\end{align*}
+Quant à la première valeur, elle est évidemment nulle, et la seconde devient
+aussi zéro après trois différentiations successives, qui feront disparaître l'élément~$x$
+du numérateur, et le rendront égal à~$32·1·2·3$, tandis que la dénominateur
+reste du même degré, outre le facteur~$e^{px}$. Donc on a
+\begin{alignat*}{3}
+&p \int_{0}^{\infty} e^{-px} \bigl[l·(q ± x)^{2}\bigr]^{2}\, dx
+  &&- 4 \int_{0}^{\infty} \frac{e^{-px} l·(q ± x)^{2}\, dx}{x ± q}
+  &&= (l·q^{2})^{2}\DPchg{}{,}
+\Tag{(36)} \\
+%
+&p \int_{0}^{\infty} e^{-px} \bigl[l·(q^{2} ± x^{2})^{2}\bigr]^{2}\, dx
+  &&- 8 \int_{0}^{\infty} \frac{e^{-px} l·(q^{2} ± x^{2})^{2}\, dx}{x^{2} ± q^{2}}
+  &&= (l·q^{4})^{2}\DPchg{}{;}
+\Tag{(37)}
+\end{alignat*}
+équations, qui peuvent s'écrire aussi:
+\begin{alignat*}{3}
+&\int_{0}^{\infty} e^{-px} l·(q ± x)^{2}\,
+  &&\frac{p(x ± q) \DPtypo{l·(q ± x)}{\DPtypo{(l·q ± x)}{l·(q ± x)}}^{2} - 4}{x ± q}
+  &&= (l·q^{2})^{2}\DPchg{}{,}
+\Tag{(38)} \\
+%
+&\int_{0}^{\infty} e^{-px} l·(q^{2} ± x^{2})^{2}\,
+  &&\frac{p(x^{2} ± q^{2}) l·(q^{2} ± x^{2})^{2} - 8}{x^{2} ± q^{2}}
+  &&= (l·q^{4})^{2}\DPchg{}{.}
+\Tag{(39)}
+\end{alignat*}
+Encore on aurait par un procédé analogue
+\begin{multline*}
+\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q} \frac{q\, dx}{q^{2} \DPtypo{±}{+} x^{2}} \\
+  = e^{-px} \left[\Arctg\frac{x}{q}\right]^{2} \Ibar_{0}^{\infty}
+  - \int_{0}^{\infty} \Arctg\frac{x}{q} \left\{
+    -pe^{-px} \Arctg\frac{x}{q} + e^{-px} \frac{q}{q^{2} \DPtypo{±}{+} x^{2}}
+  \right\} dx,
+\end{multline*}
+%% -----File: 051.png---Folio 51-------
+ou, parceque le terme intégré est nécessairement zéro pour les deux limites
+de~$x$,
+\[
+p \int_{0}^{\infty} e^{-px} \left[\Arctg\frac{x}{q}\right]^{2}\, dx
+  = 2q \int_{0}^{\infty} \frac{e^{-px}\Arctg\frac{x}{q}\, dx}{q^{2} + x^{2}}\DPchg{}{,}
+\Tag{(40)}
+\]
+ou bien
+\[
+\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}\,
+  \frac{p(x^{2} + q^{2}) \Arctg\frac{x}{q} - 2q}{x^{2} + q^{2}}\, dx = 0.
+\Tag{(41)}
+\]
+
+\Par{21.} Bien que nous ne soyons pas venus à bout de trouver des valeurs
+déterminées pour les intégrales $C'_{k}$,~$D'_{k}$, $H'_{k}$,~$I'_{k}$, $N''_{k}$,~$O''_{k}$, nous pourrons
+facilement obtenir des formules qui leur ressemblent.
+
+Car en premier lieu les équations \Eqref{(u')}~et~\Eqref{(v')} peuvent s'écrire comme suit:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q + x)^{2} \frac{px + (pq + k - 1)}{(x + q)^{k}}\, dx
+  &= 2C_{k} + \frac{l·q^{2}}{q^{k-1}}\DPchg{}{,}
+\Tag{(42)} \\
+\int_{0}^{\infty} e^{-px} l·(q - x)^{2} \frac{px + (pq + k - 1)}{(x - q)^{k}}\, dx
+  &= 2D_{k} + \frac{l·q^{2}}{(-q)^{k-1}}\DPchg{}{,}
+\Tag{(43)}
+\end{align*}
+\begin{align*}
+\int_{0}^{\infty} e^{-px}·x^{h-1} l·(q + x)^{2} \frac{px^{2} + (pq - h + k - 1) x - hq}{(x + q)^{k}}\, dx
+  &= 2E_{h, k}\DPchg{}{,}
+\Tag{(44)} \\
+\int_{0}^{\infty} e^{-px}·x^{h-1} l·(q - x)^{2} \frac{px^{2} + (pq - k + h - 1) x + hq}{(x - q)^{k}}\, dx
+  &= 2F_{h, k}\DPchg{}{.}
+\Tag{(45)}
+\end{align*}
+Les deux premières formules nous donnent pour $k = 2$ un résultat spécial,
+dont nous aurons besoin dans la suite, savoir:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q + x)^{2} \frac{px + pq + 1}{(x + q)^{2}}\, dx
+  &= 2C_{2} + \frac{l·q^{2}}{q} = -2ap + \frac{1}{q} (2 + l·q^{2})\DPchg{}{,}
+\Tag{(46)} \\
+\int_{0}^{\infty} e^{-px} l·(q - x)^{2} \frac{px - pq + 1}{(x - q)^{2}}\, dx
+  &= 2D_{2} - \frac{l·q^{2}}{q} = -2bp - \frac{1}{q} (2 + l·q^{2})\DPchg{}{.}
+\Tag{(47)}
+\end{align*}
+Pour $k = 1$ les deux dernières équations \Eqref{(44)}~et~\Eqref{(45)} au contraire, donnent
+un résultat identique avec les formules \Eqref{(16)}~et~\Eqref{(19)} respectivement,
+attendu que dans cette supposition la forme fractionnaire devient entière,
+mais pour $k = 2$ on obtient, en ôtant de la fraction la fonction entière qui
+s'y trouve comprise, et eu égard par rapport à cette forme entière aux intégrales
+\Eqref{(16)}~et~\Eqref{(19)}, les équations suivantes:
+%% -----File: 052.png---Folio 52-------
+\begin{align*}
+\int_{0}^{\infty} e^{-px} x^{h-1} l·(q + x)^{2}\,
+  \frac{(pq + h - 1) x + (hq + pq^{2})}{(x + q)^{2}}\DPtypo{}{\, dx}
+  &= \Neg pA'_{h-1} - 2E_{h, 2},
+\Tag{(48)} \\
+\int_{0}^{\infty} e^{-px} x^{h-1} l·(q - x)^{2}\,
+  \frac{(pq - h + 1) x + (hq - pq^{2})}{(x - q)^{2}}\DPtypo{}{\, dx}
+  &= -pB'_{h-1} + 2F_{h, 2}.
+\Tag{(49)}
+\end{align*}
+Tout de même les équations~\Eqref{(x')} se transforment analoguement dans les deux
+formules suivantes:
+\begin{alignat*}{2}
+&\int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2}\,
+  \frac{px^{2} + (k - 1) 2x - pq^{2}}{(x^{2} - q^{2})^{k}}\DPtypo{}{\, dx}
+  &&= 4I_{k} + \frac{2l·q^{2}}{(-q^{2})^{k}},
+\Tag{(50)} \\
+&\int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2}\,
+  \frac{px^{3} + (2k - 3) x^{2} - pq^{2} x + q^{2}}{(x^{2} - q^{2})^{k}}\DPtypo{}{\, dx}
+  &&= 4(H_{k-1} + q^{2} H_{k}).
+\Tag{(51)}
+\end{alignat*}
+Comme on a trouvé précédemment la valeur des intégrales $E_{h, k}$,~$F_{h, k}$, $H_{k}$,~$I_{k}$,
+$A'_{h}$,~$B'_{h}$, ou du moins que l'on a indiqué le chemin de les calculer, nous pouvons
+les regarder ici comme données, quoique nous n'en transcrivons pas les
+expressions, afin de ne pas devenir trop longs. Cette remarque regarde en
+même temps les valeurs qui suivent plus bas.
+
+Mais en second lieu, on peut encore obtenir d'autres résultats, de la même
+manière, qu'au \No{13}, par l'application du même théorème aux intégrales
+\Eqref{(VII)},~\Eqref{(VIII)}, \Eqref{(9)},~\Eqref{(10)}, \Eqref{(g)},~\Eqref{(h)},~\Eqref{(l)}, c'est-à-dire en y supposant que
+$f(x)$ soit égale à~$l·(q + x)^{2}$ ou à~$l·(q - x)^{2}$. Cela nous mènera pour les
+formules \Eqref{(VII)}\DPtypo{,}{}~et~\Eqref{(VIII)} aux équations suivantes:
+\begin{align*}
+%[** TN: Added four lines breaks]
+&2 \int_{0}^{\infty} \frac{e^{-px}\, dx}{x^{2} - q^{2}}
+  = \int_{0}^{\infty} \frac{e^{-px}}{x - q}\, d·l·(q + x)^{2} \\
+  &\qquad= \frac{e^{-px} l·(q + x)^{2}}{x - q} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} l·(q + x)^{2} \left\{
+     \frac{-pe^{-px}}{x - q} + e^{-px}\frac{-1}{(x - q)^{2}}
+   \right\} dx, \dbreak
+&2 \int_{0}^{\infty} \frac{e^{-px}\, dx}{x^{2} - q^{2}}
+  = \int_{0}^{\infty} \frac{e^{-px}}{x + q}\, d·l·(q - x)^{2} \\
+  &\qquad= \frac{e^{-px} l·(q - x)^{2}}{x + q} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} l·(q - x)^{2} \left\{
+     \frac{-pe^{-px}}{x + q} + e^{-px}\frac{-1}{(x + q)^{2}}
+   \right\} dx, \dbreak
+&2 \int_{0}^{\infty} \frac{e^{-px} x\, dx}{x^{2} - q^{2}}
+  = \int_{0}^{\infty} \frac{e^{-px} x}{x - q}\, d·l·(q + x)^{2} \\
+  &\qquad= \frac{e^{-px} xl·(q + x)^{2}}{x - q} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} l·(q + x)^{2} \left\{
+     \frac{e^{-px} - pe^{-px} x}{x - q} + e^{-px} x\frac{-1}{(x - q)^{2}}
+   \right\} dx, \dbreak
+&2 \int_{0}^{\infty} \frac{e^{-px} x\, dx}{x^{2} - q^{2}}
+  = \int_{0}^{\infty} \frac{e^{-px} x}{x + q}\, d·l·(q - x)^{2} \\
+  &\qquad= \frac{e^{-px} xl·(q - x)^{2}}{x + q} \Ibar_{0}^{\infty}
+   - \int_{0}^{\infty} l·(q - x)^{2} \left\{
+     \frac{e^{-px} - pe^{-px} x}{x + q} + e^{-px} x\frac{-1}{(x + q)^{2}}
+   \right\} dx.
+\end{align*}
+Lorsqu'on prend la peine de reprendre la discussion du \No{12}, on voit
+%% -----File: 053.png---Folio 53-------
+tout de suite qu'elle s'applique nécessairement au cas actuel: de sorte que
+nous trouvons après quelque réduction:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q + x)^{2} \frac{px - pq + 1}{(x - q)^{2}}\, dx
+  &= \frac{b - a}{q} - \frac{l·q^{2}}{q}
+   = \frac{1}{q} \left\{b - a - l·q^{2}\right\},
+\Tag{(52)} \\
+%
+\int_{0}^{\infty} e^{-px} l·(q - x)^{2} \frac{px + pq + 1}{(x + q)^{2}}\, dx
+  &= \frac{b - a}{q} + \frac{l·q^{2}}{q}
+   = \frac{1}{q} \left\{b - a + l·q^{2}\right\},
+\Tag{(53)}
+\end{align*}
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q + x)^{2} \frac{px^{2} - pqx + q}{(x - q)^{2}}\, dx &= a + b, \\
+\int_{0}^{\infty} e^{-px} l·(q - x)^{2} \frac{px^{2} + pqx - q}{(x + q)^{2}}\, dx &= a + b.
+\end{align*}
+Ces deux dernières ne sont qu'une conséquence nécessaire des formules \Eqref{(14)}~et~\Eqref{(52)},
+\Eqref{(15)}~et~\Eqref{(53)} respectivement. On peut prendre encore la somme
+de \Eqref{(46)}~et~\Eqref{(53)}, de \Eqref{(47)}~et~\Eqref{(52)}, savoir:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2} \frac{px + pq + 1}{(x + q)^{2}}\, dx
+  &= \frac{1}{q} \left\{2 + 2l·q^{2} + b - a - 2apq\right\},
+\Tag{(54)} \\
+\int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2} \frac{px - pq + 1}{(x - q)^{2}}\, dx
+  &= \frac{1}{q} \left\{-2 - 2l·q^{2} + b - a - 2bpq\right\}.
+\Tag{(55)}
+\end{align*}
+Quant aux autres intégrales mentionnées, \Eqref{(9)},~\Eqref{(10)}, \Eqref{(g)},~\Eqref{(h)},~\Eqref{(l)} on obtient
+de la même manière, en prenant pour~$f(x)$ tantôt~$l·(q + x)^{2}$, tantôt~$l·(q - x)^{2}$:
+\begin{align*}
+%[** Re-breaking]
+&2G_{h} = \int_{0}^{\infty} \frac{e^{-px} x^{h}}{x - q}\, d·l·(q + x)^{2}
+  = \frac{e^{-px} x^{h} l·(q + x)^{2}}{x - q} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(q + x)^{2} \left\{
+     \frac{-pe^{-px} x^{h} + hx^{h-1} e^{-px}}{x - q}
+     + e^{-px} x^{h} \frac{-1}{(x - q)^{2}}
+   \right\} dx, \\
+%
+&2G_{h} = \int_{0}^{\infty} \frac{e^{-px} x^{h}}{x + q}\, d·l·(q - x)^{2}
+  = \frac{e^{-px} x^{h} l·(q - x)^{2}}{x + q} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(q - x)^{2} \left\{
+     \frac{-pe^{-px} x^{h} + hx^{h-1} e^{-px}}{x + q}
+     + e^{-px} x^{h}\frac{-1}{(x + q)^{2}}
+   \right\} dx, \dbreak
+%
+&2H_{k+1} = \int_{0}^{\infty} \frac{e^{-px}}{(x^{2} - q^{2})^{k}(x - q)}\, d·l·(q + x)^{2}
+  = \frac{e^{-px} l·(q + x)^{2}}{(x^{2} - q^{2})^{k}(x - q)} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(x + q)^{2} \left\{
+     \frac{-pe^{-px}}{(x^{2} - q^{2})^{k}(x - q)}
+     + e^{-px} \left(\frac{-1}{(x^{2} - q^{2})^{k}(x - q)^{2}}
+       + \frac{-k·2x}{(x^{2} - q^{2})^{k+1}(x - q)}\right)
+   \right\} dx, \\
+%% -----File: 054.png---Folio 54-------
+&2H_{k+1} = \int_{0}^{\infty} \frac{e^{-px}}{(x^{2} - q^{2})^{k}(x + q)}\, d·l·(q - x)^{2}
+  = \frac{e^{-px} l·(q - x)^{2}}{(x^{2} - q^{2})^{k}(x + q)} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(q - x)^{2} \left\{
+     \frac{-pe^{-px}}{(x^{2} - q^{2})^{k}(x + q)}
+     + e^{-px} \left(\frac{-1}{(x^{2} - q^{2})^{k}(x + q)^{2}}
+       + \frac{-k·2x}{(x^{2} - q^{2})^{k+1}(x + q)}\right)
+   \right\} dx, \dbreak
+%
+&\\
+&2I_{k+1} = \int_{0}^{\infty} \frac{e^{-px} x}{(x^{2} - q^{2})^{k}(x - q)}\, d·l·(q + x)^{2}
+  = \frac{e^{-px} x·l·(q + x)^{2}}{(x^{2} - q^{2})^{k}(x - q)} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(q + x)^{2} \left\{
+    \frac{-pe^{-px} x + e^{-px}}{(x^{2} - q^{2})^{k}(x - q)}
+    + e^{-px} x \left(\frac{-1}{(x^{2} - q^{2})^{k}(x - q)^{2}}
+      + \frac{-k·2x}{(x^{2} - q^{2})^{k+1}(x - q)}\right)
+  \right\} dx, \\
+%
+&2I_{k+1} = \int_{0}^{\infty} \frac{e^{-px} x}{(x^{2} - q^{2})^{k}(x + q)}\, d·l·(q - x)^{2}
+  = \frac{e^{-px} x·l·(q - x)^{2}}{(x^{2} - q^{2})^{k}(x + q)} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(q - x)^{2} \left\{
+     \frac{-pe^{-px} x + e^{-px}}{(x^{2} - q^{2})^{k}(x + q)}
+     + e^{-px} x \left(\frac{-1}{(x^{2} - q^{2})^{k}(x + q)^{2}}
+       + \frac{-k·2x}{(x^{2} - q^{2})^{k+1}(x + q)}\right)
+   \right\} dx, \dbreak
+%
+&\\
+&2 \int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x^{2} - q^{2})^{k+1}}
+  = \int_{0}^{\infty} \frac{e^{-px} x^{h}}{(x^{2} - q^{2})^{k}(x - q)}\, d·l·(q + x)^{2}
+  = \frac{e^{-px} x^{h} l·(q + x)^{2}}{(x^{2} - q^{2})^{k}(x - q)} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(q + x)^{2} \left\{
+    \begin{gathered}
+      \frac{-pe^{-px} x^{h} + hx^{h-1} e^{-px}}{(x^{2} - q^{2})^{k}(x - q)} \\
+      + e^{-px} x^{h} \left(\frac{-1}{(x^{2} - q^{2})^{k}(x - q)}
+      + \frac{-k·2x}{(x^{2} - q^{2})^{k+1}(x - q)}\right)
+  \end{gathered}
+  \right\} dx, \\
+%
+&2 \int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x^{2} - q^{2})^{k+1}}
+  = \int_{0}^{\infty} \frac{e^{-px} x^{h}}{(x^{2} - q^{2})^{k}(x + q)}\, d·l·(q - x)^{2}
+  = \frac{e^{-px} x^{h} l·(q - x)^{2}}{(x^{2} - q^{2})^{k}(x + q)} \Ibar_{0}^{\infty} - \\
+  &\qquad- \int_{0}^{\infty} l·(q - x)^{2} \left\{
+    \begin{gathered}
+      \frac{-pe^{-px} x^{h} + hx^{h-1} e^{-px}}{(x^{2} - q^{2})^{k}(x + q)} \\
+      + e^{-px} x^{h} \left(\frac{-1}{(x^{2} - q^{2})^{k}(x + q)}
+        + \frac{-k·2x}{(x^{2} - q^{2})^{k+1}(x + q)}\right)
+    \end{gathered}
+  \right\} dx.
+\end{align*}
+Pour la limite inférieure~$0$ de~$x$ les termes intégrés dans les deux premières
+et les quatres dernières de ces équations ont pour valeur zéro, dans les deux
+autres au contraire: $\dfrac{l·q^{2}}{(-1)^{k+1} q^{2k+1}}$ et $\dfrac{l·q^{2}}{(-1)^{k} q^{2k+1}}$ respectivement. Pour la
+limite supérieure~$\infty$ tous les termes se présentent sous forme indéterminée,
+et il faut avoir recours aux règles ordinaires dans ce cas. Quant au terme
+intégré dans la troisième et la quatrième équation, il revient alors à
+\begin{align*}
+&\frac{l·(q ± x)^{2}}{e^{px}(x^{2} - q^{2})^{k}(x \mp q)} \\
+  &\qquad= \frac{±2 : (q ± x)}{pe^{px}(x^{2} - q^{2})^{k}(x \mp q)
+    + k2x (x^{2} - q^{2})^{k-1} e^{px}(x \mp q)
+    + e^{px}(x^{2} - \DPtypo{^{2}q}{q^{2}})^{k}} \\
+  &\qquad= \frac{±1}{e^{px}(x^{2} - q^{2})^{k-1}(x ± q) \left\{
+      px^{3} + (2k \mp p + 1) x^{2} - (pq ± 2k) qx ± pq^{3} - q^{2}
+    \right\}},
+\end{align*}
+%% -----File: 055.png---Folio 55-------
+donc la valeur en est zéro. Pour les six autres équations on peut mettre le
+terme sous la valeur générale:
+\begin{align*}
+&\frac{l·(q ± x)^{2}}{e^{px} x^{-h}(x^{2} - q^{2})^{k}(x \mp q)} \\
+  &\qquad= \frac{±2 : (q ± x)}{\left\{
+      \begin{aligned}%[** TN: Re-formatted]
+        &pe^{px} x^{-h}(x^{2} - q^{2})^{k} (x \mp q)
+    \DPtypo{+}{-} hx^{-h-1}(x^{2} - q^{2})^{k}(x \mp q) e^{\DPtypo{-}{}px} \\
+    &\qquad+ k·2x(x^{2} - q^{2})^{k-1} e^{px} x^{-h}(x \mp q)
+    + e^{\DPtypo{-}{}px} x^{-h}·(x^{2} - q^{2})^{k}
+  \end{aligned}
+\right\}} \\
+%
+  &\qquad= \frac{2x^{h+1}}{\left\{
+      \begin{aligned}
+        &e^{px}(x^{2} - q^{2})^{k-1}(x ± q) \\
+        &\quad\DPchg{}{·}
+          \bigl\{px^{4} + (2k - h + 1 \mp p) x^{3} - (pq ± 2k \mp h) qx^{2}
+          + (h - 1 ± pq) q^{2} x \mp hq^{3}\bigr\}
+    \end{aligned}
+  \right\}}.
+\end{align*}
+Si l'on continue à présent la différentiation, le numérateur se réduit enfin à
+$1^{h+1/1}$: donc le terme est nul pour la limite~$\infty$ de~$x$. Donc les équations
+précédentes deviennent:
+\begin{align*}
+&\int_{0}^{\infty} e^{-px} x^{h-1} l·(q + x)^{2} \frac{px^{2} - (pq + h - 1) + hq}{(x - q)^{2}}\, dx = 2G_{h},
+\Tag{(56)} \\
+&\int_{0}^{\infty} e^{-px} x^{h-1} l·(q - x)^{2} \frac{px^{2} + (pq - h + 1) - hq}{(x + q)^{2}}\, dx = 2G_{h},
+\Tag{(57)} \dbreak
+%
+&\int_{0}^{\infty} e^{-px} l·(q + x)^{2}
+  \frac{px^{3} - (pq - 2k - 1) x^{2} - (pq + 2k) qx + pq^{3} - q^{2}}
+       {(x^{2}-q^{2})^{k+1}(x - q)^{2}}\, dx \\
+  &\qquad= 2H_{k+1} + (-1)^{k+1} \frac{l·q^{2}}{q^{2k+1}},
+\Tag{(58)} \\
+&\int_{0}^{\infty} e^{-px} l·(q - x)^{2}
+  \frac{px^{3} + (pq + 2k + 1) x^{2} - (pq - 2k) qx - pq^{3} - q^{2}}
+       {(x^{2} - q^{2})^{k+1}(x + q)^{2}}\, dx \\
+  &\qquad= 2H_{k+1} + (-1)^{k+1} \frac{l·q^{2}}{q^{2k+1}},
+\Tag{(59)} \dbreak
+%
+&\int_{0}^{\infty} e^{-px} l·(q + x)^{2}
+  \frac{px^{4} - pqx^{3} - (pq^{2} - q - 2k) x^{2} + (pq^{2} - 2k) qx - q^{3}}
+       {(x^{2} - q^{2})^{k+1}(x - q)^{2}}\, dx
+  = 2I_{k+1},
+\Tag{(60)} \\
+&\int_{0}^{\infty} e^{-px} l·(q - x)^{2}
+  \frac{px^{4} + pqx^{3} - (pq^{2} + q - 2k) x^{2} - (pq^{2} - 2k) qx + q^{3}}
+       {(x^{2} - q^{2})^{k+1}(x + q)^{2}}\, dx
+  = 2I_{k+1},
+\Tag{(61)} \dbreak
+%
+&\int_{0}^{\infty} e^{-px} l·(q + x)^{2}
+  \frac{px^{4} - (pq + k - 1) x^{3} - (pq^{2} - hq - 2k) x^{2} + (pq^{2} - hq - q-2k) qx - hq^{3}}
+       {(x^{2} - q^{2})^{k+1}(x - q)^{2}}\, dx \\
+  &\qquad= 2 \int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x^{2} - q^{2})^{k+1}},
+\Tag{(62)} \\
+&\int_{0}^{\infty} e^{-px} l·(q - x)^{2}
+  \frac{px^{4} - (pq - k + 1) x^{3} - (pq^{2} + hq - 2k) x^{2} - (pq^{2} - hq + q - 2k) qx + hq^{3}}{(x^{2} - q^{2})^{k+1}(x + q)^{2}}\, dx \\
+  &\qquad= 2 \int_{0}^{\infty} \frac{e^{-px} x^{h}\, dx}{(x^{2} - q^{2})^{k+1}}.
+\Tag{(63)}
+\end{align*}
+%% -----File: 056.png---Folio 56-------
+Dans les intégrales \Eqref{(56)}~et~\Eqref{(57)} nous avons expressément omis de faire
+attention à la différence entre les $G_{2h}$~et~$G_{2h+1}$, parceque la réduction ne
+change pas pour ces deux cas; la même observation vaut des intégrales \Eqref{(62)},~\Eqref{(63)},
+qui pour $h$ de la forme $2h$ ou $2h + 1$ sont respectivement égales à
+$K_{h, k+1}$~et~$L_{h, k+1}$. Nous pouvons en déduire des résultats un peu plus simples
+en prenant la différence de \Eqref{(60)}~et~\Eqref{(58)} et \DPtypo{le}{la} somme de \Eqref{(59)}~et~\Eqref{(61)},
+c'est-à-dire après quelques réductions:
+\begin{align*}
+\int_{0}^{\infty} e^{-px} l·(q + x)^{2}
+  \frac{px^{2} + 2kx - pq^{2}}{(x^{2} - q^{2})^{k+1}}\, dx
+  &= 2I_{k+1} - 2qH_{k+1} + (-1)^{k} \frac{2l·q^{2}}{q^{2k}},
+\Tag{(64)} \\
+\int_{0}^{\infty} e^{-px} l·(q - x)^{2}
+  \frac{px^{2} + 2kx - pq^{2}}{(x^{2} - q^{2})^{k+1}}\, dx
+  &= 2I_{k+1} + 2qH_{k+1} + (-1)^{k} \frac{2l·q^{2}}{q^{2k}};
+\Tag{(65)}
+\end{align*}
+dont la somme donne de nouveau
+\[
+\int_{0}^{\infty} e^{-px} l·(q^{2} - x^{2})^{2}
+  \frac{px^{2} + 2kx - pq^{2}}{(x^{2} - q^{2})^{k+1}}\, dx
+  = 4I_{k+1} + (-1)^{k} \frac{4l·q^{2}}{q^{2k}}.
+\Tag{(66)}
+\]
+
+\Par{22.} Observons encore que les équations~\Eqref{(bb)} peuvent s'écrire:
+\begin{alignat*}{2}
+&\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}\,
+  \frac{px^{2} + 2kx + pq^{2}}{(x^{2} + q^{2})^{k+1}}\, dx
+  &&= qN_{k+1},
+\Tag{(67)} \\
+&\int_{0}^{\infty} e^{-px} \Arctg\frac{x}{q}\,
+  \frac{px^{3} + (2k - 1) x^{2} + pq^{2} x - q^{2}}{(x^{2} - q^{2})^{k+1}}\, dx
+  &&= qO_{k+1}.
+\Tag{(68)}
+\end{alignat*}
+Enfin lorsqu'on applique la transformation du \No{19} aux intégrales~$R_{h}$, on
+aura, sans faire attention aux diverses formes de~$h$, ce qui n'est d'aucune
+influence sur la réduction actuelle:
+\begin{multline*}
+qR_{h} = \int_{0}^{\infty} \frac{e^{-px} x^{h}}{x^{2} - q^{2}}\, d·\Arctg\frac{x}{q}
+  = \frac{e^{-px} x^{h} \Arctg\frac{x}{q}}{x^{2} - q^{2}} \Ibar_{0}^{\infty} \DPchg{}{-} \\
+  - \int_{0}^{\infty} \Arctg\frac{x}{q} \left\{
+    \frac{-pe^{-px} x^{h} + hx^{h-1} e^{-px}}{x^{2} - q^{2}}
+    + e^{-px} x^{h} \frac{-2x}{(x^{2}-q^{2})^{2}}
+  \right\}.
+\end{multline*}
+Le terme intégré est nul tout comme ci-dessus, pour les deux limites de~$x$
+et l'on a par suite:
+\[
+\int_{0}^{\infty} e^{-px} x^{h-1} \Arctg\frac{x}{q}\,
+  \frac{px^{3} -(h - 2) x^{2} - pq^{2} x + hq^{2}}{(x^{2} - q^{2})^{2}}\, dx
+  = qR_{h}.
+\Tag{(69)}
+\]
+%% -----File: 057.png---Folio 57-------
+Par le procédé suivant on peut acquérir des formules analogues un peu plus
+simples. Il est évident que
+\[
+R_{h+1} \mp qR_{h}
+  = \int_{0}^{\infty} \frac{e^{-px} x^{h}}{x ± q}\, \frac{dx}{x^{2} + q^{2}};
+\]
+cette formule, assujettie à la même transformation que la précédente donnera
+un terme déjà intégré, qui sera nul par un raisonnement analogue: donc on
+trouve de suite
+\begin{multline*}
+\int_{0}^{\infty} \Arctg\frac{x}{q} \left\{
+  \frac{hx^{h-1} e^{-px} - pe^{-px} x^{h}}{x ± q}
+  + e^{-px} x^{h} \frac{-1}{(x ± q)^{2}}
+\right\} dx \\
+  = \int_{0}^{\infty} e^{-px} x^{h-1} \Arctg \frac{x}{q}\,
+  \frac{px^{2} + (±pq - h + 1) \mp hq}{(x ± q)^{2}}\, dx
+  = qR_{h+1} \mp q^{2}R_{h},
+\end{multline*}
+ou, en introduisant l'intégrale~$M''_{h}$, connue par la formule~\Eqref{(33)},
+\[
+\int_{0}^{\infty} e^{-px} x^{h-1} \Arctg\frac{x}{q}\,
+  \frac{(±pq + h - 1) x + (pq^{2} ± hq)}{(x ± q)^{2}}\, dx
+  = M''_{h-1} - qR_{h+1} ± q^{2} R_{h}.
+\Tag{(70)}
+\]
+
+\Par{23.} \textit{Remarque}. Au \No{3} on a observé qu'on étudierait quelques intégrales,
+où il y aurait discontinuité pour la fonction déjà intégrée entre les
+limites de la variable: mais aussi, que la correction introduite par cette discontinuité,
+serait nulle dans tous les cas: --- il faudra démontrer cet énoncé.
+
+Commençons par les intégrales $C_{k}$,~$F_{k, h}$; le terme intégré a pour forme
+générale:
+\[
+\frac{x^{h} e^{-px}}{(x - q)^{k}}
+  = e^{-px} x^{h} (x - q)^{-k}
+  = x^{h} e^{-px - \frac{1}{2} kl·(x - q)^{2}}.
+\]
+La correction à ajouter serait donc:
+\begin{align*}
+\Delta'
+  &= \Lim \bigl[(q - \epsilon)^{h} e^{-p(q - \epsilon) - \frac{1}{2} kl·\epsilon^{2}}
+  - (q + \epsilon)^{h} e^{-p(q + \epsilon) - \frac{1}{2} kl·\epsilon^{2}}\bigr] \\
+  &= e^{-pq} \Lim \bigl[(q - \epsilon)^{h} e^{p\epsilon - \frac{1}{2} kl·\epsilon^{2}}
+  - (q + \epsilon)^{h} e^{-p\epsilon - \frac{1}{2} kl·\epsilon^{2}}\bigr] \\
+  &= e^{-pq} \Lim \biggl[
+    \left\{q^{h} - \binom{h}{2} q^{h-2} \epsilon^{2} + \dots\right\}
+    \left(e^{p\epsilon - \frac{1}{2} kl·\epsilon^{2}}
+    - e^{-p\epsilon - \frac{1}{2} kl·\epsilon^{2}}\right) \\
+  &\qquad- \epsilon \left\{
+    \binom{h}{1} q^{h-1} + \binom{h}{3} q^{h-3} \epsilon^{2} + \dots
+  \right\}
+    \left(e^{p\epsilon - \frac{1}{2} kl·\epsilon^{2}}
+    + e^{-p\epsilon - \frac{1}{2} kl·\epsilon^{2}}\DPtypo{}{\right)}\biggr];
+\end{align*}
+%% -----File: 058.png---Folio 58-------
+or, on sait que
+\begin{align*}
+e^{p\epsilon - \frac{1}{2} kl·\epsilon^{2}}
+  &= 1 + \frac{p\epsilon - \frac{1}{2} kl\epsilon^{2}}{1}
+    + \frac{(p\epsilon - \frac{1}{2} kl\epsilon^{2})^{2}}{1·2}
+    + \frac{(p\epsilon - \frac{1}{2} kl\epsilon^{2})^{3}}{1·2·3}
+    + \dots\DPchg{}{,} \\
+e^{-p\epsilon - \frac{1}{2} kl·\epsilon^{2}}
+  &= 1 + \frac{-p\epsilon - \frac{1}{2} kl\epsilon^{2}}{1}
+    + \frac{(-p\epsilon - \frac{1}{2} kl\epsilon^{2})^{2}}{1·2}
+    + \frac{(-p\epsilon - \frac{1}{2} kl\epsilon^{2})^{3}}{1·2·3}
+    + \dots\DPchg{}{;}
+\end{align*}
+donc
+\begin{align*}
+e^{p\epsilon - \frac{1}{2} kl·\epsilon^{2}} -
+e^{-p\epsilon - \frac{1}{2} kl·\epsilon^{2}}
+  &= \frac{2p\epsilon}{1} + \frac{-2p\epsilon kl\epsilon^{2}}{1·2} + \dots
+  = 2\epsilon\left\{\frac{p}{1} - \frac{pkl\epsilon^{2}}{1·2}
+    + \ldots \right\}, \\
+e^{p\epsilon - \frac{1}{2} kl·\epsilon^{2}} +
+e^{-p\epsilon - \frac{1}{2} kl·\epsilon^{2}}
+  &= 2 - \frac{kl\epsilon^{2}}{2}
+  + \tfrac{1}{2}\, \frac{4p^{2}\epsilon^{2} + k^{2}(l\epsilon^{2})^{2}}{1·2}
+  - \dots\DPchg{}{;}
+\end{align*}
+de sorte que l'on a
+\begin{multline*}
+\Delta' = e^{-pq} \Lim 2\epsilon \biggl[
+  \left\{q^{h} + \binom{h}{2} q^{h-2}\epsilon^{2} + \dots\right\}
+  \left\{\frac{p}{1} - \frac{pkl\epsilon^{2}}{1·2} + \dots \right\} \DPchg{-}{}\\
+- \left\{\binom{h}{1} q^{h-1} + \binom{h}{3} q^{h - 3}\epsilon^{2} + \dots\right\}
+  \left\{1 - \tfrac{1}{2}\, \frac{kl\epsilon^{2}}{1}
+    + \tfrac{1}{4}\, \frac{4p^{2}\epsilon^{2} + k^{2}(l\epsilon^{2})^{2}}{1·2}
+    - \dots \right\}
+\biggr].
+\end{multline*}
+Or, je dis que cette limite est zéro, car il n'y entre que des termes de la
+forme $q^{l}\epsilon$,~$q^{l}\epsilon^{m}$,~$q^{l}\epsilon^{m} (l\epsilon)^{n}$. La limite des deux premières expressions est
+évidemment zéro: mais aussi c'est la limite nécessaire de la dernière, qui ce
+présente sous la forme indéterminée~$0^{m}·\infty^{n}$: car l'on a suivant la règle
+ordinaire
+\[
+\epsilon^{m}(l\epsilon)^{n}
+  = \frac{(l\epsilon)^{n}}{\epsilon^{-m}}
+  = \frac{n(l\epsilon)^{n-1}}{-m\epsilon^{-m-1}}\, \tfrac{1}{\epsilon}
+  = \frac{-n}{m}\, \frac{(l\epsilon)^{n-1}}{\epsilon^{-m}}
+\]
+donc en continuant la différentiation $n - 1$~fois: $\dfrac{1^{n/1}}{(-m)^{n}}\, \dfrac{1}{\epsilon^{-m}} = \dfrac{1^{n/1}}{(-m)^{n}}\, \epsilon^{m}$
+d'où l'on conclut que, cette limite étant zéro, on aura aussi
+\[
+\Delta' = 0
+\]
+ce qu'il fallait démontrer.
+
+Pour les intégrales $G$,~$H$,~$I$, $K$~et~$L$, le terme intégré a la forme générale;
+\[
+\frac{x^{h} e^{-px}}{(x^{2} - q^{2})^{k}}
+  = x^{h} e^{-px - \frac{1}{2} kl(x + q)^{2} - \frac{1}{2} kl(x - q)^{2}}
+\]
+%% -----File: 059.png---Folio 59-------
+on a donc ici de la même manière que plus-haut
+\begin{multline*}
+\llap{$\Delta' = e^{-pq}$} \Lim \biggl[
+  \left\{\DPtypo{q_{h}}{q^{h}} + \binom{h}{2} q^{h-2}\epsilon^{2} + \dots\right\}
+  \biggl\{e^{p\epsilon - \frac{1}{2} kl·(2q - \epsilon)^{2} - \frac{1}{2} kl\epsilon^{2}}
+    - e^{-p\epsilon - \frac{1}{2} kl·(2q + \epsilon)^{2} - \frac{1}{2} kl\epsilon^{2}}\biggr\} - \\
+  -\epsilon\left\{\binom{h}{1} q^{h-1} + \binom{h}{3} q^{h-3}\epsilon^{2} + \dots\right\}
+  \biggl\{e^{p\epsilon - \frac{1}{2} kl·(2q - \epsilon)^{2} - \frac{1}{2} kl\epsilon^{2}}
+    + e^{-p\epsilon - \frac{1}{2} kl·(2q + \epsilon)^{2} - \frac{1}{2} kl\epsilon^{2}}\biggr\}
+  \biggr];
+\end{multline*}
+or on a
+\begin{align*}
+p\epsilon - kl·(2q - \epsilon) - kl\epsilon
+  &= r = p\epsilon
+  - k\frac{-\epsilon^{2} + 2q\epsilon - 1}{1}
+  + k\frac{(-\epsilon^{2} + 2q\epsilon - 1)^{2}}{1·2} - \dots, \\
+-p\epsilon - kl·(2q - \epsilon) - kl\epsilon
+  &= s = p\epsilon
+  - k\frac{+\epsilon^{2} + 2q\epsilon - 1}{1}
+  + k\frac{(\epsilon^{2} + 2q\epsilon - 1)^{2}}{1·2} - \dots;
+\end{align*}
+donc
+\begin{align*}
+e^{r} - e^{s}
+  &= 1 - 1 + \frac{r - s}{1} + \frac{r^{2} - s^{2}}{1·2}
+    + \frac{r^{3} - s^{3}}{1·2·3} + \dots \\
+  &= (r - s)\left(1 + \frac{r + s}{1·2} + \frac{r^{2} + 2rs + s^{2}}{1·2·3}
+     + \dots\right) \\
+  &= 2p\epsilon - k\frac{-2\epsilon^{2}}{1}
+  + k\frac{4\epsilon (2q\epsilon - 1)}{1·2} - \ldots \biggl\{1 + \ldots\biggr\},\\
+e^{r} + e^{s}
+  &= 2 + \frac{r + s}{1} + \dots
+   = 2 - 2k\frac{-q\epsilon - 1}{1} + \ldots,
+\end{align*}
+d'où enfin
+\begin{multline*}
+\Delta' = e^{-pq} \Lim 2\epsilon\biggl[
+  \left\{q^{h} + \binom{h}{2} q^{h-2}\epsilon^{2} + \dots\right\}
+  \bigg\{p + k\epsilon + k\epsilon(2q\epsilon - 1) + \dots \bigg\} \\
+  + \left\{\binom{h}{1} q^{h-1} + \binom{h}{3} q^{h-3}\epsilon^{2} + \dots\right\}
+  \bigg\{1 - k(2q\epsilon - 1) + \dots \bigg\}
+\bigg],
+\end{multline*}
+et l'on voit qu'ici de même $\Delta'$ a zéro pour limite. Un raisonnement tout-à-fait
+analogue donnerait le même résultat pour le cas des intégrales $S$,~$T$,
+$U$,~$V$ à dénominateur~$(x^{4} - q^{4})^{k}$.
+
+Quant aux formules des \Nos{12} à~\Noref{18}, on trouve en outre sous le signe
+d'intégration définie le facteur $l·(q + x)^{2}$, $l·(q - x)^{2}$, $l·(q^{2} - x^{2})^{2}$, $l·(q^{2} + x^{2})^{2}$,
+$l·(q^{4} - x^{4})^{2}$ dont le premier et le quatrième ne deviennent pas discontinues;
+les trois autres au contraire
+\begin{align*}
+&l·(q - x)^{2}, \quad l·(q^{2} - x^{2})^{2} = l·(q + x)^{2} + l·(q - x)^{2}, \\
+&l·(q^{4} - x^{4})^{2} = l·(q^{2} + x^{2})^{2} + l·(q + x)^{2} + l·(q - x)^{2}
+\end{align*}
+%% -----File: 060.png---Folio 60-------
+sont bien dans ce cas, et toutes par la fonction $l·(q - x)^{2}$ seulement. Celle-ci
+fait entrer sous la limite les deux termes $l·\epsilon^{2}$~et~$l·(-\epsilon)^{2} = l·\epsilon^{2}$ comme
+facteurs: le raisonnement reste donc le même, ainsi que la discussion sur
+la valeur des termes, qui se présentent sous une forme indéterminée: et la
+limite devient encore zéro.
+
+Les mêmes observations valent aussi pour les autres intégrales, déduites
+aux \Nos{20}---\Noref{22}, parceque le raisonnement continue toujours de manière
+analogue.
+
+Il est donc démontré, que la correction s'annulle ici, qui est nécessairement
+due à la discontinuité du terme intégré auprès de quelques-uns des
+résultats que nous avons déduits, et par suite qu'elle n'a pas d'influence:
+pour les intégrales, dont il n'a pas été fait mention ici, ce cas de discontinuité
+n'a pas lieu.
+\vfil
+\ctb
+
+\FlushRunningHeads
+\BookMark{-1}{Matière Supplémentaire}
+\SetRunningHeads{License}{License}
+\BookMark{0}{Project Gutenberg License}
+
+\begin{PGtext}
+End of the Project Gutenberg EBook of Note sur une Méthode pour la Réduction
+d'Intégrales Définies, by D. (David) Bierens de Haan
+
+*** END OF THIS PROJECT GUTENBERG EBOOK REDUCTION D'INTEGRALES DEFINIES ***
+
+***** This file should be named 36334-pdf.pdf or 36334-pdf.zip *****
+This and all associated files of various formats will be found in:
+        http://www.gutenberg.org/3/6/3/3/36334/
+
+Produced by Andrew D. Hwang, Joshua Hutchinson, and the
+Online Distributed Proofreading Team at http://www.pgdp.net
+(This ebook was produced using images provided by the
+Cornell University Library Historical Mathematics Monographs
+collection.)
+
+
+Updated editions will replace the previous one--the old editions
+will be renamed.
+
+Creating the works from public domain print editions means that no
+one owns a United States copyright in these works, so the Foundation
+(and you!) can copy and distribute it in the United States without
+permission and without paying copyright royalties.  Special rules,
+set forth in the General Terms of Use part of this license, apply to
+copying and distributing Project Gutenberg-tm electronic works to
+protect the PROJECT GUTENBERG-tm concept and trademark.  Project
+Gutenberg is a registered trademark, and may not be used if you
+charge for the eBooks, unless you receive specific permission.  If you
+do not charge anything for copies of this eBook, complying with the
+rules is very easy.  You may use this eBook for nearly any purpose
+such as creation of derivative works, reports, performances and
+research.  They may be modified and printed and given away--you may do
+practically ANYTHING with public domain eBooks.  Redistribution is
+subject to the trademark license, especially commercial
+redistribution.
+
+
+
+*** START: FULL LICENSE ***
+
+THE FULL PROJECT GUTENBERG LICENSE
+PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK
+
+To protect the Project Gutenberg-tm mission of promoting the free
+distribution of electronic works, by using or distributing this work
+(or any other work associated in any way with the phrase "Project
+Gutenberg"), you agree to comply with all the terms of the Full Project
+Gutenberg-tm License (available with this file or online at
+http://gutenberg.net/license).
+
+
+Section 1.  General Terms of Use and Redistributing Project Gutenberg-tm
+electronic works
+
+1.A.  By reading or using any part of this Project Gutenberg-tm
+electronic work, you indicate that you have read, understand, agree to
+and accept all the terms of this license and intellectual property
+(trademark/copyright) agreement.  If you do not agree to abide by all
+the terms of this agreement, you must cease using and return or destroy
+all copies of Project Gutenberg-tm electronic works in your possession.
+If you paid a fee for obtaining a copy of or access to a Project
+Gutenberg-tm electronic work and you do not agree to be bound by the
+terms of this agreement, you may obtain a refund from the person or
+entity to whom you paid the fee as set forth in paragraph 1.E.8.
+
+1.B.  "Project Gutenberg" is a registered trademark.  It may only be
+used on or associated in any way with an electronic work by people who
+agree to be bound by the terms of this agreement.  There are a few
+things that you can do with most Project Gutenberg-tm electronic works
+even without complying with the full terms of this agreement.  See
+paragraph 1.C below.  There are a lot of things you can do with Project
+Gutenberg-tm electronic works if you follow the terms of this agreement
+and help preserve free future access to Project Gutenberg-tm electronic
+works.  See paragraph 1.E below.
+
+1.C.  The Project Gutenberg Literary Archive Foundation ("the Foundation"
+or PGLAF), owns a compilation copyright in the collection of Project
+Gutenberg-tm electronic works.  Nearly all the individual works in the
+collection are in the public domain in the United States.  If an
+individual work is in the public domain in the United States and you are
+located in the United States, we do not claim a right to prevent you from
+copying, distributing, performing, displaying or creating derivative
+works based on the work as long as all references to Project Gutenberg
+are removed.  Of course, we hope that you will support the Project
+Gutenberg-tm mission of promoting free access to electronic works by
+freely sharing Project Gutenberg-tm works in compliance with the terms of
+this agreement for keeping the Project Gutenberg-tm name associated with
+the work.  You can easily comply with the terms of this agreement by
+keeping this work in the same format with its attached full Project
+Gutenberg-tm License when you share it without charge with others.
+
+1.D.  The copyright laws of the place where you are located also govern
+what you can do with this work.  Copyright laws in most countries are in
+a constant state of change.  If you are outside the United States, check
+the laws of your country in addition to the terms of this agreement
+before downloading, copying, displaying, performing, distributing or
+creating derivative works based on this work or any other Project
+Gutenberg-tm work.  The Foundation makes no representations concerning
+the copyright status of any work in any country outside the United
+States.
+
+1.E.  Unless you have removed all references to Project Gutenberg:
+
+1.E.1.  The following sentence, with active links to, or other immediate
+access to, the full Project Gutenberg-tm License must appear prominently
+whenever any copy of a Project Gutenberg-tm work (any work on which the
+phrase "Project Gutenberg" appears, or with which the phrase "Project
+Gutenberg" is associated) is accessed, displayed, performed, viewed,
+copied or distributed:
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.net
+
+1.E.2.  If an individual Project Gutenberg-tm electronic work is derived
+from the public domain (does not contain a notice indicating that it is
+posted with permission of the copyright holder), the work can be copied
+and distributed to anyone in the United States without paying any fees
+or charges.  If you are redistributing or providing access to a work
+with the phrase "Project Gutenberg" associated with or appearing on the
+work, you must comply either with the requirements of paragraphs 1.E.1
+through 1.E.7 or obtain permission for the use of the work and the
+Project Gutenberg-tm trademark as set forth in paragraphs 1.E.8 or
+1.E.9.
+
+1.E.3.  If an individual Project Gutenberg-tm electronic work is posted
+with the permission of the copyright holder, your use and distribution
+must comply with both paragraphs 1.E.1 through 1.E.7 and any additional
+terms imposed by the copyright holder.  Additional terms will be linked
+to the Project Gutenberg-tm License for all works posted with the
+permission of the copyright holder found at the beginning of this work.
+
+1.E.4.  Do not unlink or detach or remove the full Project Gutenberg-tm
+License terms from this work, or any files containing a part of this
+work or any other work associated with Project Gutenberg-tm.
+
+1.E.5.  Do not copy, display, perform, distribute or redistribute this
+electronic work, or any part of this electronic work, without
+prominently displaying the sentence set forth in paragraph 1.E.1 with
+active links or immediate access to the full terms of the Project
+Gutenberg-tm License.
+
+1.E.6.  You may convert to and distribute this work in any binary,
+compressed, marked up, nonproprietary or proprietary form, including any
+word processing or hypertext form.  However, if you provide access to or
+distribute copies of a Project Gutenberg-tm work in a format other than
+"Plain Vanilla ASCII" or other format used in the official version
+posted on the official Project Gutenberg-tm web site (www.gutenberg.net),
+you must, at no additional cost, fee or expense to the user, provide a
+copy, a means of exporting a copy, or a means of obtaining a copy upon
+request, of the work in its original "Plain Vanilla ASCII" or other
+form.  Any alternate format must include the full Project Gutenberg-tm
+License as specified in paragraph 1.E.1.
+
+1.E.7.  Do not charge a fee for access to, viewing, displaying,
+performing, copying or distributing any Project Gutenberg-tm works
+unless you comply with paragraph 1.E.8 or 1.E.9.
+
+1.E.8.  You may charge a reasonable fee for copies of or providing
+access to or distributing Project Gutenberg-tm electronic works provided
+that
+
+- You pay a royalty fee of 20% of the gross profits you derive from
+     the use of Project Gutenberg-tm works calculated using the method
+     you already use to calculate your applicable taxes.  The fee is
+     owed to the owner of the Project Gutenberg-tm trademark, but he
+     has agreed to donate royalties under this paragraph to the
+     Project Gutenberg Literary Archive Foundation.  Royalty payments
+     must be paid within 60 days following each date on which you
+     prepare (or are legally required to prepare) your periodic tax
+     returns.  Royalty payments should be clearly marked as such and
+     sent to the Project Gutenberg Literary Archive Foundation at the
+     address specified in Section 4, "Information about donations to
+     the Project Gutenberg Literary Archive Foundation."
+
+- You provide a full refund of any money paid by a user who notifies
+     you in writing (or by e-mail) within 30 days of receipt that s/he
+     does not agree to the terms of the full Project Gutenberg-tm
+     License.  You must require such a user to return or
+     destroy all copies of the works possessed in a physical medium
+     and discontinue all use of and all access to other copies of
+     Project Gutenberg-tm works.
+
+- You provide, in accordance with paragraph 1.F.3, a full refund of any
+     money paid for a work or a replacement copy, if a defect in the
+     electronic work is discovered and reported to you within 90 days
+     of receipt of the work.
+
+- You comply with all other terms of this agreement for free
+     distribution of Project Gutenberg-tm works.
+
+1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg-tm
+electronic work or group of works on different terms than are set
+forth in this agreement, you must obtain permission in writing from
+both the Project Gutenberg Literary Archive Foundation and Michael
+Hart, the owner of the Project Gutenberg-tm trademark.  Contact the
+Foundation as set forth in Section 3 below.
+
+1.F.
+
+1.F.1.  Project Gutenberg volunteers and employees expend considerable
+effort to identify, do copyright research on, transcribe and proofread
+public domain works in creating the Project Gutenberg-tm
+collection.  Despite these efforts, Project Gutenberg-tm electronic
+works, and the medium on which they may be stored, may contain
+"Defects," such as, but not limited to, incomplete, inaccurate or
+corrupt data, transcription errors, a copyright or other intellectual
+property infringement, a defective or damaged disk or other medium, a
+computer virus, or computer codes that damage or cannot be read by
+your equipment.
+
+1.F.2.  LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the "Right
+of Replacement or Refund" described in paragraph 1.F.3, the Project
+Gutenberg Literary Archive Foundation, the owner of the Project
+Gutenberg-tm trademark, and any other party distributing a Project
+Gutenberg-tm electronic work under this agreement, disclaim all
+liability to you for damages, costs and expenses, including legal
+fees.  YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
+LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
+PROVIDED IN PARAGRAPH 1.F.3.  YOU AGREE THAT THE FOUNDATION, THE
+TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
+LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
+INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+1.F.3.  LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+defect in this electronic work within 90 days of receiving it, you can
+receive a refund of the money (if any) you paid for it by sending a
+written explanation to the person you received the work from.  If you
+received the work on a physical medium, you must return the medium with
+your written explanation.  The person or entity that provided you with
+the defective work may elect to provide a replacement copy in lieu of a
+refund.  If you received the work electronically, the person or entity
+providing it to you may choose to give you a second opportunity to
+receive the work electronically in lieu of a refund.  If the second copy
+is also defective, you may demand a refund in writing without further
+opportunities to fix the problem.
+
+1.F.4.  Except for the limited right of replacement or refund set forth
+in paragraph 1.F.3, this work is provided to you 'AS-IS' WITH NO OTHER
+WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+
+1.F.5.  Some states do not allow disclaimers of certain implied
+warranties or the exclusion or limitation of certain types of damages.
+If any disclaimer or limitation set forth in this agreement violates the
+law of the state applicable to this agreement, the agreement shall be
+interpreted to make the maximum disclaimer or limitation permitted by
+the applicable state law.  The invalidity or unenforceability of any
+provision of this agreement shall not void the remaining provisions.
+
+1.F.6.  INDEMNITY - You agree to indemnify and hold the Foundation, the
+trademark owner, any agent or employee of the Foundation, anyone
+providing copies of Project Gutenberg-tm electronic works in accordance
+with this agreement, and any volunteers associated with the production,
+promotion and distribution of Project Gutenberg-tm electronic works,
+harmless from all liability, costs and expenses, including legal fees,
+that arise directly or indirectly from any of the following which you do
+or cause to occur: (a) distribution of this or any Project Gutenberg-tm
+work, (b) alteration, modification, or additions or deletions to any
+Project Gutenberg-tm work, and (c) any Defect you cause.
+
+
+Section  2.  Information about the Mission of Project Gutenberg-tm
+
+Project Gutenberg-tm is synonymous with the free distribution of
+electronic works in formats readable by the widest variety of computers
+including obsolete, old, middle-aged and new computers.  It exists
+because of the efforts of hundreds of volunteers and donations from
+people in all walks of life.
+
+Volunteers and financial support to provide volunteers with the
+assistance they need are critical to reaching Project Gutenberg-tm's
+goals and ensuring that the Project Gutenberg-tm collection will
+remain freely available for generations to come.  In 2001, the Project
+Gutenberg Literary Archive Foundation was created to provide a secure
+and permanent future for Project Gutenberg-tm and future generations.
+To learn more about the Project Gutenberg Literary Archive Foundation
+and how your efforts and donations can help, see Sections 3 and 4
+and the Foundation web page at http://www.pglaf.org.
+
+
+Section 3.  Information about the Project Gutenberg Literary Archive
+Foundation
+
+The Project Gutenberg Literary Archive Foundation is a non profit
+501(c)(3) educational corporation organized under the laws of the
+state of Mississippi and granted tax exempt status by the Internal
+Revenue Service.  The Foundation's EIN or federal tax identification
+number is 64-6221541.  Its 501(c)(3) letter is posted at
+http://pglaf.org/fundraising.  Contributions to the Project Gutenberg
+Literary Archive Foundation are tax deductible to the full extent
+permitted by U.S. federal laws and your state's laws.
+
+The Foundation's principal office is located at 4557 Melan Dr. S.
+Fairbanks, AK, 99712., but its volunteers and employees are scattered
+throughout numerous locations.  Its business office is located at
+809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887, email
+business@pglaf.org.  Email contact links and up to date contact
+information can be found at the Foundation's web site and official
+page at http://pglaf.org
+
+For additional contact information:
+     Dr. Gregory B. Newby
+     Chief Executive and Director
+     gbnewby@pglaf.org
+
+
+Section 4.  Information about Donations to the Project Gutenberg
+Literary Archive Foundation
+
+Project Gutenberg-tm depends upon and cannot survive without wide
+spread public support and donations to carry out its mission of
+increasing the number of public domain and licensed works that can be
+freely distributed in machine readable form accessible by the widest
+array of equipment including outdated equipment.  Many small donations
+($1 to $5,000) are particularly important to maintaining tax exempt
+status with the IRS.
+
+The Foundation is committed to complying with the laws regulating
+charities and charitable donations in all 50 states of the United
+States.  Compliance requirements are not uniform and it takes a
+considerable effort, much paperwork and many fees to meet and keep up
+with these requirements.  We do not solicit donations in locations
+where we have not received written confirmation of compliance.  To
+SEND DONATIONS or determine the status of compliance for any
+particular state visit http://pglaf.org
+
+While we cannot and do not solicit contributions from states where we
+have not met the solicitation requirements, we know of no prohibition
+against accepting unsolicited donations from donors in such states who
+approach us with offers to donate.
+
+International donations are gratefully accepted, but we cannot make
+any statements concerning tax treatment of donations received from
+outside the United States.  U.S. laws alone swamp our small staff.
+
+Please check the Project Gutenberg Web pages for current donation
+methods and addresses.  Donations are accepted in a number of other
+ways including including checks, online payments and credit card
+donations.  To donate, please visit: http://pglaf.org/donate
+
+
+Section 5.  General Information About Project Gutenberg-tm electronic
+works.
+
+Professor Michael S. Hart is the originator of the Project Gutenberg-tm
+concept of a library of electronic works that could be freely shared
+with anyone.  For thirty years, he produced and distributed Project
+Gutenberg-tm eBooks with only a loose network of volunteer support.
+
+
+Project Gutenberg-tm eBooks are often created from several printed
+editions, all of which are confirmed as Public Domain in the U.S.
+unless a copyright notice is included.  Thus, we do not necessarily
+keep eBooks in compliance with any particular paper edition.
+
+
+Most people start at our Web site which has the main PG search facility:
+
+     http://www.gutenberg.net
+
+This Web site includes information about Project Gutenberg-tm,
+including how to make donations to the Project Gutenberg Literary
+Archive Foundation, how to help produce our new eBooks, and how to
+subscribe to our email newsletter to hear about new eBooks.
+\end{PGtext}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+%                                                                         %
+% End of the Project Gutenberg EBook of Note sur une Méthode pour la Réduction
+% d'Intégrales Définies, by D. (David) Bierens de Haan                    %
+%                                                                         %
+% *** END OF THIS PROJECT GUTENBERG EBOOK REDUCTION D'INTEGRALES DEFINIES ***
+%                                                                         %
+% ***** This file should be named 36334-t.tex or 36334-t.zip *****        %
+% This and all associated files of various formats will be found in:      %
+%         http://www.gutenberg.org/3/6/3/3/36334/                         %
+%                                                                         %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+
+\end{document}
+
+### lprep configuration
+@ControlwordReplace = (
+  ['\\TranscriberNote', ''],
+  ['\\FlushRunningHeads', ''],
+  ['\\stretchyspace', ''],
+  ['\\ctb', ''],
+  ['\\ieme', '^{ième}'],
+  ['\\end{Théorème}', '']
+  );
+@ControlwordArguments = (
+  ['\\HalfTitle', 0, 0, '', ''],
+  ['\\Numero', 1, 1, 'Numéro ', ''],
+  ['\\no', 1, 1, 'N^{o}. ', ''],
+  ['\\No', 1, 1, 'N^{o}. ', ''],
+  ['\\Nos', 1, 1, 'N^{os} ', ''],
+  ['\\Noref', 1, 1, '', ''],
+  ['\\Eqref', 1, 0, '(00)', ''],
+  ['\\Par', 1, 1, '', ''],
+  ['\\begin{Théorème}', 1, 1, 'Théorème ', ''],
+  ['\\Theorem', 1, 1, 'Théorème ', '.'],
+  ['\\SetRunningHeads', 1, 0, '', '', 1, 0, '', ''],
+  ['\\BookMark', 1, 0, '', '', 1, 0, '', ''],
+  ['\\DPtypo', 1, 0, '', '', 1, 1, '', ''],
+  ['\\DPchg', 1, 0, '', '', 1, 1, '', '']
+  );
+
+###
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.5.6)  5 JUN 2011 19:54
+entering extended mode
+ %&-line parsing enabled.
+**36334-t.tex
+(./36334-t.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, farsi, croatian, ukrainian, russian, bulgarian, czech, slov
+ak, danish, dutch, finnish, basque, french, german, ngerman, ibycus, greek, mon
+ogreek, ancientgreek, hungarian, italian, latin, mongolian, norsk, icelandic, i
+nterlingua, turkish, coptic, romanian, welsh, serbian, slovenian, estonian, esp
+eranto, uppersorbian, indonesian, polish, portuguese, spanish, catalan, galicia
+n, swedish, ukenglish, pinyin, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/book.cls
+Document Class: book 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/bk12.clo
+File: bk12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+Package: inputenc 2006/05/05 v1.1b Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+(/usr/share/texmf-texlive/tex/latex/base/latin1.def
+File: latin1.def 2006/05/05 v1.1b Input encoding file
+)) (/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+)) (/usr/share/texmf-texlive/tex/generic/babel/babel.sty
+Package: babel 2005/11/23 v3.8h The Babel package
+(/usr/share/texmf-texlive/tex/generic/babel/frenchb.ldf
+Language: french 2005/02/06 v1.6g French support from the babel system
+(/usr/share/texmf-texlive/tex/generic/babel/babel.def
+File: babel.def 2005/11/23 v3.8h Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+)
+Package babel Info: Making : an active character on input line 219.
+Package babel Info: Making ; an active character on input line 220.
+Package babel Info: Making ! an active character on input line 221.
+Package babel Info: Making ? an active character on input line 222.
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 299.
+\parindentFFN=\dimen104
+\std@mcc=\count89
+\dec@mcc=\count90
+*************************************
+* Local config file frenchb.cfg used
+*
+(/usr/share/texmf-texlive/tex/generic/babel/frenchb.cfg))) (/usr/share/texmf-te
+xlive/tex/latex/tools/calc.sty
+Package: calc 2005/08/06 v4.2 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count91
+\calc@Bcount=\count92
+\calc@Adimen=\dimen105
+\calc@Bdimen=\dimen106
+\calc@Askip=\skip43
+\calc@Bskip=\skip44
+LaTeX Info: Redefining \setlength on input line 75.
+LaTeX Info: Redefining \addtolength on input line 76.
+\calc@Ccount=\count93
+\calc@Cskip=\skip45
+) (/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip46
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks16
+\ex@=\dimen107
+)) (/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen108
+) (/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count94
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count95
+\leftroot@=\count96
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count97
+\DOTSCASE@=\count98
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen109
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count99
+\c@MaxMatrixCols=\count100
+\dotsspace@=\muskip10
+\c@parentequation=\count101
+\dspbrk@lvl=\count102
+\tag@help=\toks17
+\row@=\count103
+\column@=\count104
+\maxfields@=\count105
+\andhelp@=\toks18
+\eqnshift@=\dimen110
+\alignsep@=\dimen111
+\tagshift@=\dimen112
+\tagwidth@=\dimen113
+\totwidth@=\dimen114
+\lineht@=\dimen115
+\@envbody=\toks19
+\multlinegap=\skip47
+\multlinetaggap=\skip48
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+) (/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+)) (/usr/share/texmf-texlive/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+) (/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip49
+\f@ncyO@elh=\skip50
+\f@ncyO@erh=\skip51
+\f@ncyO@olh=\skip52
+\f@ncyO@orh=\skip53
+\f@ncyO@elf=\skip54
+\f@ncyO@erf=\skip55
+\f@ncyO@olf=\skip56
+\f@ncyO@orf=\skip57
+) (/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
+Package: geometry 2002/07/08 v3.2 Page Geometry
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks21
+)
+\Gm@cnth=\count106
+\Gm@cntv=\count107
+\c@Gm@tempcnt=\count108
+\Gm@bindingoffset=\dimen116
+\Gm@wd@mp=\dimen117
+\Gm@odd@mp=\dimen118
+\Gm@even@mp=\dimen119
+\Gm@dimlist=\toks22
+(/usr/share/texmf-texlive/tex/xelatex/xetexconfig/geometry.cfg)) (/usr/share/te
+xmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2007/02/07 v6.75r Hypertext links for LaTeX
+\@linkdim=\dimen120
+\Hy@linkcounter=\count109
+\Hy@pagecounter=\count110
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+) (/etc/texmf/tex/latex/config/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+) (/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2006/08/22 v2.4 Connects package keyval with LaTeX options (
+HO)
+)
+Package hyperref Info: Option `hyperfootnotes' set `false' on input line 2238.
+Package hyperref Info: Option `bookmarks' set `true' on input line 2238.
+Package hyperref Info: Option `linktocpage' set `false' on input line 2238.
+Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 223
+8.
+Package hyperref Info: Option `pdfpagelabels' set `true' on input line 2238.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 2238.
+Package hyperref Info: Option `colorlinks' set `true' on input line 2238.
+Package hyperref Info: Hyper figures OFF on input line 2288.
+Package hyperref Info: Link nesting OFF on input line 2293.
+Package hyperref Info: Hyper index ON on input line 2296.
+Package hyperref Info: Plain pages OFF on input line 2303.
+Package hyperref Info: Backreferencing OFF on input line 2308.
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 2444.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip11
+Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 2599.
+\Fld@menulength=\count111
+\Field@Width=\dimen121
+\Fld@charsize=\dimen122
+\Choice@toks=\toks23
+\Field@toks=\toks24
+Package hyperref Info: Hyper figures OFF on input line 3102.
+Package hyperref Info: Link nesting OFF on input line 3107.
+Package hyperref Info: Hyper index ON on input line 3110.
+Package hyperref Info: backreferencing OFF on input line 3117.
+Package hyperref Info: Link coloring ON on input line 3120.
+\Hy@abspage=\count112
+\c@Item=\count113
+)
+*hyperref using driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2007/02/07 v6.75r Hyperref driver for pdfTeX
+\Fld@listcount=\count114
+)
+\c@PDFbkmk=\count115
+\TmpLen=\skip58
+(./36334-t.aux)
+\openout1 = `36334-t.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 350.
+LaTeX Font Info:    ... okay on input line 350.
+LaTeX Font Info:    Checking defaults for T1/lmr/m/n on input line 350.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 350.
+(/usr/share/texmf/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2007/01/14 v1.3 Font defs for Latin Modern
+)
+LaTeX Font Info:    ... okay on input line 350.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 350.
+LaTeX Font Info:    ... okay on input line 350.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 350.
+LaTeX Font Info:    ... okay on input line 350.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 350.
+LaTeX Font Info:    ... okay on input line 350.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 350.
+LaTeX Font Info:    ... okay on input line 350.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 350.
+LaTeX Font Info:    ... okay on input line 350.
+LaTeX Info: Redefining \dots on input line 350.
+-------------------- Geometry parameters
+paper: a4paper
+landscape: --
+twocolumn: --
+twoside: true
+asymmetric: --
+h-parts: 71.70166pt, 0.7\paperwidth , 107.55254pt (default)
+v-parts: 101.40665pt, 0.7\paperheight , 152.11pt (default)
+hmarginratio: 2:3
+vmarginratio: 2:3
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  597.50787pt
+\paperheight 845.04684pt
+\textwidth  418.25368pt
+\textheight 591.5302pt
+\oddsidemargin  -0.56833pt
+\evensidemargin 35.28255pt
+\topmargin  -2.73714pt
+\headheight 15.0pt
+\headsep    19.8738pt
+\footskip   30.0pt
+\marginparwidth 98.0pt
+\marginparsep   7.0pt
+\columnsep  10.0pt
+\skip\footins  10.8pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+\@twosidetrue \@mparswitchtrue 
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
+\Gread@gobject=\count116
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count117
+\scratchdimen=\dimen123
+\scratchbox=\box28
+\nofMPsegments=\count118
+\nofMParguments=\count119
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count120
+\MPscratchDim=\dimen124
+\MPnumerator=\count121
+\everyMPtoPDFconversion=\toks26
+)))
+Package hyperref Info: Link coloring ON on input line 350.
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
+)
+\c@section@level=\count122
+)
+LaTeX Info: Redefining \ref on input line 350.
+LaTeX Info: Redefining \pageref on input line 350.
+(./36334-t.out) (./36334-t.out)
+\@outlinefile=\write3
+\openout3 = `36334-t.out'.
+
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 359.
+
+(/usr/share/texmf-texlive/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 382.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 382.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+] [1
+
+] [2
+
+] [1
+
+] [2] [3] [4] [5] [6]
+Overfull \hbox (2.69081pt too wide) in paragraph at lines 835--835
+[] 
+ []
+
+[7] [8] [9]
+Underfull \vbox (badness 1715) has occurred while \output is active []
+
+[10] [11] [12]
+Overfull \hbox (18.43031pt too wide) in paragraph at lines 1219--1219
+[] 
+ []
+
+[13] [14] [15]
+Overfull \hbox (8.75203pt too wide) in paragraph at lines 1389--1389
+[] 
+ []
+
+[16]
+Overfull \hbox (10.4287pt too wide) in paragraph at lines 1465--1465
+[] 
+ []
+
+[17]
+Overfull \hbox (23.9317pt too wide) in paragraph at lines 1493--1493
+[] 
+ []
+
+[18] [19] [20]
+Overfull \hbox (6.00612pt too wide) detected at line 1708
+[][]    [] \OT1/cmr/m/n/10.95 = S[]\OML/cmm/m/it/10.95 ;  [][]   [] \OT1/cmr/m/
+n/10.95 = T[]\OML/cmm/m/it/10.95 ;  [][] [] \OT1/cmr/m/n/10.95 = U[]\OML/cmm/m/
+it/10.95 ;  [][] [] \OT1/cmr/m/n/10.95 = V[]\OML/cmm/m/it/10.95 ;
+ []
+
+
+Overfull \hbox (6.11826pt too wide) in paragraph at lines 1761--1761
+[] 
+ []
+
+[21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]
+[37]
+Overfull \hbox (1.63449pt too wide) in paragraph at lines 2747--2747
+[] 
+ []
+
+[38] [39]
+Overfull \hbox (12.21608pt too wide) in paragraph at lines 2819--2819
+[] 
+ []
+
+[40]
+Overfull \hbox (12.14133pt too wide) detected at line 2919
+[] [][]
+ []
+
+[41]
+Overfull \hbox (14.50407pt too wide) in paragraph at lines 2987--2987
+[] 
+ []
+
+[42]
+Overfull \hbox (21.31264pt too wide) in paragraph at lines 3005--3005
+[] 
+ []
+
+[43] [44] [45]
+Overfull \hbox (72.09756pt too wide) in paragraph at lines 3257--3257
+[] 
+ []
+
+[46]
+Underfull \vbox (badness 7099) has occurred while \output is active []
+
+[47]
+Overfull \hbox (8.27182pt too wide) in paragraph at lines 3295--3295
+[] 
+ []
+
+
+Overfull \hbox (41.23555pt too wide) in paragraph at lines 3336--3336
+[] 
+ []
+
+
+Underfull \vbox (badness 1688) has occurred while \output is active []
+
+[48] [49] [50]
+Overfull \hbox (8.71394pt too wide) detected at line 3521
+ []$[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 " [] []e[] \OT1/cmr/m/n/10.9
+5 + \OML/cmm/m/it/10.95 e[][][]\OT1/cmr/m/n/10.95 ;  $ 
+ []
+
+[51] [52] [53] [54
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[55]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[56]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[57]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[58]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[59]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[60] [61] (./36334-t.aux)
+
+ *File List*
+    book.cls    2005/09/16 v1.4f Standard LaTeX document class
+    bk12.clo    2005/09/16 v1.4f Standard LaTeX file (size option)
+inputenc.sty    2006/05/05 v1.1b Input encoding file
+  latin1.def    2006/05/05 v1.1b Input encoding file
+ fontenc.sty
+   t1enc.def    2005/09/27 v1.99g Standard LaTeX file
+   babel.sty    2005/11/23 v3.8h The Babel package
+ frenchb.ldf
+ frenchb.cfg
+    calc.sty    2005/08/06 v4.2 Infix arithmetic (KKT,FJ)
+  ifthen.sty    2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+ amsmath.sty    2000/07/18 v2.13 AMS math features
+ amstext.sty    2000/06/29 v2.01
+  amsgen.sty    1999/11/30 v2.0
+  amsbsy.sty    1999/11/29 v1.2d
+  amsopn.sty    1999/12/14 v2.01 operator names
+ amssymb.sty    2002/01/22 v2.2d
+amsfonts.sty    2001/10/25 v2.2f
+   alltt.sty    1997/06/16 v2.0g defines alltt environment
+fancyhdr.sty    
+geometry.sty    2002/07/08 v3.2 Page Geometry
+  keyval.sty    1999/03/16 v1.13 key=value parser (DPC)
+geometry.cfg
+hyperref.sty    2007/02/07 v6.75r Hypertext links for LaTeX
+  pd1enc.def    2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+hyperref.cfg    2002/06/06 v1.2 hyperref configuration of TeXLive
+kvoptions.sty    2006/08/22 v2.4 Connects package keyval with LaTeX options (HO
+)
+     url.sty    2005/06/27  ver 3.2  Verb mode for urls, etc.
+ hpdftex.def    2007/02/07 v6.75r Hyperref driver for pdfTeX
+   t1lmr.fd    2007/01/14 v1.3 Font defs for Latin Modern
+   color.sty    2005/11/14 v1.0j Standard LaTeX Color (DPC)
+   color.cfg    2007/01/18 v1.5 color configuration of teTeX/TeXLive
+  pdftex.def    2007/01/08 v0.04d Graphics/color for pdfTeX
+supp-pdf.tex
+ nameref.sty    2006/12/27 v2.28 Cross-referencing by name of section
+refcount.sty    2006/02/20 v3.0 Data extraction from references (HO)
+ 36334-t.out
+ 36334-t.out
+  t1cmtt.fd    1999/05/25 v2.5h Standard LaTeX font definitions
+    umsa.fd    2002/01/19 v2.2g AMS font definitions
+    umsb.fd    2002/01/19 v2.2g AMS font definitions
+ ***********
+
+ ) 
+Here is how much of TeX's memory you used:
+ 5601 strings out of 94074
+ 70461 string characters out of 1165154
+ 147428 words of memory out of 1500000
+ 8386 multiletter control sequences out of 10000+50000
+ 24780 words of font info for 62 fonts, out of 1200000 for 2000
+ 645 hyphenation exceptions out of 8191
+ 26i,22n,43p,258b,497s stack positions out of 5000i,500n,6000p,200000b,5000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-
+texlive/fonts/type1/bluesky/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1
+/bluesky/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi9.p
+fb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf
+-texlive/fonts/type1/bluesky/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/
+bluesky/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsy10.pfb
+></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsy9.pfb></usr/share/texmf-t
+exlive/fonts/type1/bluesky/ams/msam10.pfb></usr/share/texmf/fonts/type1/public/
+cm-super/sfbi1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb
+></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/f
+onts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm
+-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
+</usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fo
+nts/type1/public/cm-super/sfti0900.pfb></usr/share/texmf/fonts/type1/public/cm-
+super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb>
+Output written on 36334-t.pdf (65 pages, 620542 bytes).
+PDF statistics:
+ 1217 PDF objects out of 1440 (max. 8388607)
+ 415 named destinations out of 1000 (max. 131072)
+ 249 words of extra memory for PDF output out of 10000 (max. 10000000)
+
