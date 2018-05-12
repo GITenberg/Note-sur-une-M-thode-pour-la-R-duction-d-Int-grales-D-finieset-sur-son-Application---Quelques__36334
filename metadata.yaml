@@ -1,0 +1,35 @@
+_repo: Note-sur-une-M-thode-pour-la-R-duction-d-Int-grales-D-finieset-sur-son-Application---Quelques__36334
+_version: 0.1.0
+covers:
+- cover_type: generated
+  image_path: cover.png
+creator:
+  author:
+    agent_name: Haan, D. Bierens de (David Bierens)
+    aliases:
+    - De Haan, D. Bierens (David Bierens)
+    - Bierens de Haan, David
+    birthdate: 1822
+    deathdate: 1895
+    gutenberg_agent_id: '38211'
+    url: http://www.gutenberg.org/2009/agents/38211
+    wikipedia: http://en.wikipedia.org/wiki/David_Bierens_de_Haan
+description: ''
+gutenberg_bookshelf:
+- FR Sciences et Techniques
+- Mathematics
+gutenberg_issued: '2011-06-06'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '36334'
+language: fr
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Definite integrals'
+- !lcc 'QA'
+title: 'Note sur une Méthode pour la Réduction d''Intégrales Définies
+
+  et sur son Application à Quelques Formules Spécials'
+url: http://www.gutenberg.org/ebooks/36334
