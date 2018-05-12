@@ -15,6 +15,8 @@ creator:
     url: http://www.gutenberg.org/2009/agents/38211
     wikipedia: http://en.wikipedia.org/wiki/David_Bierens_de_Haan
 description: ''
+edition_identifiers:
+  edition_id: http://www.gutenberg.org/ebooks/36334#Note-sur-une-M-thode-pour-la-R-duction-d-Int-grales-D-finieset-sur-son-Application---Quelques_
 gutenberg_bookshelf:
 - FR Sciences et Techniques
 - Mathematics
