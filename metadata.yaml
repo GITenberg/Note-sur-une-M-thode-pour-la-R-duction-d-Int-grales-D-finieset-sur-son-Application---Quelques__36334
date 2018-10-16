@@ -31,6 +31,7 @@ rights_url: http://creativecommons.org/about/pdm
 subjects:
 - !lcsh 'Definite integrals'
 - !lcc 'QA'
+- GITenberg
 title: 'Note sur une Méthode pour la Réduction d''Intégrales Définies
 
   et sur son Application à Quelques Formules Spécials'
